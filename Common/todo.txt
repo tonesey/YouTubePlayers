@@ -1,0 +1,4 @@
+﻿
+
+http://developer.nokia.com/Community/Wiki/Best_practice_tips_for_delivering_apps_to_Windows_Phone_with_256_MB
+

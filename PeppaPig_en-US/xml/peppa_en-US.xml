@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+    <msg culture="it-IT" text="servizio sospeso"/>
+  </status>
+  <!-- 1..10 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=eaL0WfvYWRE</url>
+    <desc>The camping holyday</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Hs70vMMLFnw</url>
+    <desc>Cleaning time</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=DfMYw33jph0</url>
+    <desc>Grampy Rabbit's Dinosaur Park</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=IgdSrtx5Z7U</url>
+    <desc>Cuckoo Clock</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=uKYqJ_x_InY</url>
+    <desc>School bus trip</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=VjRdSkNi6fE</url>
+    <desc>Mr Potato Head Comes To Town</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=miMzeJtOw44</url>
+    <desc>Amazing museum</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=atKJZVavn2I</url>
+    <desc>Playing at the beach</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=NZiVBp7RmZc</url>
+    <desc>Shopping</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=vPjSfwf6Yug</url>
+    <desc>Pirate Island</desc>
+  </item>
+  <!-- 11..20 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=DCWHh_mZogE</url>
+    <desc>Peppa and George's Garden </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=cagGX11wVoQ</url>
+    <desc>Cleaning The Car</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=EX9wAsKMHec</url>
+    <desc>Noisy Night</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=0cJNYPhOnVM</url>
+    <desc>Sweet pancake</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=vPjSfwf6Yug</url>
+    <desc>Pirate island</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=rm7cmLdwM_0</url>
+    <desc>Chloe's Puppet</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=JmErJFt5BWE</url>
+    <desc>The Flying vet</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=gDsK441-HyQ</url>
+    <desc>Time Capsule</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=x6X5DTqiWDc</url>
+    <desc>Hide and seek</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=ffn4DdO8-qE</url>
+    <desc>The playground</desc>
+  </item>
+  <!-- 21..30 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=rXtXtGGfcfQ</url>
+    <desc>Piggy dance</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=vFOyYd9UUP0</url>
+    <desc>At the beach</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=N38xCoEfDrw</url>
+    <desc>Dannys Pirate Party</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=RQGXSYBjJT8</url>
+    <desc>Lunch time</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=g3PDDwsiK5I</url>
+    <desc>The tree house</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=YYe8kNY8dKo</url>
+    <desc>Lost keys</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=g53XYQhnyrM</url>
+    <desc>Grass</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=rYD91DmjNhs</url>
+    <desc>Baby sitting</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=AwpIGUYOxNQ</url>
+    <desc>New shoes</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=l6PAo1O5gJw</url>
+    <desc>Peppa Pig learn to swim</desc>
+  </item>
+  <!-- 31..40 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=uYwY4qAdajE</url>
+    <desc>Princess sleeping</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=7JFKMLOYjoY</url>
+    <desc>The Fire Engine</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=GcZj5I4cBis</url>
+    <desc>Mummy pig's birthday</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=96Gio-0FkkE</url>
+    <desc>Emily Elephant</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=mddYtBC16m8</url>
+    <desc>School play</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=14dWT0YR52c</url>
+    <desc>George racing car</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=XGh0aPoalYY</url>
+    <desc>Spider web</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=93w7mHODr1o</url>
+    <desc>Mister skinnylegs</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=xeXmajnccgc</url>
+    <desc>Summer day</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=8tVVTYHmtHo</url>
+    <desc>The wishing well</desc>
+  </item>
+  <!-- 41..50 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=qIfsWA8UCxk</url>
+    <desc>George's new dinosaur</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=4C4Jy6v4fkw</url>
+    <desc>Swimming time</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=42X2Ec0_9hw</url>
+    <desc>Kitchen</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=7-oEGzUWWUg</url>
+    <desc>Daddy got a movie camera</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Po4UBGLaJoA</url>
+    <desc>Rabbit's bump</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=kCKfz1nBymo</url>
+    <desc>Nature trail</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=E33g7jPm3Js</url>
+    <desc>The dentist</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=CsnJ9wYeAaM</url>
+    <desc>Daddy and the picture</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=uwnJflQnUC8</url>
+    <desc>Polly parrot</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=7bUl280lphE</url>
+    <desc>Snow</desc>
+  </item>
+
+
+
+
+</root>

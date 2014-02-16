@@ -1,0 +1,8 @@
+<app friendlyName="Cinico TV" indexFile="cinico.xml" isMonoLang="true">
+  <infoSection usePivot="true">
+  </infoSection>
+  <offlineManagement isAllowed="false">
+  </offlineManagement>
+  <misc showOtherApps="false">
+  </misc>
+</app>

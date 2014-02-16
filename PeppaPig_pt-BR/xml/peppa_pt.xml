@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+    <msg culture="pt-PT" text="servizio sospeso"/>
+  </status>
+  <item><url>http://www.youtube.com/watch?v=neyUPk4hrno</url><desc><descItem lang="pt" value="Panquecas"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=0nclfHWqqp4</url><desc><descItem lang="pt" value="O castelo do vento"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=fWVFfkj2jXs</url><desc><descItem lang="pt" value="Sapatos novos"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=AaxLk3ufdEw</url><desc><descItem lang="pt" value="Na praia"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=xdnX83JAWsk</url><desc><descItem lang="pt" value="Brincando de Bobinho"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=6xWeEIKKNN8</url><desc><descItem lang="pt" value="Bebe Alexandre"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=pkXkrrVBt5U</url><desc><descItem lang="pt" value="A burrinha bernardete"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=jP6VwgrRB6Y</url><desc><descItem lang="pt" value="A biblioteca"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=OWtkBv9xCYY</url><desc><descItem lang="pt" value="A Casa na Árvore"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=PSVNJXQj3gk</url><desc><descItem lang="pt" value="A filmadora do papai"/></desc></item>
+<!--11-->
+  <item><url>http://www.youtube.com/watch?v=5xP2NvAo5DU</url><desc><descItem lang="pt" value="Dona Pernas Finas"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=ypzpPCEoYXc</url><desc><descItem lang="pt" value="O Amigo do George"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=n2wqPXMUApI</url><desc><descItem lang="pt" value="Segredos"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=6K7hKkbs2G0</url><desc><descItem lang="pt" value="A princesa sonolenta"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=eCwtg5cZif0</url><desc><descItem lang="pt" value="O Barco do Vovô Pig "/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=HckDp6-oF7Y</url><desc><descItem lang="pt" value="A Festa à Fantasia"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=6Bzs9-YWVQ8</url><desc><descItem lang="pt" value="Papai pendura uma foto"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=bIqoEAvQ1hY</url><desc><descItem lang="pt" value="Minha festa de aniversario"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=qHOzHli0T7Y</url><desc><descItem lang="pt" value="Piscinas Naturais"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=3Hk0U75RM1w</url><desc><descItem lang="pt" value="Reciclando"/></desc></item>
+<!-- 21 -->
+  <item><url>http://www.youtube.com/watch?v=awUyxE0p2Pk</url><desc><descItem lang="pt" value="A Cápsula do Tempo"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=wqJoeePQHoo</url><desc><descItem lang="pt" value="O lago dos barquinhos"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=DNS_vV4itzM</url><desc><descItem lang="pt" value="Sr. Espartalho"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=ikWPgItFtgc</url><desc><descItem lang="pt" value="Um dia de ventania no Outono"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=LncKC2G9x6U</url><desc><descItem lang="pt" value="O carro do bombeiros"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=yh1VdCtuT8w</url><desc><descItem lang="pt" value="Dias dos talentos"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=PYectEpx3MY</url><desc><descItem lang="pt" value="Peppa a feira"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=GVcc7cvijzM</url><desc><descItem lang="pt" value="O aniversario do elefante Edmundo"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=0bJxIGhmGs0</url><desc><descItem lang="pt" value="Teddy brincalao"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=Em3xKIt3_JI</url><desc><descItem lang="pt" value="Uma viajem a lua"/></desc></item>
+<!-- 31 -->
+  <item><url>http://www.youtube.com/watch?v=Mcl5K_tNGUc</url><desc><descItem lang="pt" value="Trabalhar e brincar"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=xY5cKBypSA4</url><desc><descItem lang="pt" value="O campeao"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=2BK-B4qIUxQ</url><desc><descItem lang="pt" value="Tagarelas"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=rJJtBYca5cU</url><desc><descItem lang="pt" value="Sol mar e neve"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=MYmmLGhp2jk</url><desc><descItem lang="pt" value="Primavera"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=zYNcOzCIneQ</url><desc><descItem lang="pt" value="Os amigos da clara"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=QnPQCbNhfS0</url><desc><descItem lang="pt" value="O estaleiro naval do avo coelho"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=NYuUjTU_lnQ</url><desc><descItem lang="pt" value="O farol do avo coelho"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=fYMydCGCi4I</url><desc><descItem lang="pt" value="O computador do avo porquinho"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=RlVwKZsCWPU</url><desc><descItem lang="pt" value="A menina coelha nao foi trabalhar"/></desc></item>
+<!-- 41 -->
+  <item><url>http://www.youtube.com/watch?v=kAvV702-SrU</url><desc><descItem lang="pt" value="O coelhinho cesar vem brincar"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=4QG5ZlvayWk</url><desc><descItem lang="pt" value="O clube secreto"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=u4jxw4m3_N4</url><desc><descItem lang="pt" value="O avô porquinha vai ao parque infantil"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=uZbt7ZbWYpU</url><desc><descItem lang="pt" value="Numeros"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=bU6GcBbrQf8</url><desc><descItem lang="pt" value="A festa pirata do carlos"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=BjhKF493edY</url><desc><descItem lang="pt" value="Lavar a roupa"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=wYeZTN9hJSc</url><desc><descItem lang="pt" value="Helicoptero da menina coelha"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=NweZ3cWF_t0</url><desc><descItem lang="pt" value="Escavar a estrada"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=FSML37Qqy5Q</url><desc><descItem lang="pt" value="Composto"/></desc></item>
+  <item><url>http://www.youtube.com/watch?v=VRhYaQi7McA</url><desc><descItem lang="pt" value="Caça ao Tesouro"/></desc></item>
+
+</root>

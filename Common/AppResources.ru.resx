@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="appHeader" xml:space="preserve">
+    <value>меню</value>
+  </data>
+  <data name="buyAppButton" xml:space="preserve">
+    <value>купить приложение</value>
+  </data>
+  <data name="favoritesHeader" xml:space="preserve">
+    <value>избранное</value>
+  </data>
+  <data name="favText" xml:space="preserve">
+    <value>Нет избранного эпизода не установлены.
+Нажмите и удерживайте эпизод добавить его здесь.
+
+Нажмите и удерживайте эпизод в этом списке (если имеется), чтобы удалить его из Избранного</value>
+  </data>
+  <data name="full" xml:space="preserve">
+    <value>Полная версия</value>
+  </data>
+  <data name="rateAppButton" xml:space="preserve">
+    <value>курса!</value>
+  </data>
+  <data name="trial" xml:space="preserve">
+    <value>Пробная версия</value>
+  </data>
+  <data name="version" xml:space="preserve">
+    <value>версия</value>
+  </data>
+  <data name="writeAnEmailButton" xml:space="preserve">
+    <value>Напишите нам!</value>
+  </data>
+  <data name="addToFavText" xml:space="preserve">
+    <value>добавить в избранное</value>
+  </data>
+  <data name="checkoutVideo" xml:space="preserve">
+    <value>Проверьте это видео!
+Название: {0}
+
+{1}</value>
+  </data>
+  <data name="removeFromFavText" xml:space="preserve">
+    <value>Удалить из Избранного</value>
+  </data>
+  <data name="shareText" xml:space="preserve">
+    <value>доля</value>
+  </data>
+  <data name="feedbackText" xml:space="preserve">
+    <value>{0} Обратная связь / запросу</value>
+  </data>
+  <data name="buyPage_buyApp" xml:space="preserve">
+    <value>Да!</value>
+  </data>
+  <data name="buyPage_noThanks" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="trialMessageEpisodes" xml:space="preserve">
+    <value>Извините, но вы можете смотреть только первые пять эпизодов демо-версии ...
+
+Вы хотите купить полную версию?</value>
+  </data>
+  <data name="reportError" xml:space="preserve">
+    <value>недействительным ссылку!</value>
+  </data>
+  <data name="brokenLinkText" xml:space="preserve">
+    <value>Ошибка в эпизоде ​​'{0}'
+Ссылка: {1}</value>
+  </data>
+  <data name="error_buy" xml:space="preserve">
+    <value>Во время установки Windows Ошибка соединения телефон магазина! Пожалуйста, повторите попытку позже или купить приложения из магазина веб-страницы</value>
+  </data>
+  <data name="error_store" xml:space="preserve">
+    <value>Во время установки Windows Ошибка соединения телефон магазина! Пожалуйста, повторите попытку позже!</value>
+  </data>
+  <data name="noNetworkAvailable" xml:space="preserve">
+    <value>Интернет не доступен!</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Возникла проблема при последнем запуске этого приложения :(
+Хотели бы вы отправить по электронной почте сообщить о ней?</value>
+  </data>
+  <data name="ExceptionMessageTitle" xml:space="preserve">
+    <value>Сообщения о проблемах</value>
+  </data>
+  <data name="otherAppsButton" xml:space="preserve">
+    <value>другой</value>
+  </data>
+  <data name="disclaimerMessage" xml:space="preserve">
+    <value>Это приложение основано на публичный список веб-видео связи.
+Видео находятся на серверах YouTube и не контролируются разработчиками, что снимают с себя ответственность за их содержание.
+Если вы хотите запросить удаление ссылки, Сообщить о повреждении / неправильную ссылку, способствуют расширению перечня, не стесняйтесь обращаться приложение авторов.
+Наименования, товарные знаки, логотипы, текст, графика, изображения, звуки, видео, содержащиеся в этом приложении, являются собственностью соответствующих владельцев.</value>
+  </data>
+  <data name="backButtonText" xml:space="preserve">
+    <value>спина</value>
+  </data>
+  <data name="infoButtonText" xml:space="preserve">
+    <value>сообщения</value>
+  </data>
+  <data name="brokenLinkQuestion" xml:space="preserve">
+    <value>:( К сожалению, я не могу найти это видео ... Вы хотите, чтобы отправить письмо разработчикам?</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnCompletedWithError" xml:space="preserve">
+    <value>:( О, нет ...
+
+Некоторые эпизоды не были корректно загружен: пожалуйста, повторите процедуру резервного копирования ...
+Загрузке эпизодов будет сохранена.</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnCompletedWithSuccess" xml:space="preserve">
+    <value>Молодцы!
+
+Все эпизоды доступны в телефон: Вы больше не будете нужно подключение к Интернету!
+
+Пользоваться ими! :)</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_Welcome" xml:space="preserve">
+    <value>Привет! Здесь вы можете скачать все эпизоды из сети!
+
+После этого вы можете использовать приложение в автономном режиме, все эпизоды будут доступны навсегда в памяти телефона: подключение к Интернету больше не требуется!</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnEpisodesInProgress" xml:space="preserve">
+    <value>Скачать в прогресс, пожалуйста, будьте терпеливы :)
+
+Пожалуйста, не выйти из этой страницы, в противном случае вам необходимо перезагрузить процедуры резервного копирования. . .</value>
+  </data>
+  <data name="ButtonEndText_DwnOk" xml:space="preserve">
+    <value>пойти в эпизодах!</value>
+  </data>
+  <data name="ButtonStartBackupEpisodesText" xml:space="preserve">
+    <value>скачать!</value>
+  </data>
+  <data name="MessageAbortDownload" xml:space="preserve">
+    <value>Вам нужно будет повторить весь процесс резервного копирования, вы уверены?</value>
+  </data>
+  <data name="TextCurEpisodeTitleHeader" xml:space="preserve">
+    <value>эпизод:</value>
+  </data>
+  <data name="TextOverallProgressHeader" xml:space="preserve">
+    <value>общий прогресс:</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="backupEpisodesText" xml:space="preserve">
+    <value>скачать эпизоды</value>
+  </data>
+  <data name="MessageAlreadyOffline" xml:space="preserve">
+    <value>Вы уже сделали процедуру резервного копирования, вы хотели бы повторить это?</value>
+  </data>
+  <data name="UserMessageDownloadKo" xml:space="preserve">
+    <value>:( К сожалению, что-то пошло не так ... Вы хотите, чтобы отправить письмо разработчикам содержащие сведения об ошибке?</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_CheckingLinks" xml:space="preserve">
+    <value>Проверка видео URL. . .
+
+Пожалуйста, подождите. . .</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_LinksCheckedWithErrors" xml:space="preserve">
+    <value>:( Признан недействительным URL-адресов видео!
+
+Пожалуйста, используйте кнопку ниже, чтобы сообщить ошибке в службу поддержки.
+Как только поддержка говорит, что эпизоды фиксированной Пожалуйста, повторите операцию резервного копирования снова!</value>
+  </data>
+  <data name="ButtonEndText_LinksKO" xml:space="preserve">
+    <value>Сообщить об ошибке</value>
+  </data>
+  <data name="trialMessageBackup" xml:space="preserve">
+    <value>Извините, но резервная функция не доступна демо-версии ...
+
+Вы хотите купить полную версию?</value>
+  </data>
+  <data name="possibleWrongBackup" xml:space="preserve">
+    <value>Выбранного эпизода не был найден в телефоне.
+Может быть, процедура резервного копирования не правильно заполнен: пожалуйста, повторите операцию.</value>
+  </data>
+  <data name="notEnoughSpace" xml:space="preserve">
+    <value>:( Не хватает места на устройстве, чтобы сохранить эпизоды ... Требуемое место: {0} Gb</value>
+  </data>
+  <data name="wifiRequired" xml:space="preserve">
+    <value>Wi-fi соединение не требуется для загрузки!</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnCompletedWithConnectionError" xml:space="preserve">
+    <value>:( О, нет ...
+
+Wi-Fi соединение не больше не работает ...
+Пожалуйста, выйдите приложений, отключение и включение Wi-Fi соединение в настройках телефона и повторите попытку резервного копирования.
+Загрузке эпизодов будет сохранена.</value>
+  </data>
+  <data name="DownloadEpisodesQuestion" xml:space="preserve">
+    <value>Вы хотите скачать эпизоды в телефоне и смотреть их навсегда без подключения к интернету? :)</value>
+  </data>
+</root>

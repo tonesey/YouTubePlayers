@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+    <msg culture="it-IT" text="servizio sospeso"/>
+  </status>
+  <!-- 1..10 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=hsq_bjHa4lo</url>
+    <desc>Il capodanno cinese</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=5gXl0lJzbvI</url>
+    <desc>Le api e i fiori</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=_6AwNrCIAdQ</url>
+    <desc>Il camion delle banane</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=osm1a0PhV_8</url>
+    <desc>Il pigiama rosa</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=ZX4guGQ7HEE</url>
+    <desc>La gara di velocità</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=ojkrMMArP5Q</url>
+    <desc>Il rumore misterioso</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=X1xdIoqelrU</url>
+    <desc>Che fine ha fatto Bernard?</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=YjT7ixoSm6Q</url>
+    <desc>La macchina fotografica</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=mAg1vNX54yY</url>
+    <desc>Roborat</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=-wHkH5KN9HU</url>
+    <desc>Il pesciolino</desc>
+  </item>
+</root>

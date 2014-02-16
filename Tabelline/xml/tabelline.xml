@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+    <msg culture="it-IT" text="servizio sospeso" targetVer="1.0.6" op="eq"/>
+  </status>
+  <item>
+    <url>http://www.youtube.com/watch?v=bCzIpDTmCic</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina dell'UNO"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=nH8PvN7mSO4</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del DUE"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=RDeW7GJhkYU</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del TRE"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=fjnehagaJyU</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del QUATTRO"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Tnh_NrpIBE8</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del CINQUE"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Y3dBIQ2U5Bk</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del SEI"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=THkqLIffJX8</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del SETTE"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Lrj4ekZJXw0</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina dell'OTTO"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=JhBzYhxYuoc</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del NOVE"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=7ypCRs8MZS4</url>
+    <desc>
+      <descItem lang="it-IT" value="Tabellina del DIECI"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=b38UEGXrv5k</url>
+    <desc>
+      <descItem lang="it-IT" value="Il servizio da te"/>
+    </desc>
+  </item>
+</root>

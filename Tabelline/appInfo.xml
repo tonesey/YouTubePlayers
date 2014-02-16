@@ -1,0 +1,5 @@
+<app friendlyName="W Le Tabelline" indexFile="tabelline.xml" isMonoLang="true" episodesAverageLength="300" >
+  <offlineManagement isAllowed="false"></offlineManagement>
+  <misc showOtherApps="false"></misc>
+  <firstPivotItemName>da 1 a 10</firstPivotItemName>
+</app>

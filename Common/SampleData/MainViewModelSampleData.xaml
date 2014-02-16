@@ -1,0 +1,53 @@
+﻿<local:MainViewModel 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Centapp.CartoonCommon.ViewModels" 
+    DwnInProgress="True"
+    DwnCurEpisodeTitle="Pingu babysitter"
+    DwnCurEpisodePercentage="20"
+    BackupStage="DwnCompletedWithError"
+    DwnOverallPercentage="30"
+    AppName="app name"
+    IsDataLoading="True">
+
+    <local:MainViewModel.Items>
+        <local:ItemViewModel Id="1" Url="http://www.youtube.com/watch?v=2tkYQHGm_uw" Title="Pingu's family celebrate Christmas"/>
+        <local:ItemViewModel Id="2" Url="http://www.youtube.com/watch?v=qbCFzTami8g" Title="Pingu snowboarding"/>
+        <local:ItemViewModel Id="3" Url="http://www.youtube.com/watch?v=NvYHqBxOIT4" Title="Visit to the hospital"/>
+        <local:ItemViewModel Id="4" Url="http://www.youtube.com/watch?v=FIKblmDII8A" Title="Caring pingu"/>
+        <local:ItemViewModel Id="5" Url="http://www.youtube.com/watch?v=Xu_BdOLGlII" Title="Pingu builds a tower"/>
+        <local:ItemViewModel Id="6" Url="http://www.youtube.com/watch?v=69vO9ScXLV4" Title="Stinky Pingu"/>
+        <local:ItemViewModel Id="7" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="8" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="9" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="10" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="11" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="12" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="13" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="14" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+        <local:ItemViewModel Id="15" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+    </local:MainViewModel.Items>
+
+    <local:MainViewModel.Items_Chunk1>
+        <local:ItemViewModel Id="1" Url="http://www.youtube.com/watch?v=2tkYQHGm_uw" Title="Pingu's family celebrate Christmas"/>
+        <local:ItemViewModel Id="2" Url="http://www.youtube.com/watch?v=qbCFzTami8g" Title="Pingu snowboarding"/>
+        <local:ItemViewModel Id="3" Url="http://www.youtube.com/watch?v=NvYHqBxOIT4" Title="Visit to the hospital"/>
+        <local:ItemViewModel Id="4" Url="http://www.youtube.com/watch?v=FIKblmDII8A" Title="Caring pingu"/>
+        <local:ItemViewModel Id="5" Url="http://www.youtube.com/watch?v=Xu_BdOLGlII" Title="Pingu builds a tower"/>
+        <local:ItemViewModel Id="15" Url="http://www.youtube.com/watch?v=69vO9ScXLV4" Title="Stinky Pingu"/>
+    </local:MainViewModel.Items_Chunk1>
+
+    <local:MainViewModel.Items_Chunk2>
+        <local:ItemViewModel Id="16" Url="http://www.youtube.com/watch?v=Xu_BdOLGlII" Title="Pingu builds a tower"/>
+        <local:ItemViewModel Id="17" Url="http://www.youtube.com/watch?v=69vO9ScXLV4" Title="Stinky Pingu"/>
+        <local:ItemViewModel Id="18" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+    </local:MainViewModel.Items_Chunk2>
+
+
+    <local:MainViewModel.Items_Chunk3>
+        <local:ItemViewModel Id="16" Url="http://www.youtube.com/watch?v=Xu_BdOLGlII" Title="Pingu builds a tower"/>
+        <local:ItemViewModel Id="17" Url="http://www.youtube.com/watch?v=69vO9ScXLV4" Title="Stinky Pingu"/>
+        <local:ItemViewModel Id="18" Url="http://www.youtube.com/watch?v=mqJCTEF-m2Y" Title="Pingu helps to Deliver the mail"/>
+    </local:MainViewModel.Items_Chunk3>
+
+</local:MainViewModel>

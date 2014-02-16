@@ -1,0 +1,3 @@
+
+- portare le stringhe del rating nelle lingue: es, pt, ru
+- eliminare "report broken link"/"share su FB" in offline

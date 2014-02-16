@@ -1,0 +1,85 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Centapp.CartoonCommon.InfoPagePivot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+        <!--<Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="1">
+                <GradientStop Color ="White" Offset="0.2" />
+                <GradientStop Color="LightGray" Offset="0.8" />
+            </LinearGradientBrush>
+        </Grid.Background>-->
+
+        <Grid.Background>
+            <ImageBrush Opacity="0.4" ImageSource="/Resources/InfoPageBck.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+
+
+        <controls:Pivot>
+            <!--Pivot item one-->
+            <controls:PivotItem Header="info">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Margin="0,10,10,10">
+                    <Run FontStretch="Condensed" FontFamily="Arial Black" FontWeight="ExtraBlack" Text="Cinico TV"/> 
+                    <Run Text=" è stato un programma televisivo di Daniele Ciprì e Franco Maresco, andato in onda su Rai 3 a partire dal 6 aprile 1992."></Run>
+                    <LineBreak></LineBreak>
+                    <LineBreak></LineBreak>
+                    <Run Text="Il programma consisteva in clip che proponevano interviste condotte dai due registi a personaggi alienati, folli e squallidi sullo sfondo di una Sicilia desolata."></Run>
+                    <LineBreak></LineBreak>
+                    <Run Text="Cifra caratteristica è il particolare bianco e nero delle riprese."/> 
+                    <LineBreak></LineBreak>
+                    <Run Text="I soggetti sono tutti rigorosamente di sesso maschile: non vi è posto per la femminilità nello squallore e nella desolazione assoluti."></Run>
+                    <LineBreak></LineBreak>
+                    <LineBreak></LineBreak>
+                    <LineBreak></LineBreak>
+                    <Run FontStyle="Italic" Text="Da Wikipedia, l'enciclopedia libera."></Run>
+                    </TextBlock>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Pivot item two-->
+            <controls:PivotItem Header="disclaimer">
+                <TextBlock x:Name="InfoTextBlock1" 
+                       TextWrapping="Wrap" 
+                       Text="$ABC" 
+                       Margin="0,25,0,0" 
+                       TextAlignment="Left"
+                       VerticalAlignment="Stretch" />
+            </controls:PivotItem>
+        </controls:Pivot>
+
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <!--<Image Source="/Resources/big/PinguBuy.jpg" Margin="0,5,0,0" Height="300" Width="270" />-->
+            <!---->
+           
+            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center"></StackPanel>-->
+
+            <!--<Button Name="backButton" Content="$Back" Height="100" Width="200" Tap="backButton_Tap">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                        <GradientStop Color="Orange" Offset="0"/>
+                        <GradientStop Color="Gray" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>-->
+
+        </StackPanel>
+    </Grid>
+
+
+</phone:PhoneApplicationPage>

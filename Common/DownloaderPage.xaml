@@ -1,0 +1,148 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Centapp.CartoonCommon.DownloaderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    BackKeyPress="PhoneApplicationPage_BackKeyPress"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+
+        <Grid.Resources>
+            <telerikCore:RadFadeAnimation x:Key="radFadeAnimation" Duration="0:0:3" AutoReverse="True"/>
+        </Grid.Resources>
+
+        <!--TitlePanel contains the name of the application and page title-->
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,20,12,0">
+
+            <Grid.Background>
+                <ImageBrush ImageSource="PageBackground1.jpg" Opacity="0.2" />
+            </Grid.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border BorderThickness="1" 
+                        Grid.Row="0"
+                        Name="BorderBackupInfos"
+                        Margin="0,5"
+                        DoubleTap="BorderBackupInfos_DoubleTap_1"
+                        CornerRadius="20">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                            <GradientStop Color="Orange" Offset="0"/>
+                            <GradientStop Color="Gray" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel Height="550">
+                        <TextBlock Name="TextBackupInfos"  
+                               TextWrapping="Wrap" 
+                               HorizontalAlignment="Center"     
+                               FontSize="28" 
+                               Text="{Binding BackupStage, 
+                                      Converter={StaticResource backupStageToMessageConverter}}" 
+                               Width="432"></TextBlock>
+
+                        <Image x:Name="ImagePreview" Margin="0,50,0,0" 
+                               Visibility="{Binding BackupStage, Converter={StaticResource backupStageToImageVisibilityConverter}}" 
+                               Width="320" Height="200" 
+                               Source="{Binding DwnCurEpisode, Converter={StaticResource uriToImageConverter}}"></Image>
+
+                        <Button Name="ButtonStartBackupEpisodes" Grid.Row="1" Margin="0,10" Height="80" Padding="5"  
+                                HorizontalContentAlignment="Stretch" 
+                                Tap="ButtonStartBackupEpisodes_Tap" 
+                                Visibility="{Binding BackupStage, 
+                                             Converter={StaticResource backupStageToButtonStartVisibility}}">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/backup.png"></Image>
+                                    <TextBlock x:Name="ButtonStartBackupEpisodesText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,-1,0,-2" 
+                                                VerticalAlignment="Center" HorizontalAlignment="Left" Width="304">$start backup!</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Name="ButtonEnd" Grid.Row="1" Margin="0,50" Height="80" Padding="5"  
+                                HorizontalContentAlignment="Stretch" Tap="ButtonEnd_Tap" 
+                                Visibility="{Binding BackupStage, 
+                                             Converter={StaticResource backupStageToButtonEndVisibility}}">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <TextBlock x:Name="ButtonEndText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+                <StackPanel  Grid.Row="1" Visibility="{Binding DwnInProgress, Converter={StaticResource visibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Margin="0,20">
+                        <TextBlock x:Name="TextCurEpisodeTitleHeader" Text="$Current episode:" ></TextBlock>
+                        <TextBlock x:Name="TextCurEpisodeTitleValue"  Margin="20,0,0,0" Text="{Binding DwnCurEpisodeTitle}" TextAlignment="Center" FontStyle="Italic"/>
+                    </StackPanel>
+                    <toolkit:PerformanceProgressBar
+                                Visibility="{Binding BackupStage, 
+                                             Converter={StaticResource backupStageToProgBarModeConverter},
+                                             ConverterParameter = 0 }"
+                                 Margin="0,-20,0,0" 
+                                 IsIndeterminate="True" 
+                                 Height="25">
+                    </toolkit:PerformanceProgressBar>
+                    <ProgressBar
+                                Visibility="{Binding BackupStage, 
+                                             Converter={StaticResource backupStageToProgBarModeConverter},
+                                             ConverterParameter = 1 }"
+                                 Margin="0,-20,0,0" 
+                                 Value="{Binding DwnCurEpisodePercentage}" Height="25">
+                    </ProgressBar>
+                    <!---->
+                    <!--<TextBlock Text="$Current episode downloaded data" Margin="0,20"></TextBlock>
+                    <TextBlock x:Name="TextCurEpisodeAmount" Text="{Binding DwnCurEpisodeAmount}"/>-->
+                    <!--<TextBlock Text="$Current episode percentage"  Margin="0,20"></TextBlock>-->
+                    <TextBlock  x:Name="TextOverallProgressHeader" Text="$Overall progress:" Margin="0,20"></TextBlock>
+                    <ProgressBar x:Name="ProgOverall" Margin="0,-20,0,0" IsIndeterminate="False" Maximum="100"  Value="{Binding DwnOverallPercentage}" Height="25"></ProgressBar>
+                </StackPanel>
+            </Grid>
+
+
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

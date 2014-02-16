@@ -1,0 +1,338 @@
+<root ver="1.0">
+  
+  <status value="ok" defMsg="Service not available">
+    <msg culture="it-IT" text="servizio sospeso"/>
+    <msg culture="en-GB" text="Service not available"/>
+  </status>
+
+  <app useYoutubeThumnails="true" useWebLoc>
+
+  <item id="1">
+    <url>http://www.youtube.com/watch?v=OfwCmZKqMSI</url>
+    <desc>
+      <descItem lang="en-US" value="Fast and furry-ous"/>
+    </desc>
+  </item>
+
+  <!-- 2 - Beep, Beep -->
+  
+  <item id="3">
+    <url>http://www.youtube.com/watch?v=8toezQZ2Cgg</url>
+    <desc>
+      <descItem lang="en-US" value="Going Going Gosh!"/>
+    </desc>
+  </item>
+  
+  <item id="4">
+    <url>http://www.youtube.com/watch?v=ee2r7PAgNCA</url>
+    <desc>
+      <descItem lang="en-US" value="Zipping along"/>
+    </desc>
+  </item>  
+  
+  <!-- 5 - Stop! Look! And Hasten -->
+  <!-- 6 - Ready, Set, Zoom -->
+  <!-- 7 - Guided Muscle -->
+  <!-- 8 - Gee Whiz-z-z-z-z-z-z-->
+
+  <item id="9">
+    <url>http://www.youtube.com/watch?v=8xjgMpbv53g</url>
+    <desc>
+      <descItem lang="en-US" value="There They Go-Go-Go!"/>
+    </desc>
+  </item>
+  
+  <item id="10">
+    <url>http://www.youtube.com/watch?v=joS7Dx12um8</url>
+    <desc>
+      <descItem lang="en-US" value="scrambled aches roadrunner"/>
+    </desc>
+  </item>
+
+  <item id="11">
+    <url>http://www.youtube.com/watch?v=2Y8twVlTHWE</url>
+    <desc>
+      <descItem lang="en-US" value="Zoom and bored"/>
+    </desc>
+  </item>
+  
+  <!-- 12 - Whoa, Be-Gone -->
+  <!-- 13 - Hook, Line and Stinker -->
+
+  <item id="14">
+    <url>http://www.youtube.com/watch?v=zXWbkKKMiZE</url>
+    <desc>
+      <descItem lang="en-US" value="Hip Hip Hurry!"/>
+    </desc>
+  </item>
+
+  <item id="15">
+    <url> http://www.youtube.com/watch?v=-UsfvHOAWLI</url>
+    <desc>
+      <descItem lang="en-US" value="Hot-Rod and Reel!"/>
+    </desc>
+  </item>
+
+  <item id="16">
+    <url>http://www.youtube.com/watch?v=GVUBH50ACzY</url>
+    <desc>
+      <descItem lang="en-US" value="Wild about hurry"/>
+    </desc>
+  </item>
+
+  <item id="17">
+    <url>http://www.youtube.com/watch?v=AlDPNHb1-jw</url>
+    <desc>
+      <descItem lang="en-US" value="Fastest With The Mostest "/>
+    </desc>
+  </item>
+
+  <item id="18">
+    <url>http://www.youtube.com/watch?v=czVP4Tfe5Hk</url>
+    <desc>
+      <descItem lang="en-US" value="Hopalong Casualty"/>
+    </desc>
+  </item>
+
+  <item id="19">
+    <url>http://www.youtube.com/watch?v=NHvzj_kYJ6o</url>
+    <desc>
+      <descItem lang="en-US" value="Zip 'N Snort"/>
+    </desc>
+  </item>
+
+  <item id="20">
+    <url>http://www.youtube.com/watch?v=1YOj8WFY8H4</url>
+    <desc>
+      <descItem lang="en-US" value="Lickety-Splat "/>
+    </desc>
+  </item>
+  
+  <!-- 21 - Beep Prepared-->
+  
+  <item id="22">
+    <url>http://www.youtube.com/watch?v=fsD-sePT3tY</url>
+    <desc>
+      <descItem lang="en-US" value="Zoom at the Top"/>
+    </desc>
+  </item>
+
+  <!-- 23 - To Beep or Not to Beep1-->
+
+  <item id="24">
+    <url>http://www.youtube.com/watch?v=pAKZsXRb4o8</url>
+    <desc>
+      <descItem lang="en-US" value="War and pieces"/>
+    </desc>
+  </item>
+
+  <item id="25">
+    <url>http://www.youtube.com/watch?v=NIkTzmvFJRI</url>
+    <desc>
+      <descItem lang="en-US" value="Zip Zip Hooray"/>
+    </desc>
+  </item>
+
+  <item id="26">
+    <url>http://www.youtube.com/watch?v=8xjgMpbv53g</url>
+    <desc>
+      <descItem lang="en-US" value="There They Go-Go-Go!"/>
+    </desc>
+  </item>
+
+  <item id="27">
+    <url>http://www.youtube.com/watch?v=DCdfvfz9dMI</url>
+    <desc>
+      <descItem lang="en-US" value="The wild chase"/>
+    </desc>
+  </item>
+
+  <item id="28">
+    <url>http://www.youtube.com/watch?v=JIh1bbQk_2M</url>
+    <desc>
+      <descItem lang="en-US" value="Rushing Roulette "/>
+    </desc>
+  </item>
+
+  <item id="29">
+    <url>http://www.youtube.com/watch?v=_Vj7JZGj_C4</url>
+    <desc>
+      <descItem lang="en-US" value="Run, Run, Sweet Road Runner"/>
+    </desc>
+  </item>
+
+  <item id="30">
+    <url>http://www.youtube.com/watch?v=8Q_uyVv8330</url>
+    <desc>
+      <descItem lang="en-US" value="Tired and Feathered "/>
+    </desc>
+  </item>
+
+  <item id="31">
+    <url>http://www.youtube.com/watch?v=AuvAFv7CKS0</url>
+    <desc>
+      <descItem lang="en-US" value="Boulder Wham!"/>
+    </desc>
+  </item>
+
+  <item id="32">
+    <url>http://www.youtube.com/watch?v=NrTb9kmcqgg</url>
+    <desc>
+      <descItem lang="en-US" value="Just Plane Beep"/>
+    </desc>
+  </item>
+
+  <item id="33">
+    <url>http://www.youtube.com/watch?v=vdxkoIWfKR4</url>
+    <desc>
+      <descItem lang="en-US" value="Hairied and Hurried"/>
+    </desc>
+  </item>
+
+  <item id="34">
+    <url>http://www.youtube.com/watch?v=CzEB63_vVyc</url>
+    <desc>
+      <descItem lang="en-US" value="Highway Runnery"/>
+    </desc>
+  </item>
+
+  <item id="35">
+    <url>http://www.youtube.com/watch?v=JDN_ZT-jbL8</url>
+    <desc>
+      <descItem lang="en-US" value="Chaser on the Rocks"/>
+    </desc>
+  </item>
+
+  <item id="36">
+    <url>http://www.youtube.com/watch?v=HxfNh3btz9U</url>
+    <desc>
+      <descItem lang="en-US" value="Shot and bothered"/>
+    </desc>
+  </item>
+
+  <item id="37">
+    <url>http://www.youtube.com/watch?v=HO_MzWsJgpM</url>
+    <desc>
+      <descItem lang="en-US" value="Out and Out Rout"/>
+    </desc>
+  </item>
+
+  <item id="38">
+    <url>http://www.youtube.com/watch?v=gSSM8CrJxq4</url>
+    <desc>
+      <descItem lang="en-US" value="The solid tin coyote"/>
+    </desc>
+  </item>
+
+  <item id="39">
+    <url>http://www.youtube.com/watch?v=g3-TpRtOwMk</url>
+    <desc>
+      <descItem lang="en-US" value="Clippety Clobbered"/>
+    </desc>
+  </item>
+
+  <item id="40">
+    <url>http://www.youtube.com/watch?v=zY84YZEyVE0</url>
+    <desc>
+      <descItem lang="en-US" value="Sugar And Spies"/>
+    </desc>
+  </item>
+  
+  <item id="41">
+    <url>http://www.youtube.com/watch?v=gO6l5JY2JBU</url>
+    <desc>
+      <descItem lang="en-US" value="Freeze Frame"/>
+    </desc>
+  </item>
+
+  <item id="42">
+    <url>http://www.youtube.com/watch?v=S0xh1ohbT7k</url>
+    <desc>
+      <descItem lang="en-US" value="Soup or Sonic"/>
+    </desc>
+  </item>
+
+  <item id="43">
+    <url>http://www.youtube.com/watch?v=d-ZbRCvpWMQ</url>
+    <desc>
+      <descItem lang="en-US" value="Chariots of Fur Jones"/>
+    </desc>
+  </item>
+
+  <item id="44">
+    <url>http://www.youtube.com/watch?v=27chgpf_OEs</url>
+    <desc>
+      <descItem lang="en-US" value="Little go beep "/>
+    </desc>
+  </item>
+
+  <item id="45">
+    <url>http://www.youtube.com/watch?v=netnzyhQazg</url>
+    <desc>
+      <descItem lang="en-US" value="Whizzard of Ow "/>
+    </desc>
+  </item>
+  
+  <item id="46">
+    <url> http://www.youtube.com/watch?v=b2jYnplIiGk</url>
+    <desc>
+      <descItem lang="en-US" value="Coyote Falls"/>
+    </desc>
+  </item>
+
+  <item id="47">
+    <url>http://www.youtube.com/watch?v=BmKFA-7YSg8</url>
+    <desc>
+      <descItem lang="en-US" value="Fur of Flying"/>
+    </desc>
+  </item>
+
+  <item id="48">
+    <url>http://www.youtube.com/watch?v=OfMNTxBvUSM</url>
+    <desc>
+      <descItem lang="en-US" value="Hot Rod and Reel!"/>
+    </desc>
+  </item>
+  
+  <!-- FINE serie ufficiale 
+  http://en.wikipedia.org/wiki/Wile_E._Coyote_and_The_Road_Runner
+  -->
+
+  <!-- duplicato ? -->
+  <item id="49">
+    <url>http://www.youtube.com/watch?v=odNLJNXnAb0</url>
+    <desc>
+      <descItem lang="en-US" value="Glue manipulating "/>
+    </desc>
+  </item>
+
+  <!-- duplicato ? -->
+  <!--<item id="50">
+    <url>http://www.youtube.com/watch?v=LrQMMvN0Ffw</url>
+    <desc>
+      <descItem lang="en-US" value="Look Before You Beep"/>
+    </desc>
+  </item>-->
+  
+  
+  <!-- -->
+
+
+  <!-- con bugs bunny -->
+  <!--<item id="44">
+    <url>http://www.youtube.com/watch?v=rG10Ajn_AIo</url>G:\wpdev\WileCoyote\WileCoyote\ViewModels\MainViewModel.cs
+    <desc>
+      <descItem lang="en-US" value="Compressed hare"/>
+    </desc>
+  </item>-->
+  <!--<item id="45">
+    <url>http://www.youtube.com/watch?v=HQ6Bas7QEyQ</url>
+    <desc>
+      <descItem lang="en-US" value="To hare is human"/>
+    </desc>
+  </item>-->
+
+
+
+</root>
+

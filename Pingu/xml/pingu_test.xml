@@ -1,0 +1,406 @@
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+   <msg culture="it-IT" text="servizio sospeso"/>
+   <msg culture="en-GB" text="Service not available"/>
+  </status>
+  <item id="1">
+    <url>http://www.youtube.com/watch?v=arlva9ih-hE</url>
+    <origId>43</origId>
+  </item>
+  <item id="2">
+    <url>http://www.youtube.com/watch?v=qbCFzTami8g</url>
+    <origId>46</origId>
+  </item>
+  <item id="3">
+    <url>http://www.youtube.com/watch?v=_1Efbse3ZJU</url>
+    <origId>47</origId>
+  </item>
+  <item id="4">
+    <url>http://www.youtube.com/watch?v=vK0RozC0XkY</url>
+    <origId>XXX</origId>
+  </item>
+  <item id="5">
+    <url>http://www.youtube.com/watch?v=fFOjrMgWbRw</url>
+    <origId>97</origId>
+  </item>
+  <item id="6">
+    <url>http://www.youtube.com/watch?v=g9mB851HSak</url>
+    <origId>129</origId>
+  </item>
+  <item id="7">
+    <url>http://www.youtube.com/watch?v=mqJCTEF-m2Y</url>
+    <origId>2</origId>
+  </item>
+  <item id="8">
+    <url>http://www.youtube.com/watch?v=1O7WnI3Afu0</url>
+    <origId>121</origId>
+  </item>
+  <item id="9">
+    <url>http://www.youtube.com/watch?v=Tfd-eJasBSc</url>
+    <origId>1</origId>
+  </item>
+  <item id="10">
+    <url>http://www.youtube.com/watch?v=84H_fZ7bRXY</url>
+    <origId>4</origId>
+  </item>
+  <item id="11">
+    <url>http://www.youtube.com/watch?v=3TNKATmfhWM</url>
+    <origId>118</origId>
+  </item>
+  <item id="12">
+    <url>http://www.youtube.com/watch?v=_Vi4__R7O1c</url>
+    <origId>120</origId>
+  </item>
+  <item id="13">
+    <url>http://www.youtube.com/watch?v=bdfhcIS6ZQA</url>
+    <origId>151</origId>
+  </item>
+  <item id="14">
+    <url>http://www.youtube.com/watch?v=eSvzMhTTsWE</url>
+    <origId>40</origId>
+  </item>
+  <item id="15">
+    <url>http://www.youtube.com/watch?v=cwPjS364pkk</url>
+    <origId>114</origId>
+  </item>
+  <item id="16">
+    <url>http://www.youtube.com/watch?v=8sFKRWTWE8s</url>
+    <origId>42</origId>
+  </item>
+  <item id="17">
+    <url>http://www.youtube.com/watch?v=BZnimet_R2E</url>
+    <origId>21</origId>
+  </item>
+  <item id="18">
+    <url>http://www.youtube.com/watch?v=JSMKNQYKqjs</url>
+    <origId>3</origId>
+  </item>
+  <item id="19">
+    <url>http://www.youtube.com/watch?v=rVJbuuK_iIo</url>
+    <origId>90</origId>
+  </item>
+  <item id="20">
+    <url>http://www.youtube.com/watch?v=3bhMMHp1RyQ</url>
+    <origId>114</origId>
+  </item>
+  <item id="21">
+    <url>http://www.youtube.com/watch?v=cj-4MH1abFI</url>
+    <origId>148</origId>
+  </item>
+  <item id="22">
+    <url>http://www.youtube.com/watch?v=RsFmOYitELk</url>
+    <origId>100</origId>
+  </item>
+  <item id="23">
+    <url>http://www.youtube.com/watch?v=zyEMJ39OMFU</url>
+    <origId>48</origId>
+  </item>
+  <item id="24">
+    <url>http://www.youtube.com/watch?v=Hi22DIkdDy8</url>
+    <origId>118</origId>
+  </item>
+  <item id="25">
+    <url>http://www.youtube.com/watch?v=FQigwfpB62E</url>
+    <origId>XXX</origId>
+  </item>
+  <item id="26">
+    <url>http://www.youtube.com/watch?v=_lMffxgCZU0</url>
+    <origId>67</origId>
+  </item>
+  <item id="27">
+    <url>http://www.youtube.com/watch?v=kAW5V5jkphY</url>
+    <origId>74</origId>
+  </item>
+  <item id="28">
+    <url>http://www.youtube.com/watch?v=yfu6MWz6LWE</url>
+    <origId>82</origId>
+  </item>
+  <item id="29">
+    <url>http://www.youtube.com/watch?v=2mOVDLNHQwU</url>
+    <origId>143</origId>
+  </item>
+  <item id="30">
+    <url>http://www.youtube.com/watch?v=QK2xGTxuf-Y</url>
+    <origId>133</origId>
+  </item>
+  <item id="31">
+    <url>http://www.youtube.com/watch?v=Mc_bGaxsFb4</url>
+    <origId>???</origId>
+  </item>
+  <item id="32">
+    <url>http://www.youtube.com/watch?v=bCXjhVsu_Ko</url>
+    <origId>94</origId>
+  </item>
+  <item id="33">
+    <url>http://www.youtube.com/watch?v=U_wrvU6FsAc</url>
+    <origId>XXX</origId>
+  </item>
+  <item id="34">
+    <url>http://www.youtube.com/watch?v=PgkByccWphM</url>
+    <origId>152</origId>
+  </item>
+  <item id="35">
+    <url>http://www.youtube.com/watch?v=ICgGu3fQvoY</url>
+    <origId>XXX</origId>
+  </item>
+  <item id="36">
+    <url>http://www.youtube.com/watch?v=ufaiOIBJKEU</url>
+    <origId>38</origId>
+  </item>
+  <item id="37">
+    <url>http://www.youtube.com/watch?v=bS-rihPtrU4</url>
+    <origId>68</origId>
+  </item>
+  <item id="38">
+    <url>http://www.youtube.com/watch?v=Uaw2kXwwfnk</url>
+    <origId>139</origId>
+  </item>
+  <item id="39">
+    <url>http://www.youtube.com/watch?v=h5VVqEJ8vkc</url>
+    <origId>58</origId>
+  </item>
+  <item id="40">
+    <url>http://www.youtube.com/watch?v=Xy0ltUkktts</url>
+    <origId>156</origId>
+  </item>
+  <item id="41">
+    <url>http://www.youtube.com/watch?v=6yiPjlZHEto</url>
+    <origId>15</origId>
+  </item>
+  <item id="42">
+    <url>http://www.youtube.com/watch?v=m40bFzsRWd0</url>
+    <origId>49</origId>
+  </item>
+  <item id="43">
+    <url>http://www.youtube.com/watch?v=jDeST6A6zkg</url>
+    <origId>69</origId>
+  </item>
+  <item id="44">
+    <url>http://www.youtube.com/watch?v=H_T_IieEPis</url>
+    <origId>70</origId>
+  </item>
+  <item id="45">
+    <url>http://www.youtube.com/watch?v=IXPchnO7nTY</url>
+    <origId>122</origId>
+  </item>
+  <item id="46">
+    <url>http://www.youtube.com/watch?v=oKNzT1sDMMc</url>
+    <origId>25</origId>
+  </item>
+  <item id="47">
+    <url>http://www.youtube.com/watch?v=QVsefcQaU0M</url>
+    <origId>88</origId>
+  </item>
+  <item id="48">
+    <url>http://www.youtube.com/watch?v=Gi3vS6bD2CA</url>
+    <origId>6</origId>
+  </item>
+  <item id="49">
+    <url>http://www.youtube.com/watch?v=MNQw-24Pwe4</url>
+    <origId>122</origId>
+  </item>
+  <item id="50">
+    <url>http://www.youtube.com/watch?v=fjW7nNvFLgw</url>
+    <origId>92</origId>
+  </item>
+  <item id="51">
+    <url>http://www.youtube.com/watch?v=GQ8esqCF19A</url>
+    <origId>27</origId>
+  </item>
+  <item id="52">
+    <url>http://www.youtube.com/watch?v=LmTdwQbNkMo</url>
+    <origId>28</origId>
+  </item>
+  <item id="53">
+    <url>http://www.youtube.com/watch?v=OKM_mEAqtoc</url>
+    <origId>29</origId>
+  </item>
+  <item id="54">
+    <url>http://www.youtube.com/watch?v=yi9c97BoJIA</url>
+    <origId>30</origId>
+  </item>
+  <item id="55">
+    <url>http://www.youtube.com/watch?v=BQRCBByP66w</url>
+    <origId>31</origId>
+  </item>
+  <item id="56">
+    <url>http://www.youtube.com/watch?v=i879aDdy3_k</url>
+    <origId>32</origId>
+  </item>
+  <item id="57">
+    <url>http://www.youtube.com/watch?v=0fLLz7H9cvk</url>
+    <origId>33</origId>
+  </item>
+  <item id="58">
+    <url>http://www.youtube.com/watch?v=t9-wl4kGywA</url>
+    <origId>34</origId>
+  </item>
+  <item id="59">
+    <url>http://www.youtube.com/watch?v=F_1edit6yow</url>
+    <origId>35</origId>
+  </item>
+  <item id="60">
+    <url>http://www.youtube.com/watch?v=OIQwflWJyUA</url>
+    <origId>36</origId>
+  </item>
+  <item id="61">
+    <url>http://www.youtube.com/watch?v=Q97R60DW7gI</url>
+    <origId>101</origId>
+  </item>
+  <item id="62">
+    <url>http://www.youtube.com/watch?v=TWa29jk_r4s</url>
+    <origId>102</origId>
+  </item>
+  <item id="63">
+    <url>http://www.youtube.com/watch?v=jX6eIOwgsXs</url>
+    <origId>103</origId>
+  </item>
+  <item id="64">
+    <url>http://www.youtube.com/watch?v=3rW0e_kBWNI</url>
+    <origId>104</origId>
+  </item>
+  <item id="65">
+    <url>http://www.youtube.com/watch?v=Ewadn9l59AM</url>
+    <origId>105</origId>
+  </item>
+  <item id="66">
+    <url>http://www.youtube.com/watch?v=hnSqpXg9c50</url>
+    <origId>106</origId>
+  </item>
+  <item id="67">
+    <url>http://www.youtube.com/watch?v=Kl7suO0v7pA</url>
+    <origId>107</origId>
+  </item>
+  <item id="68">
+    <url>http://www.youtube.com/watch?v=cQuRASDS8Z4</url>
+    <origId>108</origId>
+  </item>
+  <item id="69">
+    <url>http://www.youtube.com/watch?v=GpsFyG1ZDLQ</url>
+    <origId>109</origId>
+  </item>
+  <item id="70">
+    <url>http://www.youtube.com/watch?v=Z9CZf8NhLkA</url>
+    <origId>110</origId>
+  </item>
+  <item id="71">
+    <url>http://www.youtube.com/watch?v=9C9tPDEkHE0</url>
+    <origId>75</origId>
+  </item>
+  <item id="72">
+    <url>http://www.youtube.com/watch?v=s1_Mqr0J9qQ</url>
+    <origId>76</origId>
+  </item>
+  <item id="73">
+    <url>http://www.youtube.com/watch?v=GUxNm1vZpRU</url>
+    <origId>77</origId>
+  </item>
+  <item id="74">
+    <url>http://www.youtube.com/watch?v=3BHTV3M8gSc</url>
+    <origId>78</origId>
+  </item>
+  <item id="75">
+    <url>http://www.youtube.com/watch?v=9C9tPDEkHE0</url>
+    <origId>79</origId>
+  </item>
+  <item id="76">
+    <url>http://www.youtube.com/watch?v=-dI4JCegpNM</url>
+    <origId>80</origId>
+  </item>
+  <item id="77">
+    <url>http://www.youtube.com/watch?v=KNQG569M7hg</url>
+    <origId>81</origId>
+  </item>
+  <item id="78">
+    <url>http://www.youtube.com/watch?v=WAI-YEOVVkA</url>
+    <origId>83</origId>
+  </item>
+  <item id="79">
+    <url>http://www.youtube.com/watch?v=58G0SvpGDGs</url>
+    <origId>84</origId>
+  </item>
+  <item id="80">
+    <url>http://www.youtube.com/watch?v=rdkKytblpCw</url>
+    <origId>85</origId>
+  </item>
+  <item id="81">
+    <url>http://www.youtube.com/watch?v=9kug9Dm1qXw</url>
+    <origId>5</origId>
+  </item>
+  <item id="82">
+    <url>http://www.youtube.com/watch?v=vgsxe6w-bUg</url>
+    <origId>7</origId>
+  </item>
+  <item id="83">
+    <url>http://www.youtube.com/watch?v=hOIciyydZzI</url>
+    <origId>8</origId>
+  </item>
+  <item id="84">
+    <url>http://www.youtube.com/watch?v=OBKrTgn1Lq8</url>
+    <origId>9</origId>
+  </item>
+  <item id="85">
+    <url>http://www.youtube.com/watch?v=cIFnRiD5Q_Q</url>
+    <origId>10</origId>
+  </item>
+  <item id="86">
+    <url>http://www.youtube.com/watch?v=vCGg1oTBzrU</url>
+    <origId>11</origId>
+  </item>
+  <item id="87">
+    <url>http://www.youtube.com/watch?v=m2JyechJqEI</url>
+    <origId>12</origId>
+  </item>
+  <item id="88">
+    <url>http://www.youtube.com/watch?v=zJNNHcA2MLY</url>
+    <origId>13</origId>
+  </item>
+  <item id="89">
+    <url>http://www.youtube.com/watch?v=G1bpgWQoy7s</url>
+    <origId>14</origId>
+  </item>
+  <item id="90">
+    <url>http://www.youtube.com/watch?v=Sl_GwJZ_FFY</url>
+    <origId>16</origId>
+  </item>
+  <item id="91">
+    <url>http://www.youtube.com/watch?v=BMpH29XCvrI</url>
+    <origId>19</origId>
+  </item>
+  <item id="92">
+    <url>http://www.youtube.com/watch?v=H3cMSbJNnGw</url>
+    <origId>20</origId>
+  </item>
+  <item id="93">
+    <url>http://www.youtube.com/watch?v=9QxQErF-ckc</url>
+    <origId>23</origId>
+  </item>
+  <item id="94">
+    <url>http://www.youtube.com/watch?v=Tcp6lK739NA</url>
+    <origId>24</origId>
+  </item>
+  <item id="95">
+    <url>http://www.youtube.com/watch?v=OFB9mzFuANY</url>
+    <origId>26</origId>
+  </item>
+  <item id="96">
+    <url>http://www.youtube.com/watch?v=t7rW5xb66V0</url>
+    <origId>37</origId>
+  </item>
+  <item id="97">
+    <url>http://www.youtube.com/watch?v=IpTckAld9IE</url>
+    <origId>38</origId>
+  </item>
+  <item id="98">
+    <url>http://www.youtube.com/watch?v=AbpDyXc35TQ</url>
+    <origId>39</origId>
+  </item>
+  <item id="99">
+    <url>http://www.youtube.com/watch?v=oFbQldt6qwc</url>
+    <origId>41</origId>
+  </item>
+  <item id="100">
+    <url>http://www.youtube.com/watch?v=ZDQVL8vr3DA</url>
+    <origId>45</origId>
+  </item>
+</root>

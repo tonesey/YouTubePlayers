@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="addToFavText" xml:space="preserve">
+    <value>adicionar aos favoritos            </value>
+  </data>
+  <data name="appHeader" xml:space="preserve">
+    <value>app</value>
+  </data>
+  <data name="brokenLinkText" xml:space="preserve">
+    <value>Erro no episódio '{0}' 
+Link: {1}</value>
+  </data>
+  <data name="buyAppButton" xml:space="preserve">
+    <value>comprar aplicativo                 </value>
+  </data>
+  <data name="buyPage_buyApp" xml:space="preserve">
+    <value>Sim!                               </value>
+  </data>
+  <data name="buyPage_noThanks" xml:space="preserve">
+    <value>Não, obrigado ...                  </value>
+  </data>
+  <data name="ExceptionMessageTitle" xml:space="preserve">
+    <value>Erro</value>
+  </data>
+  <data name="favoritesHeader" xml:space="preserve">
+    <value>favoritos                          </value>
+  </data>
+  <data name="feedbackText" xml:space="preserve">
+    <value>{0} comentário/requerer</value>
+  </data>
+  <data name="full" xml:space="preserve">
+    <value>versão Completa</value>
+  </data>
+  <data name="noNetworkAvailable" xml:space="preserve">
+    <value>Conexão à Internet não disponível! </value>
+  </data>
+  <data name="rateAppButton" xml:space="preserve">
+    <value>taxa app!                          </value>
+  </data>
+  <data name="removeFromFavText" xml:space="preserve">
+    <value>remover dos favoritos              </value>
+  </data>
+  <data name="reportError" xml:space="preserve">
+    <value>relata link incorreto</value>
+  </data>
+  <data name="shareText" xml:space="preserve">
+    <value>compartilhar</value>
+  </data>
+  <data name="trial" xml:space="preserve">
+    <value>Versão de teste</value>
+  </data>
+  <data name="version" xml:space="preserve">
+    <value>versão</value>
+  </data>
+  <data name="b" xml:space="preserve">
+    <value>escreva-nos!</value>
+  </data>
+  <data name="checkoutVideo" xml:space="preserve">
+    <value>Confira este vídeo!
+{0}
+{1}</value>
+  </data>
+  <data name="error_buy" xml:space="preserve">
+    <value>Erro durante a conexão Windows Store! 
+Por favor, tente novamente mais tarde ou comprar aplicativo da web</value>
+  </data>
+  <data name="error_store" xml:space="preserve">
+    <value>Erro durante a conexão Windows Store! 
+Por favor, tente novamente mais tarde!</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Um problema ocorreu a última vez que correu este app :( 
+Gostaria de enviar um e-mail para denunciá-lo?</value>
+  </data>
+  <data name="trialMessageEpisodes" xml:space="preserve">
+    <value>Desculpe, mas você pode assistir apenas os primeiros cinco episódios em versão de teste ... 
+
+Você quer comprar a versão completa? </value>
+  </data>
+  <data name="favText" xml:space="preserve">
+    <value>Não houve episódios favoritos definida. 
+Toque e segure um episódio para adicioná-lo aqui. 
+
+Toque e segure um episódio nesta lista (se houver) para a remover dos favoritos</value>
+  </data>
+  <data name="otherAppsButton" xml:space="preserve">
+    <value>outros apps</value>
+  </data>
+  <data name="backButtonText" xml:space="preserve">
+    <value>voltar</value>
+  </data>
+  <data name="disclaimerMessage" xml:space="preserve">
+    <value>DISCLAIMER:
+Este app é baseada em uma lista pública de links vídeos da web.
+
+Os vídeos são hospedados no YouTube e não são controlados pelos desenvolvedores, que declinam qualquer responsabilidade pelo seu conteúdo.
+
+Se você quiser solicitar a remoção de um link, indicar um link quebrado/errado ou contribuir para a expansão da lista, sinta-se livre para contatar os autores de aplicativos.
+
+Obrigado</value>
+  </data>
+  <data name="infoButtonText" xml:space="preserve">
+    <value>informações</value>
+  </data>
+  <data name="brokenLinkQuestion" xml:space="preserve">
+    <value>:( Desculpe, eu não posso encontrar o vídeo ... Quer enviar um e-mail para os desenvolvedores?</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnCompletedWithError" xml:space="preserve">
+    <value>:( Ah, não ...
+
+Alguns episódios não foram baixadas corretamente: por favor, tente novamente o download.
+Os episódios já baixados serão preservados.</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnCompletedWithSuccess" xml:space="preserve">
+    <value>Great!
+
+Todos os episódios já estão disponíveis no telefone: você não precisa de conexão com a internet!
+:)</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_Welcome" xml:space="preserve">
+    <value>Aqui você pode baixar todos os episódios da web!
+
+Uma vez feito isso, você pode usar o aplicativo off-line, todos os episódios estarão disponíveis para sempre em seu telefone: sua conexão com a Internet não é mais necessária!
+
+</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnEpisodesInProgress" xml:space="preserve">
+    <value>Download em andamento, um pouco de paciência ... :)
+
+ Por favor, não sair desta página, caso contrário, será necessário repetir o procedimento de novo …</value>
+  </data>
+  <data name="ButtonEndText_DwnOk" xml:space="preserve">
+    <value>vá para os episódios!</value>
+  </data>
+  <data name="ButtonStartBackupEpisodesText" xml:space="preserve">
+    <value>começa a voltar-se!</value>
+  </data>
+  <data name="MessageAbortDownload" xml:space="preserve">
+    <value>Você precisará repetir o procedimento de backup inteiro, você tem certeza?</value>
+  </data>
+  <data name="TextCurEpisodeTitleHeader" xml:space="preserve">
+    <value>episodio:</value>
+  </data>
+  <data name="TextOverallProgressHeader" xml:space="preserve">
+    <value>progresso:</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Atenção</value>
+  </data>
+  <data name="backupEpisodesText" xml:space="preserve">
+    <value>baixar episódios</value>
+  </data>
+  <data name="MessageAlreadyOffline" xml:space="preserve">
+    <value>Se você executar o procedimento novamente backup dos episódios atualmente armazenados serão apagados, você tem certeza?</value>
+  </data>
+  <data name="UserMessageDownloadKo" xml:space="preserve">
+    <value>:( Sinto muito, algo deu errado ... Quer enviar um e-mail para os desenvolvedores com os detalhes do erro?</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_CheckingLinks" xml:space="preserve">
+    <value>Verificação de validade ligação em andamento. . .
+
+Por favor, aguarde. . .</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_LinksCheckedWithErrors" xml:space="preserve">
+    <value>:( Encontrado links inválidos!
+
+Por favor, use o botão abaixo para relatar o problema: quando você recebe o e-mail de confirmação novamente repetir a operação de backup!</value>
+  </data>
+  <data name="ButtonEndText_LinksKO" xml:space="preserve">
+    <value>envia erro</value>
+  </data>
+  <data name="trialMessageBackup" xml:space="preserve">
+    <value>Oopss ...... backup não está disponível na versão de teste ...
+
+Quer comprar a versão completa?</value>
+  </data>
+  <data name="possibleWrongBackup" xml:space="preserve">
+    <value>O episódio selecionado não está contido no telefone. 
+E' possível que a operação de backup falhou: por favor, tente novamente o backup.</value>
+  </data>
+  <data name="DownloaderPage_Infos_Stage_DwnCompletedWithConnectionError" xml:space="preserve">
+    <value>:( Ah, não ...
+
+O wi-fi não está mais ativo.
+Por favor, saia do aplicativo, desativar e ativar o wi-fi nas configurações do telefone e refazer o download.
+Os episódios baixados será mantida.
+</value>
+  </data>
+  <data name="DownloadEpisodesQuestion" xml:space="preserve">
+    <value>Você quer baixar episódios em seu telefone e vê-los sempre sem conexão com a internet? :)</value>
+  </data>
+  <data name="RatingMessage1" xml:space="preserve">
+    <value>De 5 estrelas a este app! :)</value>
+  </data>
+  <data name="RatingMessage2" xml:space="preserve">
+    <value>Você está usando este aplicativo muito!
+
+Por que não nos dão cinco estrelas? :)</value>
+  </data>
+  <data name="RatingNo" xml:space="preserve">
+    <value>não...</value>
+  </data>
+  <data name="RatingTitle" xml:space="preserve">
+    <value>Você está gostando {0}?</value>
+  </data>
+  <data name="RatingYes" xml:space="preserve">
+    <value>Sim!</value>
+  </data>
+  <data name="SpaceRequiredWarn" xml:space="preserve">
+    <value>Episódios offline ocupará sobre {0}Gb de memória do telefone. Continuar?</value>
+  </data>
+</root>

@@ -1,0 +1,14 @@
+Welcome to the amazing world of Peppa Pig!
+
+You can watch 50 Peppa Pig videos on your Windows Phone in MP4 superior audio and video quality.
+You can backup episode into your phone (no more internet connection will be required), set your favorite episodes and share video urls on social networks!
+
+DISCLAIMER:
+This app is an UNOFFICIAL "Peppa Pig" tv show: it ss based on a public list of web videos links.
+Videos are hosted on YouTube servers and are not controlled by developers, that decline all responsibility for their content.
+If you want to request removal of a link, report broken/wrong link, contribute to expansion of the list, feel free to contact app authors.
+
+Release history:
+1.1.1: bugfixes, UI improvements
+1.1.0: downloader fixes
+1.0.0: first release

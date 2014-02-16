@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+    <msg culture="it-IT" text="servizio sospeso" targetVer="1.0.6" op="eq"/>
+  </status>
+  <item>
+    <url>http://www.youtube.com/watch?v=0tlrwsu1IQM</url>
+    <desc>
+      <descItem lang="it-IT" value="Il piccolo Alex"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Lt5q6Gx_DsI</url>
+    <desc>
+      <descItem lang="it-IT" value="L'esame della vista"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=CTd5KaYBS3g</url>
+    <desc>
+      <descItem lang="it-IT" value="Strumenti musicali"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=-EAuBFyFFmo</url>
+    <desc>
+      <descItem lang="it-IT" value="Il camion dei pompieri"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=LKOCX3AkCLU</url>
+    <desc>
+      <descItem lang="it-IT" value="Una gita in treno"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=2uWyxQvr_V0</url>
+    <desc>
+      <descItem lang="it-IT" value="L'ospedale"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=n4jPd97O_hc</url>
+    <desc>
+      <descItem lang="it-IT" value="Papà perde i suoi occhiali"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=MXTUw9ccu1Q</url>
+    <desc>
+      <descItem lang="it-IT" value="Bolle di sapone"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=hW8pX5tJ9ns</url>
+    <desc>
+      <descItem lang="it-IT" value="La casa sull'albero"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=wGpTFUw7F7Q</url>
+    <desc>
+      <descItem lang="it-IT" value="Neve"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=b38UEGXrv5k</url>
+    <desc>
+      <descItem lang="it-IT" value="Il servizio da te"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=Oj23gPw4cbI</url>
+    <desc>
+      <descItem lang="it-IT" value="L'ospite francese"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=pQik-O5fneI</url>
+    <desc>
+      <descItem lang="it-IT" value="Il compleanno"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=pQik-O5fneI</url>
+    <desc>
+      <descItem lang="it-IT" value="Il rovo di more"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=tKdEBY3izDw</url>
+    <desc>
+      <descItem lang="it-IT" value="George ha il singhiozzo"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=8w8ANT1DhE0</url>
+    <desc>
+      <descItem lang="it-IT" value="La barca di nonno Pig"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=8w8ANT1DhE0</url>
+    <desc>
+      <descItem lang="it-IT" value="Il parco giochi"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=1DSvRWzZm5o</url>
+    <desc>
+      <descItem lang="it-IT" value="Luna park"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=4SVsuitp6Wg</url>
+    <desc>
+      <descItem lang="it-IT" value="La macchina nuova"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=ytMYU_OPrMI</url>
+    <desc>
+      <descItem lang="it-IT" value="Il pollaio di nonna Pig"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=CgbdqFvKD7E</url>
+    <desc>
+      <descItem lang="it-IT" value="I numeri"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=YI7Nm4UQTR8</url>
+    <desc>
+      <descItem lang="it-IT" value="La festa dei pirati"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=NVUOTDZ-PQU</url>
+    <desc>
+      <descItem lang="it-IT" value="Il castello ventoso"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=6kdtsy-0mEc</url>
+    <desc>
+      <descItem lang="it-IT" value="La festa della scuola"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=44G1z-XRLR4</url>
+    <desc>
+      <descItem lang="it-IT" value="La gita scolastica"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=Nx-B4xghc10</url>
+    <desc>
+      <descItem lang="it-IT" value="Fischiettando"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=8r8gRsHGCzw</url>
+    <desc>
+      <descItem lang="it-IT" value="L'armadio dei giocattoli"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=YvLzygTrrhk</url>
+    <desc>
+      <descItem lang="it-IT" value="La tartaruga temeraria"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=jbKpuAhZao0</url>
+    <desc>
+      <descItem lang="it-IT" value="La fatina dei dentini"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=aSu_GnN3T4g</url>
+    <desc>
+      <descItem lang="it-IT" value="Amici del cuore"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=aSu_GnN3T4g</url>
+    <desc>
+      <descItem lang="it-IT" value="Festa in maschera"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=HGGwHmSmg-U</url>
+    <desc>
+      <descItem lang="it-IT" value="Bolle di sapone"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=6qhU-U27Xsw</url>
+    <desc>
+      <descItem lang="it-IT" value="Il litigio"/>
+    </desc>
+  </item>
+
+  <item>
+    <url>http://www.youtube.com/watch?v=Ny180-1RD5Y</url>
+    <desc>
+      <descItem lang="it-IT" value="Tutti al lavoro"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=v6S8SXLNZ2A</url>
+    <desc>
+      <descItem lang="it-IT" value="La capanna di Babbo Natale"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=9_5lOUs8L_E</url>
+    <desc>
+      <descItem lang="it-IT" value="Papà fa ginnastica"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=j-JBUeVj9sQ</url>
+    <desc>
+      <descItem lang="it-IT" value="Rebecca coniglio"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=lQi-b6NksIk</url>
+    <desc>
+      <descItem lang="it-IT" value="La chiacchierona"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=S9Ex8eOipR0</url>
+    <desc>
+      <descItem lang="it-IT" value="Tutti al mare"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=44G1z-XRLR4</url>
+    <desc>
+      <descItem lang="it-IT" value="La recita scolastica"/>
+    </desc>
+  </item>
+  <!-- 41 - 50-->
+
+  <item>
+    <url>http://www.youtube.com/watch?v=WnYpIZSyUe0</url>
+    <desc>
+      <descItem lang="it-IT" value="L'arcobaleno"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=_tkpyFoLvPY</url>
+    <desc>
+      <descItem lang="it-IT" value="Cantiere navale"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=M-GD6fpGho0</url>
+    <desc>
+      <descItem lang="it-IT" value="La tosse"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=5dgmQhZ2ZNg</url>
+    <desc>
+      <descItem lang="it-IT" value="Viaggio sulla luna"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=UysN_pGFviA</url>
+    <desc>
+      <descItem lang="it-IT" value="Le vacanze di Polly"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=c9jm6dDVI_E</url>
+    <desc>
+      <descItem lang="it-IT" value="Le stelle"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=iufOCjhWVNw</url>
+    <desc>
+      <descItem lang="it-IT" value="Il riciclaggio dei rifiuti"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=0r_69Vrm67Y</url>
+    <desc>
+      <descItem lang="it-IT" value="Scarpe nuove"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=PmFH5uttRTw</url>
+    <desc>
+      <descItem lang="it-IT" value="Giochi da grandi"/>
+    </desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=vZJpgCCP9cE</url>
+    <desc>
+      <descItem lang="it-IT" value="Rifugi"/>
+    </desc>
+  </item>
+
+</root>

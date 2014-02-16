@@ -1,0 +1,2 @@
+This is an HOTFIX due to large amount of crashes when app is launched without internet/wi-fi connection. 
+Best regards

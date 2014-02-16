@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{68AEF2AA-4CB0-4E6E-A903-05FBC27A0F08}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Centapp.CartoonCommon</RootNamespace>
+    <AssemblyName>PeppaPig</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>pt</SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>PeppaPig_pt-BR.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>Centapp.CartoonCommon.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP7</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP7</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TRIAL|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TRIAL\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>Bin\Debug\Cartoon.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTRIAL|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTRIAL\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;TRIAL;WP7</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>Bin\Debug\Cartoon.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNOINTERNET|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugNOINTERNET\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;NOINTERNET</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>Bin\Debug\Cartoon.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Wp7Shared\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.Async.1.0.165\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.Async.1.0.165\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Phone">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.Async.1.0.165\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="mtiks">
+      <HintPath>..\..\Wp7Shared\Analytics\mtiks.dll</HintPath>
+    </Reference>
+    <Reference Include="MyToolkit">
+      <HintPath>..\..\Wp7Shared\packages\MyToolkit.2.0.14.0\lib\portable-win+net40+sl40+wp71\MyToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="MyToolkit.Extended">
+      <HintPath>..\..\Wp7Shared\packages\MyToolkit.Extended.2.0.14.0\lib\sl4-wp71\MyToolkit.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MyToolkit.Http">
+      <HintPath>..\..\Wp7Shared\packages\MyToolkit.Http.2.0.14.0\lib\portable-win+net40+sl40+wp71\MyToolkit.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Wp7Shared\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.1.1.6\lib\sl4-windowsphone71\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.18\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.18\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.18\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.1.1.6\lib\sl4-windowsphone71\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.1.1.6\lib\sl4-windowsphone71\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="mscorlib.extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Windows.Core, Version=2013.3.1127.2040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\App.xaml.cs">
+      <Link>App.xaml.cs</Link>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\AppResources.Designer.cs">
+      <Link>AppResources.Designer.cs</Link>
+      <DependentUpon>AppResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="..\Common\Behaviours\LoadedBehaviour.cs">
+      <Link>Behaviours\LoadedBehaviour.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\BuyAppPage.xaml.cs">
+      <Link>BuyAppPage.xaml.cs</Link>
+      <DependentUpon>BuyAppPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\Controls\FeedbackOverlay.xaml.cs">
+      <Link>Controls\FeedbackOverlay.xaml.cs</Link>
+      <DependentUpon>FeedbackOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\Converters\BackupStageToButtonEndVisibilityConverter.cs">
+      <Link>Converters\BackupStageToButtonEndVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\BackupStageToButtonStartVisibilityConverter.cs">
+      <Link>Converters\BackupStageToButtonStartVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\BackupStageToImageVisibilityConverter.cs">
+      <Link>Converters\BackupStageToImageVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\BackupStageToMessageConverter.cs">
+      <Link>Converters\BackupStageToMessageConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\BackupStageToProgBarModeConverter.cs">
+      <Link>Converters\BackupStageToProgBarModeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\EpisodesToPanItemContentConverter.cs">
+      <Link>Converters\EpisodesToPanItemContentConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\EpisodesToPanItemVisConverter.cs">
+      <Link>Converters\EpisodesToPanItemVisConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\FavVisibilityConverter.cs">
+      <Link>Converters\FavVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\FavVisibilityConverterInverted.cs">
+      <Link>Converters\FavVisibilityConverterInverted.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\IdToImageConverter.cs">
+      <Link>Converters\IdToImageConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\IdToTitleConverter.cs">
+      <Link>Converters\IdToTitleConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\ItemToDescrConverter.cs">
+      <Link>Converters\ItemToDescrConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\TrialToBackColorConverter.cs">
+      <Link>Converters\TrialToBackColorConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\UriToImageConverter.cs">
+      <Link>Converters\UriToImageConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\VisibilityConverter.cs">
+      <Link>Converters\VisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Converters\VisibilityConverterInverted.cs">
+      <Link>Converters\VisibilityConverterInverted.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\DownloaderPage.xaml.cs">
+      <Link>DownloaderPage.xaml.cs</Link>
+      <DependentUpon>DownloaderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\Helpers\GenericHelper.cs">
+      <Link>Helpers\GenericHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Helpers\NetworkInterface.cs">
+      <Link>Helpers\NetworkInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\InfoPage.xaml.cs">
+      <Link>InfoPage.xaml.cs</Link>
+      <DependentUpon>InfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\MainPage.xaml.cs">
+      <Link>MainPage.xaml.cs</Link>
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\ReminderPopup.xaml.cs">
+      <Link>ReminderPopup.xaml.cs</Link>
+      <DependentUpon>ReminderPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\Utility\LittleWatson.cs">
+      <Link>Utility\LittleWatson.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utility\Logger.cs">
+      <Link>Utility\Logger.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utility\MissingConnectionException.cs">
+      <Link>Utility\MissingConnectionException.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utility\MyResourceManager.cs">
+      <Link>Utility\MyResourceManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\ViewModels\ItemViewModel.cs">
+      <Link>ViewModels\ItemViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\ViewModels\MainViewModel.cs">
+      <Link>ViewModels\MainViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\Common\App.xaml">
+      <Link>App.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\BuyAppPage.xaml">
+      <Link>BuyAppPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\Controls\FeedbackOverlay.xaml">
+      <Link>Controls\FeedbackOverlay.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\DownloaderPage.xaml">
+      <Link>DownloaderPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\InfoPage.xaml">
+      <Link>InfoPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\MainPage.xaml">
+      <Link>MainPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\ReminderPopup.xaml">
+      <Link>ReminderPopup.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\SampleData\MainViewModelSampleData.xaml">
+      <Link>SampleData\MainViewModelSampleData.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Common\Resources\buttons\backup.png">
+      <Link>Resources\buttons\backup.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\buttons\buy.png">
+      <Link>Resources\buttons\buy.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\buttons\info.png">
+      <Link>Resources\buttons\info.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\buttons\mail.png">
+      <Link>Resources\buttons\mail.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\buttons\other.png">
+      <Link>Resources\buttons\other.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\buttons\rate.png">
+      <Link>Resources\buttons\rate.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\buttons\search.png">
+      <Link>Resources\buttons\search.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\icons\app_header.png">
+      <Link>Resources\icons\app_header.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\icons\favorite.png">
+      <Link>Resources\icons\favorite.png</Link>
+    </Content>
+    <Content Include="..\Common\Resources\icons\list.png">
+      <Link>Resources\icons\list.png</Link>
+    </Content>
+    <Content Include="README_FIRST.txt" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <Content Include="xml\peppa_pt.xml" />
+    <Resource Include="..\Common\Resources\mqdefault.jpg">
+      <Link>Resources\mqdefault.jpg</Link>
+    </Resource>
+    <Resource Include="..\Common\Resources\icons\other.png">
+      <Link>Resources\icons\other.png</Link>
+    </Resource>
+    <Content Include="Resources\BuyApp.jpg" />
+    <EmbeddedResource Include="..\Common\AppResources.pt.resx">
+      <Link>AppResources.pt.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="appInfo.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="PageBackground1.jpg" />
+    <Resource Include="PanoramaBackground.png" />
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Wp7Shared\Wp7Shared.csproj">
+      <Project>{C0ABFED3-524B-473B-A9CA-5EE8C6D78884}</Project>
+      <Name>Wp7Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Common\AppResources.resx">
+      <Link>AppResources.resx</Link>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <Import Project="..\..\Wp7Shared\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\Wp7Shared\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\Wp7Shared\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\Wp7Shared\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+</Project>

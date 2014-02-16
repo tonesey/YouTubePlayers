@@ -1,0 +1,86 @@
+*** OFFLINE BACKUP INTRODUCED! ***
+
+Welcome to the amazing world of Pingu!
+
+You can watch 100 Pingu videos on your windows phone in MP4 quality video superior audio and video quality.
+You can set your favorite episodes and share video urls on social networks!
+
+DISCLAIMER:
+Pingu is based on a public list of web videos links.
+Videos are hosted on YouTube servers and are not controlled by developers, that decline all responsibility for their content.
+If you want to request removal of a link, report broken/wrong link, contribute to expansion of the list, feel free to contact app authors.
+
+Release history:
+2.0: added "backup to phone" feature! 
+1.7: added 10 episodes, bugfix
+1.6: bugfix, spanish localization
+
+===============================
+
+*** AGGIUNTO SALVATAGGIO OFFLINE EPISODI! ***
+
+Benvenuti nel fantastico mondo di Pingu!
+
+Con questa app potrai guardare 100 video di Pingu sul tuo Windows Phone in formato MP4 con video/audio in alta qualità.
+È possibile impostare i tuoi episodi preferiti e condividerli su facebook!
+
+DISCLAIMER:
+Pingu si basa su un elenco di link pubblici a contenuti presenti sul web.
+I filmati linkati nell'app sono ospitati su server YouTube e non sono controllati dagli sviluppatori, che declinano pertanto ogni responsabilità circa il loro contenuto.
+Per chiedere la rimozione di un link, segnalarne il malfunzionamento, contribuire all'ampliamento della lista contattare gli autori dell'app. 
+
+Cronologia rilasci:
+2.0: aggiunta funzionalità per il salvataggio episodi sul telefono
+1.7: aggiunti 10 episodi, bugfix
+1.6: bugfix, localizzazione in spagnolo
+
+===============================
+
+*** ADICIONADA FUNCIONALIDADE PARA SALVAR OS EPISÓDIOS NO TELEFONE! ***
+
+
+Bem-vindo ao maravilhoso mundo da Pingu!
+Com este aplicativo você pode assistir a 100 vídeos Pingu em seu Windows Phone com formato MP4 qualidade de vídeo/áudio.
+
+Você pode definir seus episódios favoritos e compartilhá-los no facebook!
+  
+DISCLAIMER:
+Pingu é baseado em uma lista pública de links vídeos da web.
+Os vídeos são hospedados no YouTube e não são controlados pelos desenvolvedores, que declinam qualquer responsabilidade pelo seu conteúdo.
+Se você quiser solicitar a remoção de um link, indicar um link quebrado/errado ou contribuir para a expansão da lista, sinta-se livre para contatar os autores de aplicativos.
+  
+História:
+2.0: anadida funcionalidad para salvar los episodios en el teléfono
+1.7: adicionados 10 episódios, correções de bugs
+1.6: correções de bugs, localização em Espanhol
+
+
+===============================
+
+*** AÑADIDO FUNCIÓN DE BACKUP OFFLINE!!! *** 
+
+
+Bienvenido al maravilloso mundo de Pingu!
+
+Puedes ver 100 Pingu vídeos en su teléfono Windows
+en calidad MP4.
+
+¡ Puedes configurar tus episodios favoritos y compartir vìdeo urls en
+las redes sociales !
+
+DISCLAIMER:
+Pingu està basado en una lista pública de enlaces de vìdeos web.
+Los vìdeos se alojan en los servidores de YouTube y no son controlados
+por los desarrolladores, que declinan toda la responsabilidad de su
+contenido.
+
+Si deseas solicitar la eliminación de un enlace, señalar un enlace
+incierto / incorrecto, contribuir a la expansiòn de la lista, no dude
+en ponerse en contacto con los autores de la aplicaciòn.
+
+Historial de versiones:
+2.0: adicionada funcionalidade para salvar os episódios no telefone
+1.7: añadidos 10 episodios, corrección de errores
+1.6: corrección de errores, localización al español
+
+

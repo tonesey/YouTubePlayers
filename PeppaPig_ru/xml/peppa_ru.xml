@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+	<status value="ok" defMsg="Service not available">
+		<msg culture="ru" text="Услуга недоступна"/>
+	</status>
+	<item><url>http://www.youtube.com/watch?v=MtqXMr1ACIg</url><desc><descItem lang="ru" value="Папа занялся спортом"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=GRBqzdAcEW8</url><desc><descItem lang="ru" value="мисс кролик выходной"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=S5LZ7KAX5y4</url><desc><descItem lang="ru" value="мой день рождение"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=ewBwxdRtEc0</url><desc><descItem lang="ru" value="ночь в доме Зои"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=zczjxiTf_mg</url><desc><descItem lang="ru" value="Плавание"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=L5vO0OhWFd4</url><desc><descItem lang="ru" value="Папа вешает фотографии"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=ng70zKaxIFM</url><desc><descItem lang="ru" value="Крошка поросенок"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=ljGEy9mS6dg</url><desc><descItem lang="ru" value="Крольчонок Ребекка"/></desc></item>	
+	<item><url>http://www.youtube.com/watch?v=QtqjdB3pEaw</url><desc><descItem lang="ru" value="Кораблики"/></desc></item>	
+	<item><url>http://www.youtube.com/watch?v=wfkPa_SYQWY</url><desc><descItem lang="ru" value="Катание на коньках"/></desc></item>
+	<!-- 11..20 -->
+	<item><url>http://www.youtube.com/watch?v=xkEdlb3RsTs</url><desc><descItem lang="ru" value="Капсула времени"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=uQFAF-oZjHs</url><desc><descItem lang="ru" value="Капитан папа Свин"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=7qUTrP3bYIs</url><desc><descItem lang="ru" value="Холодный зимний день"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=TEIM1t4EgTQ</url><desc><descItem lang="ru" value="Гроза"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=bqBrfOAi34w</url><desc><descItem lang="ru" value="Этили слоненок"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=yq8DYvbrXtU</url><desc><descItem lang="ru" value="Друг понарошку"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=3-bl22-j0h4</url><desc><descItem lang="ru" value="Дорожная пробка"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=jxePPrnHq1M</url><desc><descItem lang="ru" value="Друг Джорджа"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=0EUT2BV2qJY</url><desc><descItem lang="ru" value="Домики"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=9_wpveMUyZw</url><desc><descItem lang="ru" value="Домик на дереве"/></desc></item>
+	<!-- 21..30 -->	
+	<item><url>http://www.youtube.com/watch?v=wRE3x9TWlv4</url><desc><descItem lang="ru" value="Джордж простудился"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=kSiycRUukWU</url><desc><descItem lang="ru" value="День рождение Джорджа"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=Rk-1jB0CyOE</url><desc><descItem lang="ru" value="Часы с кукушкой"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=hts_TC-LVho</url><desc><descItem lang="ru" value="Дедушкин паровозик"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=BtbLPF79kTc</url><desc><descItem lang="ru" value="Блины"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=vdiCgzEfJuk</url><desc><descItem lang="ru" value="Без электричества"/></desc></item>
+	
+	<item><url>http://www.youtube.com/watch?v=cNsCmUleo98</url><desc><descItem lang="ru" value="Автосервис Дедушки"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=ZfhZ0M509pE</url><desc><descItem lang="ru" value="Снег"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=t-IHU2xI-Ls</url><desc><descItem lang="ru" value="Урок балета"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=hVhMmybvkmM</url><desc><descItem lang="ru" value="Двоюродная сестра"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=D1qcm10PkG8</url><desc><descItem lang="ru" value="Замок ветров"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=ZM3kaU1gUrs</url><desc><descItem lang="ru" value="Переодевание"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=cbAHjqmXrag</url><desc><descItem lang="ru" value="Не важно"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=cIQ2_lzzS14</url><desc><descItem lang="ru" value="Поиск сокровищ"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=HY27XFRgOUo</url><desc><descItem lang="ru" value="Новая машина"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=y7fCFF8RKrg</url><desc><descItem lang="ru" value="Зубная Фея"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=l1DIvvplf6Y</url><desc><descItem lang="ru" value="День рождение мамы свиньи"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=4RHLEKe6k-U</url><desc><descItem lang="ru" value="Новые ботинки"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=p4_lDDdsI5g</url><desc><descItem lang="ru" value="Школьный праздник"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=wGhhl5LASZk</url><desc><descItem lang="ru" value="Пикник"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=6VscfdQjP-A</url><desc><descItem lang="ru" value="Завтрак"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=vpyo4RaWBng</url><desc><descItem lang="ru" value="Мистер тонкие ножки"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=4J-3qhcE1Tw</url><desc><descItem lang="ru" value="На пляже"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=_hsAYANPss8</url><desc><descItem lang="ru" value="Мама на работе"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=kEi5xcmK830</url><desc><descItem lang="ru" value="Полет"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=_2YaeLiA4Xs</url><desc><descItem lang="ru" value="Детский сад"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=hCim_mPJ_jY</url><desc><descItem lang="ru" value="Секреты"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=Rjn8ZSqcwrg</url><desc><descItem lang="ru" value="Игра в прядки"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=I1QId0GTl30</url><desc><descItem lang="ru" value="Попугайчик Поли"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=TvIchlt9K0g</url><desc><descItem lang="ru" value="Кукольный театр"/></desc></item>
+  <!--
+  <item><url>http://www.youtube.com/watch?v=sdoupLIS3o4</url><desc><descItem lang="ru" value="Лутшая подруга"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=_ztg4TEqTwo</url><desc><descItem lang="ru" value="Мой день рождение"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=3qYNQh5cSUY</url><desc><descItem lang="ru" value="Уборка"/></desc></item>
+	<item><url>http://www.youtube.com/watch?v=hni6T4-VPMo</url><desc><descItem lang="ru" value="Папина видео камера"/></desc></item>
+
+  -->
+</root>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root ver="1.0">
+  <status value="ok" defMsg="Service not available">
+    <msg culture="it-IT" text="servizio sospeso"/>
+  </status>
+  <!-- 1..10 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=Cf43DV-kWoU</url>
+    <desc>Incertamente! (1)</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=pGYDfCru46g</url>
+    <desc>Incertamente! (2)</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=lVM9lkvP-Bs</url>
+    <desc>Il risarcimento</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=yKvHsKS_so8</url>
+    <desc>Intervista a Filangeri Giuseppe</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=8j963BoHRFE</url>
+    <desc>Fagioli</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=s-phMOVAoUo</url>
+    <desc>Cosa c'è oltre?</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=L5F5hDlKa3Y</url>
+    <desc>Grazie tante</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=mOzdOuKADTA</url>
+    <desc>A Silvio</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=zwsihPmbtss</url>
+    <desc>Fratelli Abbate - Paglia o Ferro</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=BGgj29GTUwo</url>
+    <desc>Sputodent</desc>
+  </item>
+  <!-- 11..20 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=iTWhnPuClqk</url>
+    <desc>Paviglianiti e l'atto grande</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=7zRU6lxYqrk</url>
+    <desc>Il pranzo di Giuseppe Paviglianiti</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=i3R9ObwXgdw</url>
+    <desc>Paviglianiti: io tu e le rose</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=wljKH0EUE3E</url>
+    <desc>Signò Belluscone</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=uD5cmkY1HEY</url>
+    <desc>Natale Lauria</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=TTwKiMPOqAs</url>
+    <desc>Subumano poco umano</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=ESg213H61Mc</url>
+    <desc>Giordano</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=ESg213H61Mc</url>
+    <desc>Giordano</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=FlKgbv8Q2QI</url>
+    <desc>Pietro Giordano Dio</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=QmWVO1A90bQ</url>
+    <desc>Giordano cane ai pani</desc>
+  </item>
+  <!-- 21..30 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=8mr6ZPfa1X4</url>
+    <desc>Escremeneto</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=i5RbqmY4sGI</url>
+    <desc>Fortunato Cirrincione</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=-dgmqTNF_AE</url>
+    <desc>Fratelli Abbate - Mucca o Toro</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Rd8nF3DCb5w</url>
+    <desc>I Fratelli Abbate e le donne</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=Ubj4FG2kjNs</url>
+    <desc>Un pezzo di... come dire...</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=oPcRYAITi-4</url>
+    <desc>Il Prof Giordano e Rocco Cane e Paviglianiti</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=emiBXdqLu2E</url>
+    <desc>Rocco Cane e lo zio Salvatore</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=hwecQ5g6zV4</url>
+    <desc>Pietro Giordano e Santa Rosalia</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=ka9UqlDsZlE</url>
+    <desc>Beethoven</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=gimrQsIk-Go</url>
+    <desc>Intervista a Tirone</desc>
+  </item>
+  <!-- 31..40 -->
+  <item>
+    <url>http://www.youtube.com/watch?v=9zhHd8qA_kQ</url>
+    <desc>Pietro Giordano nonno di Fortunato Cirrincione</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=yX32CIkpebw</url>
+    <desc>Intervista a Giuseppe Filangeri e Tirone</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=k8vUbn3Ogpk</url>
+    <desc>Fortunato Cirrincione e Pier Paolo Pasolini</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=OXD85L86rm4</url>
+    <desc>Cirrincione e il suo cane</desc>
+  </item>
+  <item>
+    <url>http://www.youtube.com/watch?v=GTszJzELTKU</url>
+    <desc>Delaurentiis</desc>
+  </item>
+
+
+</root>

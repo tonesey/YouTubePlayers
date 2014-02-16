@@ -1,0 +1,450 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Centapp.CartoonCommon.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:ib="clr-namespace:Wp7Shared.Behaviours;assembly=Wp7Shared"
+    xmlns:sharedControls="clr-namespace:Wp7Shared.UserControls;assembly=Wp7Shared"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    xmlns:ctrl="clr-namespace:Centapp.CartoonCommon.Controls"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.IsVisible="False">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="True" IsVisible="False"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="DefaultItemTemplate">
+            <Border BorderThickness="1" BorderBrush="LightGray" Height="140" Width="410" 
+                                    Margin="0,5"
+                                    CornerRadius="10"
+                                    MouseEnter="Border_MouseEnter">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.5">
+                        <GradientStop Color="{Binding IsAvailableInTrial, Converter={StaticResource trialToBackColorConverter}}" Offset="0"/>
+                        <GradientStop Color="LightGray" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!--<ColumnDefinition Width="40" />-->
+                        <ColumnDefinition Width="178" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Source="/PeppaPig;component/Resources/mqdefault.jpg"-->
+                    <!--Source="{Binding Converter={StaticResource idToImageConverter}}"-->
+                    <Grid  Grid.Row="0" Grid.Column="0"  Margin="11,5,15,18" Width="178" Height="100" VerticalAlignment="Center">
+                        <Image
+                            Stretch="Fill"
+                            Source="{Binding Converter={StaticResource idToImageConverter}}"
+                            VerticalAlignment="Center">
+                            <Image.RenderTransform>
+                                <ScaleTransform CenterX="89" CenterY="50" ScaleY="1.99" ScaleX="1.2"></ScaleTransform>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
+                    <TextBlock HorizontalAlignment="Stretch" 
+                               Grid.Row="0" Grid.Column="1" 
+                               Text="{Binding Title}"
+                               TextWrapping="Wrap" 
+                               Margin="0,0,4,0"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                               VerticalAlignment="Center"/>
+
+                    <!--<TextBlock HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" 
+                                               Text="{Binding Path=., Converter={StaticResource itemToDescrConverter}}"
+                                               TextWrapping="Wrap" 
+                                               Margin="10,0,20,0"
+                                               Style="{StaticResource PhoneTextLargeStyle}"
+                                               VerticalAlignment="Center"
+                                               />-->
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="FavoritesItemTemplate">
+            <Border BorderThickness="1" BorderBrush="LightGray" Height="140" Width="410" 
+                                    Margin="0,5"
+                                    CornerRadius="10"
+                                    MouseEnter="Border_MouseEnter">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.9">
+                        <GradientStop Color="Gold" Offset="0"/>
+                        <GradientStop Color="LightGray" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!--<ColumnDefinition Width="40" />-->
+                        <ColumnDefinition Width="178" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Source="/Resources/thumb/3.png" -->
+                    <Grid  Grid.Row="0" Grid.Column="0"  Margin="11,5,15,18" Width="178" Height="100" VerticalAlignment="Center">
+                        <Image
+                            Stretch="Fill"
+                            Source="{Binding Converter={StaticResource idToImageConverter}}"
+                            VerticalAlignment="Center">
+                            <Image.RenderTransform>
+                                <ScaleTransform CenterX="89" CenterY="50" ScaleY="1.99" ScaleX="1.2"></ScaleTransform>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
+
+                    <TextBlock HorizontalAlignment="Stretch" 
+                               Grid.Row="0" Grid.Column="1" 
+                               Text="{Binding Title}"
+                               TextWrapping="Wrap" 
+                               Margin="0,0,4,0"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent" Visibility="Visible" >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <toolkit:PerformanceProgressBar
+                            Grid.Row="0"
+                            HorizontalAlignment="Stretch"
+                            Margin="0"
+                            IsIndeterminate="True"
+                            ActualIsIndeterminate="{Binding IsDataLoading}"
+                            Visibility="{Binding IsDataLoading, Converter={StaticResource visibilityConverter}}"/>
+
+        <!--Panorama control-->
+        <controls:Panorama x:Name="PanoramaMainControl" Title="{Binding AppName}" Grid.Row="1" Margin="0,-20,0,0" 
+                           IsEnabled="{Binding IsNotDataLoading}">
+
+            <controls:Panorama.Background>
+                <ImageBrush ImageSource="PanoramaBackground.png" Opacity="0.5"/>
+            </controls:Panorama.Background>
+
+            <!-- 1-25 -->
+            <controls:PanoramaItem Name="panItem1"
+                                   Visibility="{Binding Items, 
+                                                Converter={StaticResource episodesToPanItemVisConverter},
+                                                ConverterParameter = 0 }">
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
+                        <TextBlock Name="TextBlockFirstPivotItem" Margin="20,-5,0,0" 
+                                   Text="1-25"/>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Name="firstListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
+                    <ListBox  Name="firstList" Height="500" Margin="0,0,-2,0" 
+                              ItemsSource="{Binding Items_Chunk1}" 
+                              ItemTemplate="{StaticResource DefaultItemTemplate}"
+                             />
+                </StackPanel>
+            </controls:PanoramaItem>
+
+            <!-- 26-50 -->
+            <controls:PanoramaItem Name="panItem2"                        
+                                   Visibility="{Binding Items, 
+                                                Converter={StaticResource episodesToPanItemVisConverter},
+                                                ConverterParameter = 1 }">
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
+                        <TextBlock Margin="20,-5,0,0" 
+                                   Text="{Binding Items_Chunk2, 
+                                                  Converter={StaticResource episodesToPanItemContentConverter},
+                                                  ConverterParameter = 1 }"/>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+                <StackPanel>
+                    <TextBlock Name="secondListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
+                    <ListBox Name="secondList"  Height="500" Margin="0,0,-12,0" ItemsSource="{Binding Items_Chunk2}" ItemTemplate="{StaticResource DefaultItemTemplate}"
+                             />
+                </StackPanel>
+            </controls:PanoramaItem>
+
+            <!-- 51-75 -->
+            <controls:PanoramaItem Name="panItem3"
+                                   Visibility="{Binding Items, 
+                                                Converter={StaticResource episodesToPanItemVisConverter},
+                                                ConverterParameter = 2 }">
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
+                        <TextBlock Margin="20,-5,0,0" 
+                                   Text="{Binding Items_Chunk3, 
+                                                  Converter={StaticResource episodesToPanItemContentConverter},
+                                                  ConverterParameter = 2 }"/>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+                <StackPanel>
+                    <TextBlock Name="thirdListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
+                    <ListBox Name="thirdList"  Height="500" Margin="0,0,-12,0" ItemsSource="{Binding Items_Chunk3}" ItemTemplate="{StaticResource DefaultItemTemplate}"
+                             />
+                </StackPanel>
+            </controls:PanoramaItem>
+
+            <!-- 76-100 -->
+            <controls:PanoramaItem Name="panItem4"  
+                                   Visibility="{Binding Items, 
+                                                Converter={StaticResource episodesToPanItemVisConverter},
+                                                ConverterParameter = 3 }">
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
+                        <TextBlock Margin="20,-5,0,0" 
+                                   Text="{Binding Items_Chunk4, 
+                                                  Converter={StaticResource episodesToPanItemContentConverter},
+                                                  ConverterParameter = 3 }"/>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+                <StackPanel>
+                    <TextBlock Name="fourthListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
+                    <ListBox Name="fourthList"  Height="500"  Margin="0,0,-12,0" ItemsSource="{Binding Items_Chunk4}" ItemTemplate="{StaticResource DefaultItemTemplate}"
+                             />
+                </StackPanel>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem>
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Resources/icons/favorite.png" Width="80" Height="60"></Image>
+                        <TextBlock x:Name="favoritesHeader" Margin="20,-5,0,0">$favorites</TextBlock>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+                <StackPanel>
+                    <TextBlock Name="favoritesListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
+                    <StackPanel Visibility="{Binding IsDataLoading, Converter={StaticResource visibilityConverterInverted}}">
+                        <ListBox Name="favoritesList" 
+                             Margin="0,0,-12,0" 
+                              Height="500" 
+                             ItemsSource="{Binding FavoriteEpisodes}" 
+                             ItemTemplate="{StaticResource FavoritesItemTemplate}"
+                             Visibility="{Binding FavoriteEpisodes, Converter={StaticResource favVisibilityConverter}}"
+                             />
+                        <Border BorderThickness="1" 
+                            Name="noFavoritesBorder"
+                            Margin="0,5"
+                            CornerRadius="20"
+                            Visibility="{Binding FavoriteEpisodes, Converter={StaticResource favVisibilityConverterInverted}}">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <TextBlock Name="noFavoritestextBlock"  
+                               TextWrapping="Wrap" 
+                               HorizontalAlignment="Center"     
+                               FontSize="{StaticResource PhoneFontSizeLarge}" 
+                               Text="[no sentences]" Height="430" Width="402"></TextBlock>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem x:Name="otherAppsPanoramaItem">
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <!--<Image Source="Resources/icons/other.png"  Margin="0,15,0,0"></Image>-->
+                        <TextBlock x:Name="otherAppsPanoramaHeader" Margin="0,-5,0,0" Text="$other apps"/>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+                <ScrollViewer Height="500">
+                    <sharedControls:OtherApps x:Name="otherApps" >
+                    </sharedControls:OtherApps>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem x:Name="appPanoramaItem">
+                <controls:PanoramaItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Resources/icons/app_header.png" Width="80" Height="60" Margin="0,15,0,0"></Image>
+                        <TextBlock x:Name="appHeader" Margin="20,-5,0,0">$app</TextBlock>
+                    </StackPanel>
+                </controls:PanoramaItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Row="0">
+                        <!--
+                        <Button Name="rateAppButton" Content="Rate this app" Height="100" Tap="rateAppButton_Tap">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                <GradientStop Color="Orange" Offset="0"/>
+                                <GradientStop Color="Gray" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        </Button>
+                        -->
+                        <Button Name="backupEpisodesButton" Margin="0" Height="80" Padding="5"  HorizontalContentAlignment="Stretch" Tap="backupEpisodesButton_Tap">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/backup.png"></Image>
+                                    <TextBlock x:Name="backupEpisodesText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                                VerticalAlignment="Center">download episodes</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Yellow" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Name="rateAppButton" Margin="0" Height="80" Padding="5" 
+                            HorizontalContentAlignment="Stretch" Tap="rateAppButton_Tap">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/rate.png" Height="36" Width="36"></Image>
+                                    <TextBlock x:Name="rateAppButtonText" 
+                                               Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                              VerticalAlignment="Center">$Rate this app</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Name="writeAnEmailButton" Margin="0" Height="80" Padding="5" 
+                            HorizontalContentAlignment="Stretch" Tap="writeAnEmailButton_Tap">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/mail.png"></Image>
+                                    <TextBlock x:Name="writeAnEmailButtonText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                                VerticalAlignment="Center">$Write us!</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <Button Name="infoButton" Margin="0" Height="80" Padding="5" 
+                            HorizontalContentAlignment="Stretch" Tap="infoButton_Tap">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/info.png"></Image>
+                                    <TextBlock x:Name="infoButtonText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                                VerticalAlignment="Center">$Info</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                        <!--
+                        <Button Name="buyAppButton" Margin="0" Height="80" Padding="5" 
+                            HorizontalContentAlignment="Stretch" Tap="buyAppButton_Tap">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/buy.png"></Image>
+                                    <TextBlock x:Name="buyAppButtonText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                                VerticalAlignment="Center">$Buy full version</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        -->
+
+
+                        <Button Name="searchEpisodesButton" Margin="0" Height="80" Padding="5" 
+                            HorizontalContentAlignment="Stretch" Visibility="Collapsed"
+                                Tap="searchEpisodesButton_Tap">
+                            <Button.Content>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="/Resources/buttons/search.png"></Image>
+                                    <TextBlock x:Name="searchEpisodesButtonText" 
+                                                Grid.Column="1" FontSize="32" Margin="10,0,0,0" 
+                                                VerticalAlignment="Center">$Search episode</TextBlock>
+                                </Grid>
+                            </Button.Content>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
+                                    <GradientStop Color="Orange" Offset="0"/>
+                                    <GradientStop Color="Gray" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+
+                    </StackPanel>
+
+                    <TextBlock x:Name="appInfo" FontSize="22" HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,10,0">[v 1.0 - Registered version]</TextBlock>
+                </Grid>
+            </controls:PanoramaItem>
+
+           
+        </controls:Panorama>
+
+        <!-- Feedback overlay -->
+        <ctrl:FeedbackOverlay Grid.RowSpan="2" EnableAnimation="True" />
+
+    </Grid>
+</phone:PhoneApplicationPage>
