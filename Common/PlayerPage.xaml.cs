@@ -24,16 +24,42 @@ namespace Centapp.CartoonCommon
         {
             InitializeComponent();
 
-            adControl1.Visibility = System.Windows.Visibility.Visible;
-            adControl1.AdRefreshed -= adControl1_AdRefreshed;
-            adControl1.AdRefreshed += adControl1_AdRefreshed;
-            adControl1.ErrorOccurred -= adControl1_ErrorOccurred;
-            adControl1.ErrorOccurred += adControl1_ErrorOccurred;
-            adControl1.AdUnitId = App.ViewModel.AdUnitId;
-            adControl1.ApplicationId = App.ViewModel.ApplicationId;
-            adControl1.IsHitTestVisible = false;
-            adControl1.Width = 80;
-            adControl1.Height = 480;
+            switch (App.ViewModel.AdvProvider)
+            {
+                case AdvProvider.PubCenter:
+                    //MS PubCenter
+                    adControlSoma.Visibility = System.Windows.Visibility.Collapsed;
+                    adControlPubCenter.Visibility = System.Windows.Visibility.Visible;
+                    adControlPubCenter.AdRefreshed -= adControl1_AdRefreshed;
+                    adControlPubCenter.AdRefreshed += adControl1_AdRefreshed;
+                    adControlPubCenter.ErrorOccurred -= adControl1_ErrorOccurred;
+                    adControlPubCenter.ErrorOccurred += adControl1_ErrorOccurred;
+                    adControlPubCenter.AdUnitId = App.ViewModel.AdUnitId;
+                    adControlPubCenter.ApplicationId = App.ViewModel.ApplicationId;
+                    adControlPubCenter.IsHitTestVisible = false;
+                    adControlPubCenter.Width = 80;
+                    adControlPubCenter.Height = 480;
+                    break;
+                case AdvProvider.Sooma:
+                    //SOOMA
+                    adControlPubCenter.Visibility = System.Windows.Visibility.Collapsed;
+                    adControlSoma.Visibility = System.Windows.Visibility.Visible;
+                    adControlSoma.Pub = int.Parse(App.ViewModel.AdPublisherId); 
+                    adControlSoma.Adspace = int.Parse(App.ViewModel.AdSpaceId);  
+                    adControlSoma.Age = 6;
+                    try
+                    {
+                        adControlSoma.StartAds();
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                    break;
+            }
+
+            Loaded += PlayerPage_Loaded;
+            Unloaded += PlayerPage_Unloaded;
 
             SMFPlayerControl.IsControlStripVisible = false;
             SMFPlayerControl.VolumeLevel = 0.8;
@@ -46,6 +72,60 @@ namespace Centapp.CartoonCommon
             MediaElementPlayer.MediaEnded += MediaElementPlayer_MediaEnded;
             MediaElementPlayer.MediaOpened += MediaElementPlayer_MediaOpened;
             MediaElementPlayer.MediaFailed += MediaElementPlayer_MediaFailed;
+        }
+
+        void PlayerPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.ViewModel.IsDataLoading = false;
+
+            if (SMFPlayerControl.Visibility == Visibility.Visible)
+            {
+                //SMF PLAYER
+                SMFPlayerControl.Playlist.Clear();
+                //if (GenericHelper.AppIsOfflineSettingValue)
+                //{
+                //    SMFPlayerControl.Playlist.Add(new PlaylistItem());
+                //    using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                //    {
+                //        using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(App.ViewModel.CurrentYoutubeMP4FileName, System.IO.FileMode.Open))
+                //        {
+                //            SMFPlayerControl.Playlist.ElementAt(0).StreamSource = stream;
+                //            SMFPlayerControl.Playlist.ElementAt(0).DeliveryMethod = DeliveryMethods.NotSpecified;
+                //            SMFPlayerControl.Playlist.ElementAt(0).VideoStretchMode = System.Windows.Media.Stretch.UniformToFill;
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
+                //}
+                SMFPlayerControl.Play();
+
+
+            }
+            else
+            {
+                //MEDIAPLAYER
+                //per customizzarlo: http://msdn.microsoft.com/en-us/library/ms748248(v=vs.110).aspx
+                if (GenericHelper.AppIsOfflineSettingValue)
+                {
+                    using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(App.ViewModel.CurrentYoutubeMP4FileName, System.IO.FileMode.Open))
+                        {
+                            MediaElementPlayer.SetSource(stream);
+                        }
+                    }
+                }
+                else
+                {
+                    MediaElementPlayer.Source = App.ViewModel.CurrentYoutubeMP4Uri;
+                }
+            }
+        }
+
+        void PlayerPage_Unloaded(object sender, RoutedEventArgs e)
+        {
         }
 
         void MediaElementPlayer_MediaFailed(object sender, ExceptionRoutedEventArgs e)
@@ -80,7 +160,7 @@ namespace Centapp.CartoonCommon
         {
             Dispatcher.BeginInvoke(() =>
             {
-                adControl1.Width = 0;
+                adControlPubCenter.Width = 0;
             });
         }
 
@@ -92,55 +172,7 @@ namespace Centapp.CartoonCommon
         //{
         //}
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            App.ViewModel.IsDataLoading = false;
-
-            if (SMFPlayerControl.Visibility == Visibility.Visible)
-            {
-                //SMF PLAYER
-                SMFPlayerControl.Playlist.Clear();
-                //if (GenericHelper.AppIsOfflineSettingValue)
-                //{
-                //    SMFPlayerControl.Playlist.Add(new PlaylistItem());
-                //    using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                //    {
-                //        using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(App.ViewModel.CurrentYoutubeMP4FileName, System.IO.FileMode.Open))
-                //        {
-                //            SMFPlayerControl.Playlist.ElementAt(0).StreamSource = stream;
-                //            SMFPlayerControl.Playlist.ElementAt(0).DeliveryMethod = DeliveryMethods.NotSpecified;
-                //            SMFPlayerControl.Playlist.ElementAt(0).VideoStretchMode = System.Windows.Media.Stretch.UniformToFill;
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
-                //}
-                SMFPlayerControl.Play();
-
-                
-            }
-            else
-            {
-                //MEDIAPLAYER
-                //per customizzarlo: http://msdn.microsoft.com/en-us/library/ms748248(v=vs.110).aspx
-                if (GenericHelper.AppIsOfflineSettingValue)
-                {
-                    using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                    {
-                        using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(App.ViewModel.CurrentYoutubeMP4FileName, System.IO.FileMode.Open))
-                        {
-                            MediaElementPlayer.SetSource(stream);
-                        }
-                    }
-                }
-                else
-                {
-                    MediaElementPlayer.Source = App.ViewModel.CurrentYoutubeMP4Uri;
-                }
-            }
-        }
+       
 
     }
 }

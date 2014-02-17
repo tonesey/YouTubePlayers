@@ -52,6 +52,14 @@ namespace Centapp.CartoonCommon
         BackupEpisodes
     }
 
+    public enum AdvProvider
+    {
+        Undefined,
+        Sooma,
+        PubCenter
+    }
+
+
     public delegate void PopupClosedEventHandler();
     public delegate void PopupCancelPressedActionToExecute();
 

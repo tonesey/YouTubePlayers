@@ -11,8 +11,9 @@
     x:Class="Centapp.CartoonCommon.PlayerPage"
     xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" 
     mc:Ignorable="d"
+    xmlns:soma="clr-namespace:SOMAWP7;assembly=SOMAWP7"
     SupportedOrientations="Landscape" Orientation="Landscape"  
-    shell:SystemTray.IsVisible="False" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="False">
 
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="ReplayButtonStyle" TargetType="Button">
@@ -755,12 +756,19 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <my:AdControl Grid.Column="0" Name="adControl1"  IsAutoRefreshEnabled="True" Margin="-200,0,-200,0" Width="480" Height="80"  Visibility="Visible" RenderTransformOrigin="0.5,0.5" >
+            <my:AdControl Visibility="Collapsed" Grid.Column="0" Name="adControlPubCenter"  IsAutoRefreshEnabled="True" Margin="-200,0,-200,0" Width="480" Height="80"   RenderTransformOrigin="0.5,0.5" >
                 <my:AdControl.RenderTransform>
                     <CompositeTransform Rotation="270"/>
                 </my:AdControl.RenderTransform>
             </my:AdControl>
-            
+
+            <soma:SomaAdViewer Visibility="Visible" Grid.Column="0" Name="adControlSoma"  Margin="-200,0,-200,0" Width="480" Height="80"  RenderTransformOrigin="0.5,0.5"
+                                 PopupAd="True" ShowErrors="True">
+                <soma:SomaAdViewer.RenderTransform>
+                    <CompositeTransform Rotation="270"/>
+                </soma:SomaAdViewer.RenderTransform>
+            </soma:SomaAdViewer>
+
             <Core:SMFPlayer Width="720" Name="SMFPlayerControl" 
                             Grid.Column="1"
                             Visibility="Visible"
@@ -768,8 +776,11 @@
                             Grid.ColumnSpan="2" PositionLiveBuffer="0:0:1" FastForwardButtonBehavior="ClickToggle" RewindButtonBehavior="ClickToggle">
             </Core:SMFPlayer>
 
+
+
+
             <MediaElement x:Name="MediaElementPlayer" Visibility="Collapsed"  Grid.Column="1" Width="720" >
-                
+
             </MediaElement>
         </Grid>
     </Grid>

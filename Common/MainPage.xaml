@@ -288,16 +288,7 @@
                         <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical" Grid.Row="0">
-                        <!--
-                        <Button Name="rateAppButton" Content="Rate this app" Height="100" Tap="rateAppButton_Tap">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.4">
-                                <GradientStop Color="Orange" Offset="0"/>
-                                <GradientStop Color="Gray" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                        </Button>
-                        -->
+                       
                         <Button Name="backupEpisodesButton" Margin="0" Height="80" Padding="5"  HorizontalContentAlignment="Stretch" Tap="backupEpisodesButton_Tap">
                             <Button.Content>
                                 <Grid HorizontalAlignment="Stretch">
@@ -408,7 +399,6 @@
                             </Button.Background>
                         </Button>
                         -->
-
 
                         <Button Name="searchEpisodesButton" Margin="0" Height="80" Padding="5" 
                             HorizontalContentAlignment="Stretch" Visibility="Collapsed"

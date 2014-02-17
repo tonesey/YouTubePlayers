@@ -157,13 +157,30 @@ namespace Centapp.CartoonCommon
 
 
             bool usesAdvertising = false;
+            //pubcenter
             string adUnitId = string.Empty;
             string applicationId = string.Empty;
+            //soma
+            string adSpaceId = string.Empty;
+            string adPublisherId = string.Empty;
+            AdvProvider provider = AdvProvider.Undefined ;
+
             if (doc.Root.Element("adv") != null)
             {
                 usesAdvertising = true;
-                adUnitId = doc.Root.Element("adv").Attribute("AdUnitId").Value;
-                applicationId = doc.Root.Element("adv").Attribute("ApplicationId").Value;
+                if (doc.Root.Element("adv").Attribute("provider").Value == "soma")
+                {
+                    provider = AdvProvider.Sooma;
+                    adSpaceId = doc.Root.Element("adv").Attribute("AdSpaceId").Value;
+                    adPublisherId = doc.Root.Element("adv").Attribute("PublisherID").Value;
+                }
+                else if (doc.Root.Element("adv").Attribute("provider") == null || (doc.Root.Element("adv").Attribute("provider") != null && doc.Root.Element("adv").Attribute("provider").Value == "pubcenter"))
+                {
+                    //DEFAULT
+                    provider = AdvProvider.PubCenter;
+                    adUnitId = doc.Root.Element("adv").Attribute("AdUnitId").Value;
+                    applicationId = doc.Root.Element("adv").Attribute("ApplicationId").Value;
+                }
             }
 
             var attributes = asm.GetCustomAttributes(typeof(System.Resources.NeutralResourcesLanguageAttribute), false);
@@ -181,8 +198,11 @@ namespace Centapp.CartoonCommon
             App.ViewModel.EpisodesLength = episodesLength;
             App.ViewModel.MtiksId = mtiksId;
             App.ViewModel.IsAdvertisingEnabled = usesAdvertising;
+            App.ViewModel.AdvProvider = provider;
             App.ViewModel.AdUnitId = adUnitId;
             App.ViewModel.ApplicationId = applicationId;
+            App.ViewModel.AdSpaceId = adSpaceId;
+            App.ViewModel.AdPublisherId = adPublisherId;
             //
 
             try

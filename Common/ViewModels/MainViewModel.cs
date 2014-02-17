@@ -52,8 +52,12 @@ namespace Centapp.CartoonCommon.ViewModels
         public string MtiksId { get; set; }
 
         public bool IsAdvertisingEnabled { get; set; }
+
+        public AdvProvider AdvProvider { get; set; }
         public string AdUnitId { get; set; }
         public string ApplicationId { get; set; }
+        public string AdSpaceId { get; set; }
+        public string AdPublisherId { get; set; }
         #endregion
 
         //public Color GradientStop =  Colors.Yellow;

@@ -94,6 +94,8 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Advertising.Mobile, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Advertising.Mobile.UI, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
@@ -101,6 +103,27 @@
       <HintPath>..\..\Wp7Shared\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.SilverlightMediaFramework.Compatibility.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Compatibility.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SilverlightMediaFramework.Core.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Core.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SilverlightMediaFramework.Plugins.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Plugins.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SilverlightMediaFramework.Plugins.Progressive.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Plugins.Progressive.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SilverlightMediaFramework.Plugins.SmoothStreaming.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Plugins.SmoothStreaming.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SilverlightMediaFramework.Plugins.TimedText.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Plugins.TimedText.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SilverlightMediaFramework.Utilities.Phone">
+      <HintPath>..\Common\lib\smf\Microsoft.SilverlightMediaFramework.Utilities.Phone.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.Async.1.0.165\lib\sl4-windowsphone71\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -124,6 +147,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Wp7Shared\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SOMAWP7">
+      <HintPath>..\Common\lib\soma\SOMAWP7.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>..\..\Wp7Shared\packages\Microsoft.Bcl.1.1.6\lib\sl4-windowsphone71\System.IO.dll</HintPath>
@@ -241,6 +267,10 @@
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\Common\PlayerPage.xaml.cs">
+      <Link>PlayerPage.xaml.cs</Link>
+      <DependentUpon>PlayerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\Common\ReminderPopup.xaml.cs">
       <Link>ReminderPopup.xaml.cs</Link>
       <DependentUpon>ReminderPopup.xaml</DependentUpon>
@@ -294,6 +324,10 @@
     <Page Include="..\Common\MainPage.xaml">
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Common\PlayerPage.xaml">
+      <Link>PlayerPage.xaml</Link>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\Common\ReminderPopup.xaml">
