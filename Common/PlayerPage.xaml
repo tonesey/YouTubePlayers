@@ -772,9 +772,8 @@
             <Core:SMFPlayer Width="720" Name="SMFPlayerControl" 
                             Grid.Column="1"
                             Visibility="Visible"
-                             Style="{StaticResource SMFPlayerStyle1}" 
-                            Grid.ColumnSpan="2" PositionLiveBuffer="0:0:1" FastForwardButtonBehavior="ClickToggle" RewindButtonBehavior="ClickToggle">
-            </Core:SMFPlayer>
+                            Style="{StaticResource SMFPlayerStyle1}" 
+                            Grid.ColumnSpan="2" PositionLiveBuffer="0:0:1" FastForwardButtonBehavior="ClickToggle" RewindButtonBehavior="ClickToggle"/>
 
 
 

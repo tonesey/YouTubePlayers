@@ -13,6 +13,7 @@ using Microsoft.SilverlightMediaFramework.Plugins.Primitives;
 using System.IO.IsolatedStorage;
 using System.IO;
 using Centapp.CartoonCommon.Helpers;
+using System.Windows.Media;
 
 namespace Centapp.CartoonCommon
 {
@@ -46,14 +47,15 @@ namespace Centapp.CartoonCommon
                     adControlSoma.IsHitTestVisible = false;
                     adControlSoma.PopupAd = true;
                     //adControlSoma.PopupAdDuration = 300;
-                    adControlSoma.AdSpaceHeight = 80;
-                    adControlSoma.AdSpaceWidth = 480;
+                    adControlSoma.AdSpaceHeight = 50;
+                    adControlSoma.AdSpaceWidth = 320;
                     adControlSoma.Visibility = System.Windows.Visibility.Visible;
                     adControlSoma.Pub = int.Parse(App.ViewModel.AdPublisherId); 
                     adControlSoma.Adspace = int.Parse(App.ViewModel.AdSpaceId);  
-                    adControlSoma.Age = 6;
+                    adControlSoma.Age = 12;
                     adControlSoma.LocationUseOK = true;
                     adControlSoma.StartAds();
+                    adControlSoma.NewAdAvailable -= adControlSoma_NewAdAvailable;
                     adControlSoma.NewAdAvailable += adControlSoma_NewAdAvailable;
                     break;
             }
@@ -98,6 +100,9 @@ namespace Centapp.CartoonCommon
                 SMFPlayerControl.Playlist.Clear();
                 SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
                 SMFPlayerControl.Play();
+                //var videoArea = SMFPlayerControl.VideoArea;
+                //var VideoHeight = SMFPlayerControl.VideoHeight;
+                //var VideoWidth= SMFPlayerControl.VideoWidth;
             }
             else
             {
