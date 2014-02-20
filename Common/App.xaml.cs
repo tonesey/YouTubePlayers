@@ -168,18 +168,19 @@ namespace Centapp.CartoonCommon
             if (doc.Root.Element("adv") != null)
             {
                 usesAdvertising = true;
-                if (doc.Root.Element("adv").Attribute("provider").Value == "soma")
-                {
-                    provider = AdvProvider.Sooma;
-                    adSpaceId = doc.Root.Element("adv").Attribute("AdSpaceId").Value;
-                    adPublisherId = doc.Root.Element("adv").Attribute("PublisherID").Value;
-                }
-                else if (doc.Root.Element("adv").Attribute("provider") == null || (doc.Root.Element("adv").Attribute("provider") != null && doc.Root.Element("adv").Attribute("provider").Value == "pubcenter"))
+
+                if (doc.Root.Element("adv").Attribute("provider") == null || (doc.Root.Element("adv").Attribute("provider") != null && doc.Root.Element("adv").Attribute("provider").Value == "pubcenter"))
                 {
                     //DEFAULT
                     provider = AdvProvider.PubCenter;
                     adUnitId = doc.Root.Element("adv").Attribute("AdUnitId").Value;
                     applicationId = doc.Root.Element("adv").Attribute("ApplicationId").Value;
+                }
+                else if (doc.Root.Element("adv").Attribute("provider").Value == "soma")
+                {
+                    provider = AdvProvider.Sooma;
+                    adSpaceId = doc.Root.Element("adv").Attribute("AdSpaceId").Value;
+                    adPublisherId = doc.Root.Element("adv").Attribute("PublisherID").Value;
                 }
             }
 

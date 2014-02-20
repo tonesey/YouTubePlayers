@@ -43,18 +43,17 @@ namespace Centapp.CartoonCommon
                 case AdvProvider.Sooma:
                     //SOOMA
                     adControlPubCenter.Visibility = System.Windows.Visibility.Collapsed;
+                    adControlSoma.IsHitTestVisible = false;
+                    adControlSoma.PopupAdDuration = 300;
+                    adControlSoma.AdSpaceHeight = 80;
+                    adControlSoma.AdSpaceWidth = 480;
                     adControlSoma.Visibility = System.Windows.Visibility.Visible;
                     adControlSoma.Pub = int.Parse(App.ViewModel.AdPublisherId); 
                     adControlSoma.Adspace = int.Parse(App.ViewModel.AdSpaceId);  
                     adControlSoma.Age = 6;
-                    try
-                    {
-                        adControlSoma.StartAds();
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
+                    adControlSoma.LocationUseOK = true;
+                    adControlSoma.StartAds();
+                    adControlSoma.NewAdAvailable += adControlSoma_NewAdAvailable;
                     break;
             }
 
@@ -74,12 +73,31 @@ namespace Centapp.CartoonCommon
             MediaElementPlayer.MediaFailed += MediaElementPlayer_MediaFailed;
         }
 
+        void adControlSoma_NewAdAvailable(object sender, EventArgs e)
+        {
+        }
+
         void PlayerPage_Loaded(object sender, RoutedEventArgs e)
         {
             App.ViewModel.IsDataLoading = false;
 
             if (SMFPlayerControl.Visibility == Visibility.Visible)
             {
+
+                //switch (App.ViewModel.AdvProvider)
+                //{
+                //    case AdvProvider.Sooma:
+                //        try
+                //        {
+                //            adControlSoma.StartAds();
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //           // throw;
+                //        }
+                //        break;
+                //}
+
                 //SMF PLAYER
                 SMFPlayerControl.Playlist.Clear();
                 //if (GenericHelper.AppIsOfflineSettingValue)
@@ -99,8 +117,11 @@ namespace Centapp.CartoonCommon
                 //{
                 SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
                 //}
-                SMFPlayerControl.Play();
+                
+                
+                //SMFPlayerControl.Play();
 
+               
 
             }
             else
