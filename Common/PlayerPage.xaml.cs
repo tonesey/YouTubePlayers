@@ -44,7 +44,8 @@ namespace Centapp.CartoonCommon
                     //SOOMA
                     adControlPubCenter.Visibility = System.Windows.Visibility.Collapsed;
                     adControlSoma.IsHitTestVisible = false;
-                    adControlSoma.PopupAdDuration = 300;
+                    adControlSoma.PopupAd = true;
+                    //adControlSoma.PopupAdDuration = 300;
                     adControlSoma.AdSpaceHeight = 80;
                     adControlSoma.AdSpaceWidth = 480;
                     adControlSoma.Visibility = System.Windows.Visibility.Visible;
@@ -77,52 +78,26 @@ namespace Centapp.CartoonCommon
         {
         }
 
+        private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            switch (App.ViewModel.AdvProvider)
+            {
+                case AdvProvider.Sooma:
+                    adControlSoma.StopAds();
+                    break;
+            }
+        }
+
         void PlayerPage_Loaded(object sender, RoutedEventArgs e)
         {
             App.ViewModel.IsDataLoading = false;
 
             if (SMFPlayerControl.Visibility == Visibility.Visible)
             {
-
-                //switch (App.ViewModel.AdvProvider)
-                //{
-                //    case AdvProvider.Sooma:
-                //        try
-                //        {
-                //            adControlSoma.StartAds();
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //           // throw;
-                //        }
-                //        break;
-                //}
-
                 //SMF PLAYER
                 SMFPlayerControl.Playlist.Clear();
-                //if (GenericHelper.AppIsOfflineSettingValue)
-                //{
-                //    SMFPlayerControl.Playlist.Add(new PlaylistItem());
-                //    using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                //    {
-                //        using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(App.ViewModel.CurrentYoutubeMP4FileName, System.IO.FileMode.Open))
-                //        {
-                //            SMFPlayerControl.Playlist.ElementAt(0).StreamSource = stream;
-                //            SMFPlayerControl.Playlist.ElementAt(0).DeliveryMethod = DeliveryMethods.NotSpecified;
-                //            SMFPlayerControl.Playlist.ElementAt(0).VideoStretchMode = System.Windows.Media.Stretch.UniformToFill;
-                //        }
-                //    }
-                //}
-                //else
-                //{
                 SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
-                //}
-                
-                
-                //SMFPlayerControl.Play();
-
-               
-
+                SMFPlayerControl.Play();
             }
             else
             {
@@ -171,6 +146,7 @@ namespace Centapp.CartoonCommon
 
         void Player_MediaEnded(object sender, EventArgs e)
         {
+            NavigationService.GoBack();
         }
 
         void Player_DataReceived(object sender, DataReceivedInfo e)
@@ -188,6 +164,10 @@ namespace Centapp.CartoonCommon
         void adControl1_AdRefreshed(object sender, EventArgs e)
         {
         }
+
+
+      
+
 
         //void Player_VolumeLevelChanged(object sender, Microsoft.SilverlightMediaFramework.Core.CustomEventArgs<double> e)
         //{
