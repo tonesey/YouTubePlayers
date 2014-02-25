@@ -53,6 +53,7 @@ namespace Centapp.CartoonCommon
                     adControlSoma.Pub = int.Parse(App.ViewModel.AdPublisherId); 
                     adControlSoma.Adspace = int.Parse(App.ViewModel.AdSpaceId);  
                     adControlSoma.Age = 12;
+                    adControlSoma.ShowErrors = false;
                     adControlSoma.LocationUseOK = true;
                     adControlSoma.StartAds();
                     adControlSoma.NewAdAvailable -= adControlSoma_NewAdAvailable;
@@ -70,10 +71,10 @@ namespace Centapp.CartoonCommon
             SMFPlayerControl.MediaOpened += Player_MediaOpened;
             SMFPlayerControl.MediaFailed += Player_MediaFailed;
 
-            MediaElementPlayer.AutoPlay = true;
-            MediaElementPlayer.MediaEnded += MediaElementPlayer_MediaEnded;
-            MediaElementPlayer.MediaOpened += MediaElementPlayer_MediaOpened;
-            MediaElementPlayer.MediaFailed += MediaElementPlayer_MediaFailed;
+            //MediaElementPlayer.AutoPlay = true;
+            //MediaElementPlayer.MediaEnded += MediaElementPlayer_MediaEnded;
+            //MediaElementPlayer.MediaOpened += MediaElementPlayer_MediaOpened;
+            //MediaElementPlayer.MediaFailed += MediaElementPlayer_MediaFailed;
         }
 
         void adControlSoma_NewAdAvailable(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{91159ac6-55c0-4e26-abd0-c3785916504c}" Title="Pingu" RuntimeType="Silverlight" Version="3.1.13" Genre="apps.normal" Author="Centapp" Description="Pingu episodes" Publisher="Centapp">
+  <App xmlns="" ProductID="{91159ac6-55c0-4e26-abd0-c3785916504c}" Title="Pingu" RuntimeType="Silverlight" Version="3.1.17" Genre="apps.normal" Author="Centapp" Description="Pingu episodes" Publisher="Centapp">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <!--<Capability Name="ID_CAP_GAMERSERVICES" />-->
@@ -18,6 +18,9 @@
       <!--<Capability Name="ID_CAP_ISV_CAMERA" />
       <Capability Name="ID_CAP_CONTACTS" />
       <Capability Name="ID_CAP_APPOINTMENTS" />-->
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
