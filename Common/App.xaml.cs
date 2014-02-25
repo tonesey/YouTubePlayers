@@ -163,7 +163,7 @@ namespace Centapp.CartoonCommon
             //soma
             string adSpaceId = string.Empty;
             string adPublisherId = string.Empty;
-            AdvProvider provider = AdvProvider.Undefined ;
+            AdvProvider provider = AdvProvider.Undefined;
 
             if (doc.Root.Element("adv") != null)
             {
@@ -181,6 +181,12 @@ namespace Centapp.CartoonCommon
                     provider = AdvProvider.Sooma;
                     adSpaceId = doc.Root.Element("adv").Attribute("AdSpaceId").Value;
                     adPublisherId = doc.Root.Element("adv").Attribute("PublisherID").Value;
+                }
+                else if (doc.Root.Element("adv").Attribute("provider").Value == "myapp")
+                {
+                    provider = AdvProvider.MyAppPromotion;
+                    //TODO parametrizzare id app
+                    //appId = doc.Root.Element("adv").Attribute("appId").Value;
                 }
             }
 

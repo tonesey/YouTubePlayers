@@ -390,6 +390,7 @@
     <Resource Include="..\Common\Resources\icons\other.png">
       <Link>Resources\icons\other.png</Link>
     </Resource>
+    <Content Include="banner_hunter.png" />
     <Content Include="Mkt\descr.txt" />
     <Resource Include="Mkt\screen1_all.png" />
     <Resource Include="Mkt\screen2_all.png" />

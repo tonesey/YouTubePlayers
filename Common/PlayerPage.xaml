@@ -762,12 +762,14 @@
                 </my:AdControl.RenderTransform>
             </my:AdControl>
 
-            <soma:SomaAdViewer Visibility="Visible" Grid.Column="0" Name="adControlSoma"  Margin="-200,0,-200,0" Width="480" Height="80"  RenderTransformOrigin="0.5,0.5"
+            <soma:SomaAdViewer Visibility="Collapsed" Grid.Column="0" Name="adControlSoma"  Margin="-200,0,-200,0" Width="480" Height="80"  RenderTransformOrigin="0.5,0.5"
                                  PopupAd="True" ShowErrors="True">
                 <soma:SomaAdViewer.RenderTransform>
                     <CompositeTransform Rotation="270"/>
                 </soma:SomaAdViewer.RenderTransform>
             </soma:SomaAdViewer>
+
+            <Image Name="myAdv" Width="80" Height="480" Source="banner_hunter.png" Tap="myAdv_Tap"></Image>
 
             <Core:SMFPlayer Width="720" Name="SMFPlayerControl" 
                             Grid.Column="1"
@@ -775,11 +777,7 @@
                             Style="{StaticResource SMFPlayerStyle1}" 
                             Grid.ColumnSpan="2" PositionLiveBuffer="0:0:1" FastForwardButtonBehavior="ClickToggle" RewindButtonBehavior="ClickToggle"/>
 
-
-
-
             <MediaElement x:Name="MediaElementPlayer" Visibility="Collapsed"  Grid.Column="1" Width="720" >
-
             </MediaElement>
         </Grid>
     </Grid>

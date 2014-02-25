@@ -56,7 +56,8 @@ namespace Centapp.CartoonCommon
     {
         Undefined,
         Sooma,
-        PubCenter
+        PubCenter,
+        MyAppPromotion
     }
 
 

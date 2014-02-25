@@ -304,6 +304,7 @@
     <Resource Include="Resources\icons\list.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="banner_hunter.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="todo.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

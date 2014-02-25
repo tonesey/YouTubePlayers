@@ -14,6 +14,7 @@ using System.IO.IsolatedStorage;
 using System.IO;
 using Centapp.CartoonCommon.Helpers;
 using System.Windows.Media;
+using Microsoft.Phone.Tasks;
 
 namespace Centapp.CartoonCommon
 {
@@ -25,6 +26,7 @@ namespace Centapp.CartoonCommon
         {
             InitializeComponent();
 
+            myAdv.Visibility = System.Windows.Visibility.Collapsed;
             switch (App.ViewModel.AdvProvider)
             {
                 case AdvProvider.PubCenter:
@@ -59,6 +61,11 @@ namespace Centapp.CartoonCommon
                     adControlSoma.NewAdAvailable -= adControlSoma_NewAdAvailable;
                     adControlSoma.NewAdAvailable += adControlSoma_NewAdAvailable;
                     break;
+                default:
+                    adControlPubCenter.Visibility = System.Windows.Visibility.Collapsed;
+                    adControlSoma.Visibility = System.Windows.Visibility.Collapsed;
+                    myAdv.Visibility = System.Windows.Visibility.Visible;
+                    break;
             }
 
             Loaded += PlayerPage_Loaded;
@@ -91,6 +98,26 @@ namespace Centapp.CartoonCommon
             }
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.NavigationMode == NavigationMode.Back) {
+                StartPlaylist();
+            }
+        }
+
+
         void PlayerPage_Loaded(object sender, RoutedEventArgs e)
         {
             App.ViewModel.IsDataLoading = false;
@@ -98,9 +125,7 @@ namespace Centapp.CartoonCommon
             if (SMFPlayerControl.Visibility == Visibility.Visible)
             {
                 //SMF PLAYER
-                SMFPlayerControl.Playlist.Clear();
-                SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
-                SMFPlayerControl.Play();
+                StartPlaylist();
                 //var videoArea = SMFPlayerControl.VideoArea;
                 //var VideoHeight = SMFPlayerControl.VideoHeight;
                 //var VideoWidth= SMFPlayerControl.VideoWidth;
@@ -124,6 +149,13 @@ namespace Centapp.CartoonCommon
                     MediaElementPlayer.Source = App.ViewModel.CurrentYoutubeMP4Uri;
                 }
             }
+        }
+
+        private void StartPlaylist()
+        {
+            SMFPlayerControl.Playlist.Clear();
+            SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
+            SMFPlayerControl.Play();
         }
 
         void PlayerPage_Unloaded(object sender, RoutedEventArgs e)
@@ -171,8 +203,13 @@ namespace Centapp.CartoonCommon
         {
         }
 
-
-      
+        private void myAdv_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            MarketplaceDetailTask marketplaceDetailTask = new MarketplaceDetailTask();
+            marketplaceDetailTask.ContentIdentifier = "c2e057e9-1b3c-4a13-b722-ad744c5d7ddf"; //the color hunter
+            marketplaceDetailTask.ContentType = MarketplaceContentType.Applications;
+            marketplaceDetailTask.Show();
+        }
 
 
         //void Player_VolumeLevelChanged(object sender, Microsoft.SilverlightMediaFramework.Core.CustomEventArgs<double> e)
