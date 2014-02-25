@@ -352,7 +352,7 @@ namespace Centapp.CartoonCommon
             try
             {
 
-                GenericHelper.AppIsOfflineSettingValue = false;
+                //GenericHelper.AppIsOfflineSettingValue = false;
 
                 if (GenericHelper.AppIsOfflineSettingValue)
                 {
@@ -374,8 +374,9 @@ namespace Centapp.CartoonCommon
                             App.ViewModel.IsDataLoading = true;
                             //OK
                             //Uri test1 = new Uri(@"C:\Data\Users\DefApps\AppData\{2D034F2D-836B-466C-9CA2-A7BB6B24E3F8}\Local\ep_1.mp4", UriKind.Absolute);
-                            Uri test2 = new Uri( @"C:\Data\Users\DefApps\AppData\{" + Wp7Shared.Helpers.AppInfosHelper.GetId() + @"}\Local\ep_1.mp4", UriKind.Absolute);
-                            App.ViewModel.CurrentYoutubeMP4Uri = test2;
+                            Uri episodeUri = new Uri(@"C:\Data\Users\DefApps\AppData\{" + Wp7Shared.Helpers.AppInfosHelper.GetId() + @"}\Local\" + selectedItem.OfflineFileName, 
+                                                    UriKind.Absolute);
+                            App.ViewModel.CurrentYoutubeMP4Uri = episodeUri;
                             Wp7Shared.Helpers.NavigationHelper.SafeNavigateTo(NavigationService, Dispatcher, "/PlayerPage.xaml");
                             #endregion
                         }
