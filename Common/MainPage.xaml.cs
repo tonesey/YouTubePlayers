@@ -694,7 +694,7 @@ namespace Centapp.CartoonCommon
             {
                 var email = new EmailComposeTask();
                 email.To = "centapp@hotmail.com";
-                email.Subject = string.Format("{0} - {1}", AppResources.reportError, App.ViewModel.AppName.ToUpper());
+                email.Subject = string.Format("{0} - {1} ({2})", AppResources.reportError, App.ViewModel.AppName.ToUpper(), GenericHelper.GetAppversion());
                 var episode = (_currentContextItem as ItemViewModel);
                 email.Body = string.Format(AppResources.brokenLinkText,
                                           new IdToTitleConverter().Convert(episode.Id, null, null, App.ViewModel.NeutralCulture),
@@ -807,7 +807,9 @@ namespace Centapp.CartoonCommon
 
                 var email = new EmailComposeTask();
                 email.To = "centapp@hotmail.com";
-                email.Subject = string.Format(AppResources.feedbackText, App.ViewModel.AppName.ToUpper());
+                email.Subject = string.Format(AppResources.feedbackText, App.ViewModel.AppName.ToUpper()) + string.Format(" ({0})", GenericHelper.GetAppversion());
+
+                
                 email.Show();
             }
             catch (InvalidOperationException ignored)

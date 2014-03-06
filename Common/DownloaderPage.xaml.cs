@@ -116,7 +116,6 @@ namespace Centapp.CartoonCommon
             var episodes = App.ViewModel.Items.Take(1).ToList();
 #else
             var episodes = App.ViewModel.Items;
-            //MessageBox.Show("eliminare Take(1)");
 #endif
 
             App.ViewModel.Logger.Log("[Init] episodes initial count: " + episodes.Count);

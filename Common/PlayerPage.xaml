@@ -9,6 +9,7 @@
     xmlns:Media="clr-namespace:Microsoft.SilverlightMediaFramework.Core.Media;assembly=Microsoft.SilverlightMediaFramework.Core.Phone"  
     xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:smf_accesscontrols="clr-namespace:Microsoft.SilverlightMediaFramework.Core.Accessibility.Controls;assembly=Microsoft.SilverlightMediaFramework.Core.Phone"
     x:Class="Centapp.CartoonCommon.PlayerPage"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
     xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" 
     mc:Ignorable="d"
     xmlns:soma="clr-namespace:SOMAWP7;assembly=SOMAWP7"
@@ -747,6 +748,10 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
+        <Grid.Resources>
+            <telerikCore:RadFadeAnimation x:Key="radFadeAnimation" Duration="0:0:3" AutoReverse="False"/>
+        </Grid.Resources>
+        
         <Grid Background="Transparent">
 
             <Grid.ColumnDefinitions>
