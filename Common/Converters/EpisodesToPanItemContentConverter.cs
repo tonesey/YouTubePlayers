@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,18 +22,30 @@ namespace Centapp.CartoonCommon.Converters
         #region IValueConverter Members
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int index = int.Parse(parameter.ToString());
-            switch (index)
+            if (App.ViewModel.UseJSon)
             {
-                //case 0:
-                //    return string.Format("1-{0}", (value as Collection<ItemViewModel>).Count);
-                case 1:
-                    return string.Format("26-{0}", 26 + (value as Collection<ItemViewModel>).Count - 1);
-                case 2:
-                    return string.Format("51-{0}", 51 + (value as Collection<ItemViewModel>).Count - 1);
-                case 3:
-                    return string.Format("76-{0}", 76 + (value as Collection<ItemViewModel>).Count - 1);
+                if ((value as Collection<ItemViewModel>).Count > 0)
+                {
+                    return string.Format(AppResources.season, (value as Collection<ItemViewModel>).First().SeasonId);
+                }
+                return "???";
             }
+            else
+            {
+                int index = int.Parse(parameter.ToString());
+                switch (index)
+                {
+                    case 0:
+                        return "1-25";
+                    case 1:
+                        return string.Format("26-{0}", 26 + (value as Collection<ItemViewModel>).Count - 1);
+                    case 2:
+                        return string.Format("51-{0}", 51 + (value as Collection<ItemViewModel>).Count - 1);
+                    case 3:
+                        return string.Format("76-{0}", 76 + (value as Collection<ItemViewModel>).Count - 1);
+                }
+            }
+
             return "???";
         }
 

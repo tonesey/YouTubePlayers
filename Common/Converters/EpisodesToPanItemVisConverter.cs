@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,16 +23,24 @@ namespace Centapp.CartoonCommon.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int index = int.Parse(parameter.ToString());
-            switch (index)
+            if (App.ViewModel.UseJSon)
             {
-                //case 0:
-                //    return (value as Collection<ItemViewModel>).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
-                case 1:
-                    return (value as Collection<ItemViewModel>).Count > 25 ? Visibility.Visible : Visibility.Collapsed;
-                case 2:
-                    return (value as Collection<ItemViewModel>).Count > 50 ? Visibility.Visible : Visibility.Collapsed;
-                case 3:
-                    return (value as Collection<ItemViewModel>).Count > 75 ? Visibility.Visible : Visibility.Collapsed;
+                //verifico che esista la stagione con l'id passato come parametro
+                return App.ViewModel.Items.Any() && (App.ViewModel.Items.FirstOrDefault(it => it.SeasonId == (index + 1)) != null);
+            }
+            else
+            {
+                switch (index)
+                {
+                    //case 0:
+                    //    return (value as Collection<ItemViewModel>).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+                    case 1:
+                        return (value as Collection<ItemViewModel>).Count > 25 ? Visibility.Visible : Visibility.Collapsed;
+                    case 2:
+                        return (value as Collection<ItemViewModel>).Count > 50 ? Visibility.Visible : Visibility.Collapsed;
+                    case 3:
+                        return (value as Collection<ItemViewModel>).Count > 75 ? Visibility.Visible : Visibility.Collapsed;
+                }
             }
             return true;
         }

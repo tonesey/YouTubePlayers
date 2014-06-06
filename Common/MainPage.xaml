@@ -147,8 +147,11 @@
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
-                        <TextBlock Name="TextBlockFirstPivotItem" Margin="20,-5,0,0" 
-                                   Text="1-25"/>
+                        <TextBlock  Name="TextBlockFirstPivotItem"
+                                    Margin="20,-5,0,0" 
+                                   Text="{Binding Items_Chunk1, 
+                                                  Converter={StaticResource episodesToPanItemContentConverter},
+                                                  ConverterParameter = 0 }"/>
                     </StackPanel>
                 </controls:PanoramaItem.Header>
                 <StackPanel Orientation="Vertical">

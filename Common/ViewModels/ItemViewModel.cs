@@ -58,20 +58,6 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
 
-        //private bool _requeued = false;
-        //public bool Requeued
-        //{
-        //    get
-        //    {
-        //        return _requeued;
-        //    }
-        //    set
-        //    {
-        //        _requeued = value;
-        //        NotifyPropertyChanged("Requeued");
-        //    }
-        //}
-
         private int _dwnRetries = 0;
         public int DwnRetries
         {
@@ -180,6 +166,8 @@ namespace Centapp.CartoonCommon.ViewModels
         }
 
 
-       
+
+
+        public int SeasonId { get; set; }
     }
 }

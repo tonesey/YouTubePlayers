@@ -1,5 +1,5 @@
 <app friendlyName="Peppa Pig"
-     indexFile="peppa.xml"
+     indexFile="videosrc.json"
      isMonoLang="true"
      episodesAverageLength="300"
      mtiksId="b05432789b94330e66f98f264">

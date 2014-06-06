@@ -332,4 +332,7 @@ Perchè non ci dai 5 stelle sullo store? :)</value>
   <data name="SpaceRequiredWarn" xml:space="preserve">
     <value>Gli episodi una volta scaricati occuperanno circa {0}Gb di memoria. Continuare?</value>
   </data>
+  <data name="season" xml:space="preserve">
+    <value>stagione {0}</value>
+  </data>
 </root>

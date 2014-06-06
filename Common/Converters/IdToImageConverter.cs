@@ -15,6 +15,10 @@ namespace Centapp.CartoonCommon.Converters
         #region IValueConverter Members
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+
+#if DEBUGOFFLINE
+            return null;
+#endif 
             if (!GenericHelper.AppIsOfflineSettingValue)
             {
                 //return new BitmapImage(new Uri(string.Format("/Resources/thumb/{0}.png", (int)value), UriKind.Relative));

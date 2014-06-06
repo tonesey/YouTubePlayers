@@ -22,11 +22,15 @@ using System.Threading;
 using System.Windows.Threading;
 using System.IO.IsolatedStorage;
 using System.Net.NetworkInformation;
+using Centapp.CartoonCommon.JSON;
+using Newtonsoft.Json;
 using Wp7Shared.Exceptions;
 using System.Reflection;
 using Centapp.CartoonCommon.Utility;
 using System.Xml;
 using System.Globalization;
+using Wp7Shared.Helpers;
+
 
 namespace Centapp.CartoonCommon.ViewModels
 {
@@ -46,6 +50,14 @@ namespace Centapp.CartoonCommon.ViewModels
         #region app main infos
         public string AppName { get; set; }
         public string IndexFile { get; set; }
+
+        public bool UseJSon
+        {
+            get
+            {
+                return IndexFile != null && IndexFile.EndsWith("json");
+            }
+        }
         public CultureInfo NeutralCulture { get; set; }
         public bool IsMonoLang { get; set; }
         public int EpisodesLength { get; set; }
@@ -346,280 +358,315 @@ namespace Centapp.CartoonCommon.ViewModels
         }
 
         #region online management
-        public void DownloadItemsAsynch(string xmlUrl)
+        public void DownloadItemsAsynch(string indexFileUrl)
         {
+#if !DEBUGOFFLINE
             WebClient client = new WebClient();
             client.OpenReadCompleted += new OpenReadCompletedEventHandler(client_OpenReadCompleted);
-            client.OpenReadAsync(new Uri(xmlUrl + "?" + Guid.NewGuid()), UriKind.Absolute);
+            client.OpenReadAsync(new Uri(indexFileUrl + "?" + Guid.NewGuid()), UriKind.Absolute);
+#else
+            Assembly asm = Assembly.GetExecutingAssembly();
+            Stream localStream = asm.GetManifestResourceStream("Centapp.CartoonCommon.videosrc.json");
+            client_OpenReadCompleted(localStream, null);
+#endif
         }
 
 
         void client_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
             string errMsg = string.Empty;
-            bool xmlLoadedFromIsoStore = false;
+            bool indexFileLoadedFromIsostore = false;
+            Stream webStream = null;
 
             App.ViewModel.Logger.Log("[client_OpenReadCompleted]");
-            XDocument doc = new XDocument();
 
-            #region xml load from web
-            Stream webStream = null;
-            if (e.Error != null)
+            if (App.ViewModel.UseJSon)
             {
-                if (_dwnRetryCounter <= 2)
+#if DEBUGOFFLINE
+                webStream = (Stream)sender;
+#endif
+                List<Season> seasons = new List<Season>();
+                using (StreamReader reader = new StreamReader(webStream))
                 {
-                    _dwnRetryCounter++;
-                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] error -> retrying #{0}...", _dwnRetryCounter));
-                    Thread.Sleep(_dwnRetryCounter * 2000);
-                    LoadData();
-                    return;
+                    BuildItemsFromJson(reader.ReadToEnd(), false);
                 }
 
-                //try to load local xml
-                App.ViewModel.Logger.Log("[client_OpenReadCompleted] error -> trying to load from isostore...");
-                using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
-                {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
-                    {
-                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
-                        {
-                            doc = LoadXmlFromStream(isoStream);
-                            xmlLoadedFromIsoStore = true;
-                            App.ViewModel.Logger.Log("[client_OpenReadCompleted] xml loaded from isostore successfully!");
-                        }
-                    }
-                    else
-                    {
-                        App.ViewModel.Logger.Log("[client_OpenReadCompleted] cannot load xml from isostore...");
-                    }
-                }
-
-                if (!xmlLoadedFromIsoStore)
-                {
-                    errMsg = string.Format("error during data download  (0) ({0})", e.Error.Message);
-                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] e.Error != null - {0}", errMsg));
-                    if (e.Error.InnerException != null)
-                    {
-                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] e.Error != null -  InnerEx - {0}", e.Error.InnerException.Message));
-                    }
-
-                    if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
-                    return;
-                }
-            }
-            else
-            {
-                //tutto ok
-                try
-                {
-                    webStream = e.Result;
-                    doc = LoadXmlFromStream(webStream);
-                }
-                catch (XmlException ex)
-                {
-                    if (_dwnRetryCounter <= 2)
-                    {
-                        _dwnRetryCounter++;
-                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] error during xml reading (1)x -> retrying #{0}...", _dwnRetryCounter));
-                        Thread.Sleep(_dwnRetryCounter * 2000);
-                        LoadData();
-                        return;
-                    }
-
-                    errMsg = string.Format("error during xml reading (1) ({0})", ex.Message);
-                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] XmlException - {0}", errMsg));
-                    if (ex.InnerException != null)
-                    {
-                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] XmlException InnerEx - {0}", ex.InnerException.Message));
-                    }
-
-                    if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
-                    return;
-                }
-                catch (Exception ex)
-                {
-                    if (_dwnRetryCounter <= 2)
-                    {
-                        _dwnRetryCounter++;
-                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] error during xml reading (2) -> retrying #{0}...", _dwnRetryCounter));
-                        Thread.Sleep(_dwnRetryCounter * 2000);
-                        LoadData();
-                        return;
-                    }
-
-                    errMsg = string.Format("error during xml reading (2) ({0})", ex.Message);
-                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] Exception - {0}", errMsg));
-                    if (ex.InnerException != null)
-                    {
-                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] Exception InnerEx - {0}", ex.InnerException.Message));
-                    }
-                    
-                    if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
-                    return;
-                }
-            }
-
-            try
-            {
                 if (webStream != null)
                 {
                     webStream.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                errMsg = string.Format("error during xml reading (3) ({0})", ex.Message);
-                App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] webStream.Close error - {0}", errMsg));
-                //if (OnError != null) OnError(errMsg, true);
-                throw new Exception(errMsg, ex);
-            }
-            #endregion
 
-            if (!xmlLoadedFromIsoStore)
+                //TODO salvare offline
+                //TODO gestire status
+
+
+            }
+            else
             {
-                #region status management
-                try
+
+                #region xml load from web
+                XDocument doc = new XDocument();
+                if (e.Error != null)
                 {
-                    var elStatus = doc.Element("root").Element("status");
-                    if (elStatus != null)
+                    if (_dwnRetryCounter <= 2)
                     {
-                        var elTestMode = elStatus.Attribute("mode");
-                        if ((elStatus.Attribute("value") != null && (elStatus.Attribute("value").Value != "ok")) ||
-                             (elTestMode != null && elTestMode.Value == "testMsg"))
+                        _dwnRetryCounter++;
+                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] error -> retrying #{0}...", _dwnRetryCounter));
+                        Thread.Sleep(_dwnRetryCounter * 2000);
+                        LoadData();
+                        return;
+                    }
+
+                    //try to load local xml
+                    App.ViewModel.Logger.Log("[client_OpenReadCompleted] error -> trying to load from isostore...");
+                    using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
                         {
-                            //ko o warning
-                            var localizedMsg = elStatus.Attribute("defMsg").Value;
-
-                            try
+                            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
                             {
-                                var localizedMsgNode = elStatus.Descendants("msg").FirstOrDefault(n => n.Attribute("culture").Value == Thread.CurrentThread.CurrentCulture.Name);
-                                if (localizedMsgNode != null)
-                                {
-                                    localizedMsg = localizedMsgNode.Attribute("text").Value;
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                App.ViewModel.Logger.Log(string.Format("cannot find message for culture '{0}', using default", Thread.CurrentThread.CurrentCulture.Name));
-                            }
-
-                            bool mustExit = false;
-                            bool msgRequired = true;
-
-                            if (elStatus.Attribute("value").Value == "ko")
-                            {
-                                mustExit = true;
-                            }
-                            else if (elStatus.Attribute("value").Value == "warn")
-                            {
-                                mustExit = false;
-                            }
-
-                            if ((elStatus.Attribute("targetVer") != null) && (elStatus.Attribute("op") != null))
-                            {
-                                var targetVer = elStatus.Attribute("targetVer").Value;
-                                var op = elStatus.Attribute("op").Value;
-
-                                if (!string.IsNullOrEmpty(targetVer) && !string.IsNullOrEmpty(op))
-                                {
-                                    Version serverVer = new Version(targetVer);
-
-                                    VersionFormat formatRequired = VersionFormat.VRB;
-
-                                    if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build != -1)
-                                    {
-                                        //VRB
-                                        formatRequired = VersionFormat.VRB;
-                                    }
-                                    else if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build == -1)
-                                    {
-                                        //VR
-                                        formatRequired = VersionFormat.VR;
-                                    }
-                                    else if (serverVer.Major != -1 && serverVer.Minor == -1 && serverVer.Build == -1)
-                                    {
-                                        //V
-                                        formatRequired = VersionFormat.V;
-                                    }
-
-                                    Version appVer = new Version(GenericHelper.GetAppversion(formatRequired));
-
-                                    switch (op.ToUpper())
-                                    {
-                                        case "EQ":
-                                            msgRequired = appVer == serverVer;
-                                            break;
-                                        case "LT":
-                                            msgRequired = appVer < serverVer;
-                                            break;
-                                        case "GT":
-                                            msgRequired = appVer > serverVer;
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
-                            }
-
-                            if (msgRequired)
-                            {
-                                OnUserMessageRequired(localizedMsg, mustExit);
-                                if (mustExit)
-                                {
-                                    return;
-                                }
+                                doc = LoadXmlFromStream(isoStream);
+                                indexFileLoadedFromIsostore = true;
+                                App.ViewModel.Logger.Log("[client_OpenReadCompleted] xml loaded from isostore successfully!");
                             }
                         }
+                        else
+                        {
+                            App.ViewModel.Logger.Log("[client_OpenReadCompleted] cannot load xml from isostore...");
+                        }
+                    }
+
+                    if (!indexFileLoadedFromIsostore)
+                    {
+                        errMsg = string.Format("error during data download  (0) ({0})", e.Error.Message);
+                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] e.Error != null - {0}", errMsg));
+                        if (e.Error.InnerException != null)
+                        {
+                            App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] e.Error != null -  InnerEx - {0}", e.Error.InnerException.Message));
+                        }
+
+                        if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
+                        return;
+                    }
+                }
+                else
+                {
+                    //tutto ok
+                    try
+                    {
+                        webStream = e.Result;
+                        doc = LoadXmlFromStream(webStream);
+                    }
+                    catch (XmlException ex)
+                    {
+                        if (_dwnRetryCounter <= 2)
+                        {
+                            _dwnRetryCounter++;
+                            App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] error during xml reading (1)x -> retrying #{0}...", _dwnRetryCounter));
+                            Thread.Sleep(_dwnRetryCounter * 2000);
+                            LoadData();
+                            return;
+                        }
+
+                        errMsg = string.Format("error during xml reading (1) ({0})", ex.Message);
+                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] XmlException - {0}", errMsg));
+                        if (ex.InnerException != null)
+                        {
+                            App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] XmlException InnerEx - {0}", ex.InnerException.Message));
+                        }
+
+                        if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (_dwnRetryCounter <= 2)
+                        {
+                            _dwnRetryCounter++;
+                            App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] error during xml reading (2) -> retrying #{0}...", _dwnRetryCounter));
+                            Thread.Sleep(_dwnRetryCounter * 2000);
+                            LoadData();
+                            return;
+                        }
+
+                        errMsg = string.Format("error during xml reading (2) ({0})", ex.Message);
+                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] Exception - {0}", errMsg));
+                        if (ex.InnerException != null)
+                        {
+                            App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] Exception InnerEx - {0}", ex.InnerException.Message));
+                        }
+
+                        if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
+                        return;
+                    }
+                }
+                try
+                {
+                    if (webStream != null)
+                    {
+                        webStream.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    errMsg = string.Format("error during status management ({0})", ex.Message);
-                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] status management error - {0}", errMsg));
+                    errMsg = string.Format("error during xml reading (3) ({0})", ex.Message);
+                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] webStream.Close error - {0}", errMsg));
+                    //if (OnError != null) OnError(errMsg, true);
                     throw new Exception(errMsg, ex);
                 }
                 #endregion
 
-                #region xml saving
+                if (!indexFileLoadedFromIsostore)
+                {
+                    #region status management
+                    try
+                    {
+                        var elStatus = doc.Element("root").Element("status");
+                        if (elStatus != null)
+                        {
+                            var elTestMode = elStatus.Attribute("mode");
+                            if ((elStatus.Attribute("value") != null && (elStatus.Attribute("value").Value != "ok")) ||
+                                (elTestMode != null && elTestMode.Value == "testMsg"))
+                            {
+                                //ko o warning
+                                var localizedMsg = elStatus.Attribute("defMsg").Value;
+
+                                try
+                                {
+                                    var localizedMsgNode = elStatus.Descendants("msg").FirstOrDefault(n => n.Attribute("culture").Value == Thread.CurrentThread.CurrentCulture.Name);
+                                    if (localizedMsgNode != null)
+                                    {
+                                        localizedMsg = localizedMsgNode.Attribute("text").Value;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    App.ViewModel.Logger.Log(string.Format("cannot find message for culture '{0}', using default", Thread.CurrentThread.CurrentCulture.Name));
+                                }
+
+                                bool mustExit = false;
+                                bool msgRequired = true;
+
+                                if (elStatus.Attribute("value").Value == "ko")
+                                {
+                                    mustExit = true;
+                                }
+                                else if (elStatus.Attribute("value").Value == "warn")
+                                {
+                                    mustExit = false;
+                                }
+
+                                if ((elStatus.Attribute("targetVer") != null) && (elStatus.Attribute("op") != null))
+                                {
+                                    var targetVer = elStatus.Attribute("targetVer").Value;
+                                    var op = elStatus.Attribute("op").Value;
+
+                                    if (!string.IsNullOrEmpty(targetVer) && !string.IsNullOrEmpty(op))
+                                    {
+                                        Version serverVer = new Version(targetVer);
+
+                                        VersionFormat formatRequired = VersionFormat.VRB;
+
+                                        if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build != -1)
+                                        {
+                                            //VRB
+                                            formatRequired = VersionFormat.VRB;
+                                        }
+                                        else if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build == -1)
+                                        {
+                                            //VR
+                                            formatRequired = VersionFormat.VR;
+                                        }
+                                        else if (serverVer.Major != -1 && serverVer.Minor == -1 && serverVer.Build == -1)
+                                        {
+                                            //V
+                                            formatRequired = VersionFormat.V;
+                                        }
+
+                                        Version appVer = new Version(GenericHelper.GetAppversion(formatRequired));
+
+                                        switch (op.ToUpper())
+                                        {
+                                            case "EQ":
+                                                msgRequired = appVer == serverVer;
+                                                break;
+                                            case "LT":
+                                                msgRequired = appVer < serverVer;
+                                                break;
+                                            case "GT":
+                                                msgRequired = appVer > serverVer;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+
+                                if (msgRequired)
+                                {
+                                    OnUserMessageRequired(localizedMsg, mustExit);
+                                    if (mustExit)
+                                    {
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        errMsg = string.Format("error during status management ({0})", ex.Message);
+                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] status management error - {0}", errMsg));
+                        throw new Exception(errMsg, ex);
+                    }
+                    #endregion
+
+                    #region xml saving
+                    try
+                    {
+                        SaveIndexToIsostore(doc);
+                    }
+                    catch (Exception ex)
+                    {
+                        errMsg = string.Format("error during xml saving (5) ({0})", ex.Message);
+                        App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] SaveIndexToIsostore error - {0}", errMsg));
+                        //if (OnError != null) OnError(errMsg, true);
+                        throw new Exception(errMsg, ex);
+                    }
+                    #endregion
+                }
+
+                #region resmanager
                 try
                 {
-                    SaveIndexToIsostore(doc);
+                    InitResManager(doc);
                 }
                 catch (Exception ex)
                 {
-                    errMsg = string.Format("error during xml saving (5) ({0})", ex.Message);
-                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] SaveIndexToIsostore error - {0}", errMsg));
+                    errMsg = string.Format("error during dictionary init (6) ({0})", ex.Message);
+                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] InitResManager error - {0}", errMsg));
+                    //if (OnError != null) OnError(errMsg, true);
+                    throw new Exception(errMsg, ex);
+                }
+                #endregion
+
+                #region viewmodel creation
+                try
+                {
+                    BuildItemsFromXml(doc, false);
+                }
+                catch (Exception ex)
+                {
+                    errMsg = string.Format("error during episodies init (6) ({0})", ex.Message);
+                    App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] BuildItemsFromXml error - {0}", errMsg));
                     //if (OnError != null) OnError(errMsg, true);
                     throw new Exception(errMsg, ex);
                 }
                 #endregion
             }
-
-            try
-            {
-                InitResManager(doc);
-            }
-            catch (Exception ex)
-            {
-                errMsg = string.Format("error during dictionary init (6) ({0})", ex.Message);
-                App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] InitResManager error - {0}", errMsg));
-                //if (OnError != null) OnError(errMsg, true);
-                throw new Exception(errMsg, ex);
-            }
-
-            try
-            {
-                BuildItemsFromXml(doc, false);
-            }
-            catch (Exception ex)
-            {
-                errMsg = string.Format("error during episodes init (6) ({0})", ex.Message);
-                App.ViewModel.Logger.Log(string.Format("[client_OpenReadCompleted] BuildItemsFromXml error - {0}", errMsg));
-                //if (OnError != null) OnError(errMsg, true);
-                throw new Exception(errMsg, ex);
-            }
-
         }
+
+
 
         private static XDocument LoadXmlFromStream(Stream stream)
         {
@@ -710,6 +757,60 @@ namespace Centapp.CartoonCommon.ViewModels
             //#endif
         }
 
+        private void BuildItemsFromJson(string json, bool appIsOffline)
+        {
+            List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+            ObservableCollection<ItemViewModel> items = new ObservableCollection<ItemViewModel>();
+            //int seasonCount = 0;
+            int index = 0;
+            foreach (var season in seasons)
+            {
+                foreach (var episode in season.episodies)
+                {
+                    var item = new ItemViewModel()
+                               {
+                                   Id = ++index,
+                                   Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
+                                   IsAvailableInTrial = appIsOffline ? true : index <= 5,
+                                   Title = episode.name,
+                                   SeasonId= season.season
+                               };
+                    items.Add(item);
+                }
+                //seasonCount++;
+            }
+
+            #region favorites management
+            for (int i = 1; i <= items.Count; i++)
+            {
+                ItemViewModel curEpisode = items.ElementAt(i - 1);
+                int episodeId = curEpisode.Id;
+                //curEpisode.Title = _cnv.Convert(episodeId);
+                if (GenericHelper.FavoriteEpisodesIdsSettingValue.Contains(episodeId))
+                {
+                    curEpisode.IsFavorite = true;
+                }
+                if (appIsOffline)
+                {
+                    curEpisode.OfflineFileName = GenericHelper.GetOfflineFileName(episodeId.ToString());
+                }
+            }
+            #endregion
+
+            Items = items;
+
+            Items_Chunk1 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 1));
+            Items_Chunk2 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 2));
+            Items_Chunk3 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 3));
+            Items_Chunk4 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 4));
+
+            this.IsDataLoaded = true;
+            IsDataLoading = false;
+
+            NotifyPropertyChanged("FavoriteEpisodes");
+            if (OnLoadCompleted != null) OnLoadCompleted();
+        }
+
         private void BuildItemsFromXml(XDocument doc, bool appIsOffline)
         {
             //<root>
@@ -729,6 +830,8 @@ namespace Centapp.CartoonCommon.ViewModels
                                                                      //IsAvailableInTrial = appIsOffline ? true : int.Parse(item.Attribute("id").Value) <= 5
                                                                      IsAvailableInTrial = appIsOffline ? true : index <= 5
                                                                  }).ToList());
+
+            #region favorites management
             for (int i = 1; i <= items.Count; i++)
             {
                 ItemViewModel curEpisode = items.ElementAt(i - 1);
@@ -744,6 +847,7 @@ namespace Centapp.CartoonCommon.ViewModels
                     curEpisode.OfflineFileName = GenericHelper.GetOfflineFileName(episodeId.ToString());
                 }
             }
+            #endregion
 
 #if DEBUG
             var duplicates = items
@@ -772,15 +876,12 @@ namespace Centapp.CartoonCommon.ViewModels
         }
         #endregion
 
-
         public void LoadData()
         {
             IsDataLoading = true;
             if (!GenericHelper.AppIsOfflineSettingValue)
             {
                 DownloadItemsAsynch(string.Format("http://centapp.altervista.org/{0}", App.ViewModel.IndexFile));
-                //DownloadItemsAsynch("https://skydrive.live.com/redir?resid=9CD47B76DA8EF008!5643&authkey=!ALLzIiEIyiZ5m9E");
-                //MessageBox.Show("TEST DATA KO");
             }
             else
             {

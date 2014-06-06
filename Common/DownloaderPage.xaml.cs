@@ -113,12 +113,12 @@ namespace Centapp.CartoonCommon
             App.ViewModel.DwnInProgress = true;
 
 #if SIMULATE_DWN
-            var episodes = App.ViewModel.Items.Take(1).ToList();
+            var episodies = App.ViewModel.Items.Take(1).ToList();
 #else
             var episodes = App.ViewModel.Items;
 #endif
 
-            App.ViewModel.Logger.Log("[Init] episodes initial count: " + episodes.Count);
+            App.ViewModel.Logger.Log("[Init] episodies initial count: " + episodes.Count);
             //App.ViewModel.Logger.Log("[Init] _incrementalBackup = " + _incrementalBackup);
 
             List<int> episodesToSkip = new List<int>();
@@ -138,7 +138,7 @@ namespace Centapp.CartoonCommon
                     int episodeId = int.Parse(item.Replace(".mp4", string.Empty).Replace("ep_", string.Empty).Trim());
                     episodesToSkip.Add(episodeId);
                 }
-                App.ViewModel.Logger.Log("[Init] already existing episodes count: " + episodesToSkip.Count);
+                App.ViewModel.Logger.Log("[Init] already existing episodies count: " + episodesToSkip.Count);
             }
 
             _itemsToDownload.Clear();
@@ -392,7 +392,7 @@ namespace Centapp.CartoonCommon
                             if (_wrongEpisodes.Any())
                             {
                                 //trovati link ko
-                                App.ViewModel.Logger.Log("[ProcessItem] found KO episodes");
+                                App.ViewModel.Logger.Log("[ProcessItem] found KO episodies");
                                 App.ViewModel.DwnInProgress = false;
                                 App.ViewModel.BackupStage = BackupStageEn.LinksCheckedWithErrors;
                                 EnableLockScreen();
@@ -405,7 +405,7 @@ namespace Centapp.CartoonCommon
                             else
                             {
                                 //tutti i link sono, si può proseguire con il download
-                                App.ViewModel.Logger.Log("[ProcessItem] no KO episodes, download starts");
+                                App.ViewModel.Logger.Log("[ProcessItem] no KO episodies, download starts");
                                 _currentQueue = _itemsToDownload;
                                 _retriedEpisodes.Clear();
                                 _requeuedEpisodes.Clear();
@@ -677,7 +677,7 @@ namespace Centapp.CartoonCommon
             //sb.AppendLine("retried");
             //if (!_retriedEpisodes.Any())
             //{
-            //    sb.Append("no retried episodes found");
+            //    sb.Append("no retried episodies found");
             //}
             //else
             //{
@@ -692,7 +692,7 @@ namespace Centapp.CartoonCommon
             //sb.AppendLine("requeued");
             //if (!_requeuedEpisodes.Any())
             //{
-            //    sb.Append("no requeued episodes found");
+            //    sb.Append("no requeued episodies found");
             //}
             //else
             //{
