@@ -112,8 +112,8 @@ namespace Centapp.CartoonCommon
             App.ViewModel.BackupStage = BackupStageEn.CheckingLinks;
             App.ViewModel.DwnInProgress = true;
 
-#if SIMULATE_DWN
-            var episodies = App.ViewModel.Items.Take(1).ToList();
+#if DEBUG
+            var episodes = App.ViewModel.Items.Take(3).ToList();
 #else
             var episodes = App.ViewModel.Items;
 #endif
@@ -590,10 +590,20 @@ namespace Centapp.CartoonCommon
             email.Body += string.Format("\nApp version = '{0}'", GenericHelper.GetAppversion());
             email.Body += string.Format("\nApp language = '{0}'", App.ViewModel.NeutralCulture);
             email.Body += "\n";
-            var titleCnv = new IdToTitleConverter();
+            var titleCnv = new IdToTitleConverter();                   
+
             foreach (var item in list)
             {
-                string epTitle = titleCnv.Convert(item.Id.ToString(), null, null, App.ViewModel.NeutralCulture).ToString();
+                string epTitle = null;
+                if (App.ViewModel.UseResManager)
+                {
+                    epTitle = titleCnv.Convert(item.Id.ToString(), null, null, App.ViewModel.NeutralCulture).ToString();
+                }
+                else
+                {
+                    epTitle = item.Title;
+                }
+
                 email.Body += string.Format("id={0}; title={1}; url={2}; origid={3}\n", new string[] { item.Id.ToString(), epTitle, item.Url, item.OrigId });
             }
             email.Show();

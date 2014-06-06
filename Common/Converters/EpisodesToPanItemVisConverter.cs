@@ -26,7 +26,8 @@ namespace Centapp.CartoonCommon.Converters
             if (App.ViewModel.UseJSon)
             {
                 //verifico che esista la stagione con l'id passato come parametro
-                return App.ViewModel.Items.Any() && (App.ViewModel.Items.FirstOrDefault(it => it.SeasonId == (index + 1)) != null);
+                var vis = (App.ViewModel.Items.FirstOrDefault(it => it.SeasonId == (index + 1)) != null);
+                return vis ? Visibility.Visible : Visibility.Collapsed;
             }
             else
             {
@@ -42,7 +43,7 @@ namespace Centapp.CartoonCommon.Converters
                         return (value as Collection<ItemViewModel>).Count > 75 ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
-            return true;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

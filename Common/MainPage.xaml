@@ -26,6 +26,7 @@
     </shell:SystemTray.ProgressIndicator>
 
     <phone:PhoneApplicationPage.Resources>
+        
         <DataTemplate x:Key="DefaultItemTemplate">
             <Border BorderThickness="1" BorderBrush="LightGray" Height="140" Width="410" 
                                     Margin="0,5"
@@ -39,12 +40,9 @@
                 </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <!--<ColumnDefinition Width="40" />-->
                         <ColumnDefinition Width="178" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <!-- Source="/PeppaPig;component/Resources/mqdefault.jpg"-->
-                    <!--Source="{Binding Converter={StaticResource idToImageConverter}}"-->
                     <Grid  Grid.Row="0" Grid.Column="0"  Margin="11,5,15,18" Width="178" Height="100" VerticalAlignment="Center">
                         <Image
                             Stretch="Fill"
@@ -62,17 +60,10 @@
                                Margin="0,0,4,0"
                                Style="{StaticResource PhoneTextLargeStyle}"
                                VerticalAlignment="Center"/>
-
-                    <!--<TextBlock HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" 
-                                               Text="{Binding Path=., Converter={StaticResource itemToDescrConverter}}"
-                                               TextWrapping="Wrap" 
-                                               Margin="10,0,20,0"
-                                               Style="{StaticResource PhoneTextLargeStyle}"
-                                               VerticalAlignment="Center"
-                                               />-->
                 </Grid>
             </Border>
         </DataTemplate>
+        
         <DataTemplate x:Key="FavoritesItemTemplate">
             <Border BorderThickness="1" BorderBrush="LightGray" Height="140" Width="410" 
                                     Margin="0,5"
@@ -86,12 +77,10 @@
                 </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <!--<ColumnDefinition Width="40" />-->
                         <ColumnDefinition Width="178" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!--Source="/Resources/thumb/3.png" -->
                     <Grid  Grid.Row="0" Grid.Column="0"  Margin="11,5,15,18" Width="178" Height="100" VerticalAlignment="Center">
                         <Image
                             Stretch="Fill"
@@ -132,7 +121,9 @@
                             Visibility="{Binding IsDataLoading, Converter={StaticResource visibilityConverter}}"/>
 
         <!--Panorama control-->
-        <controls:Panorama x:Name="PanoramaMainControl" Title="{Binding AppName}" Grid.Row="1" Margin="0,-20,0,0" 
+        <controls:Panorama x:Name="PanoramaMainControl" 
+                           Title="{Binding AppName}" 
+                           Grid.Row="1" Margin="0,-20,0,0" 
                            IsEnabled="{Binding IsNotDataLoading}">
 
             <controls:Panorama.Background>
@@ -146,10 +137,10 @@
                                                 ConverterParameter = 0 }">
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
+                        <Image Source="Resources/icons/list.png" Style="{StaticResource PanormaHeaderImageStyle}"></Image>
                         <TextBlock  Name="TextBlockFirstPivotItem"
-                                    Margin="20,-5,0,0" 
-                                   Text="{Binding Items_Chunk1, 
+                                    Style="{StaticResource PanormaHeaderTextStyle}"
+                                    Text="{Binding Items_Chunk1, 
                                                   Converter={StaticResource episodesToPanItemContentConverter},
                                                   ConverterParameter = 0 }"/>
                     </StackPanel>
@@ -170,8 +161,8 @@
                                                 ConverterParameter = 1 }">
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
-                        <TextBlock Margin="20,-5,0,0" 
+                        <Image Source="Resources/icons/list.png" Style="{StaticResource PanormaHeaderImageStyle}"></Image>
+                        <TextBlock Style="{StaticResource PanormaHeaderTextStyle}"
                                    Text="{Binding Items_Chunk2, 
                                                   Converter={StaticResource episodesToPanItemContentConverter},
                                                   ConverterParameter = 1 }"/>
@@ -191,8 +182,8 @@
                                                 ConverterParameter = 2 }">
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
-                        <TextBlock Margin="20,-5,0,0" 
+                        <Image Source="Resources/icons/list.png" Style="{StaticResource PanormaHeaderImageStyle}"></Image>
+                        <TextBlock Style="{StaticResource PanormaHeaderTextStyle}"
                                    Text="{Binding Items_Chunk3, 
                                                   Converter={StaticResource episodesToPanItemContentConverter},
                                                   ConverterParameter = 2 }"/>
@@ -212,8 +203,8 @@
                                                 ConverterParameter = 3 }">
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image Source="Resources/icons/list.png" Width="80" Height="60"></Image>
-                        <TextBlock Margin="20,-5,0,0" 
+                        <Image Source="Resources/icons/list.png" Style="{StaticResource PanormaHeaderImageStyle}"></Image>
+                        <TextBlock Style="{StaticResource PanormaHeaderTextStyle}"
                                    Text="{Binding Items_Chunk4, 
                                                   Converter={StaticResource episodesToPanItemContentConverter},
                                                   ConverterParameter = 3 }"/>
@@ -229,8 +220,8 @@
             <controls:PanoramaItem>
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image Source="Resources/icons/favorite.png" Width="80" Height="60"></Image>
-                        <TextBlock x:Name="favoritesHeader" Margin="20,-5,0,0">$favorites</TextBlock>
+                        <Image Source="Resources/icons/favorite.png" Style="{StaticResource PanormaHeaderImageStyle}"></Image>
+                        <TextBlock x:Name="favoritesHeader" Style="{StaticResource PanormaHeaderTextStyle}">$favorites</TextBlock>
                     </StackPanel>
                 </controls:PanoramaItem.Header>
                 <StackPanel>
@@ -264,14 +255,13 @@
                 </StackPanel>
             </controls:PanoramaItem>
 
-            <controls:PanoramaItem x:Name="otherAppsPanoramaItem">
+            <controls:PanoramaItem x:Name="otherAppsPanoramaItem"  >
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <!--<Image Source="Resources/icons/other.png"  Margin="0,15,0,0"></Image>-->
-                        <TextBlock x:Name="otherAppsPanoramaHeader" Margin="0,-5,0,0" Text="$other apps"/>
+                        <TextBlock x:Name="otherAppsPanoramaHeader" Text="$other apps" Style="{StaticResource PanormaHeaderTextStyle}"/>
                     </StackPanel>
                 </controls:PanoramaItem.Header>
-                <ScrollViewer Height="500">
+                <ScrollViewer Height="500" Margin="0,-10,0,0">
                     <sharedControls:OtherApps x:Name="otherApps" >
                     </sharedControls:OtherApps>
                 </ScrollViewer>
@@ -280,18 +270,17 @@
             <controls:PanoramaItem x:Name="appPanoramaItem">
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Image Source="Resources/icons/app_header.png" Width="80" Height="60" Margin="0,15,0,0"></Image>
-                        <TextBlock x:Name="appHeader" Margin="20,-5,0,0">$app</TextBlock>
+                        <Image Source="Resources/icons/app_header.png"  Style="{StaticResource PanormaHeaderImageStyle}"></Image>
+                        <TextBlock x:Name="appHeader" Style="{StaticResource PanormaHeaderTextStyle}">$app</TextBlock>
                     </StackPanel>
                 </controls:PanoramaItem.Header>
 
-                <Grid>
+                <Grid Margin="0,-10,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"></RowDefinition>
                         <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical" Grid.Row="0">
-                       
                         <Button Name="backupEpisodesButton" Margin="0" Height="80" Padding="5"  HorizontalContentAlignment="Stretch" Tap="backupEpisodesButton_Tap">
                             <Button.Content>
                                 <Grid HorizontalAlignment="Stretch">

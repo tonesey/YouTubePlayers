@@ -128,6 +128,7 @@ namespace Centapp.CartoonCommon
             string indexFile = doc.Root.Attribute("indexFile").Value;
             //default = false
             bool isMonoLang = doc.Root.Attribute("isMonoLang") != null ? bool.Parse(doc.Root.Attribute("isMonoLang").Value) : false;
+            bool useResManager = doc.Root.Attribute("useResManager") != null ? bool.Parse(doc.Root.Attribute("useResManager").Value) : true;
             int episodesLength = doc.Root.Attribute("episodesAverageLength") != null ? int.Parse(doc.Root.Attribute("episodesAverageLength").Value) : -1;
             string mtiksId = doc.Root.Attribute("mtiksId") != null ? doc.Root.Attribute("mtiksId").Value : "";
 
@@ -201,6 +202,7 @@ namespace Centapp.CartoonCommon
             App.ViewModel.AppName = appName;
             App.ViewModel.IndexFile = indexFile;
             App.ViewModel.IsMonoLang = isMonoLang;
+            App.ViewModel.UseResManager = useResManager;
             App.ViewModel.NeutralCulture = new CultureInfo(defLang);
             App.ViewModel.EpisodesLength = episodesLength;
             App.ViewModel.MtiksId = mtiksId;

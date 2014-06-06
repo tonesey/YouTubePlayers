@@ -55,25 +55,32 @@ namespace Centapp.CartoonCommon.ViewModels
         {
             get
             {
-                return IndexFile != null && IndexFile.EndsWith("json");
+                return IndexFile != null && IndexFile.Contains("_json");
             }
         }
+
+        public bool DownloadIsAllowed { get; set; }
+        public bool InfoPageIsPivot { get; set; }
+        public bool ShowOtherApps { get; set; }
+        public string CustomFirstPivotItemName { get; set; }
+        public Uri CurrentYoutubeMP4Uri { get; set; }
+        public string CurrentYoutubeMP4FileName { get; set; }
+
         public CultureInfo NeutralCulture { get; set; }
         public bool IsMonoLang { get; set; }
+        public bool UseResManager { get; set; }
         public int EpisodesLength { get; set; }
+
+        #region adv/analytics
         public string MtiksId { get; set; }
-
         public bool IsAdvertisingEnabled { get; set; }
-
         public AdvProvider AdvProvider { get; set; }
         public string AdUnitId { get; set; }
         public string ApplicationId { get; set; }
         public string AdSpaceId { get; set; }
         public string AdPublisherId { get; set; }
         #endregion
-
-        //public Color GradientStop =  Colors.Yellow;
-        //private const int TotalEpisodes = 100;
+        #endregion
 
         int _dwnRetryCounter = 0;
 
@@ -88,8 +95,6 @@ namespace Centapp.CartoonCommon.ViewModels
             get { return _logger; }
             set { _logger = value; }
         }
-
-        // public EnWorkingMode WorkingMode { get; set; }
 
         IdToTitleConverter _cnv = new IdToTitleConverter();
 
@@ -362,13 +367,25 @@ namespace Centapp.CartoonCommon.ViewModels
         {
 #if !DEBUGOFFLINE
             WebClient client = new WebClient();
+
             client.OpenReadCompleted += new OpenReadCompletedEventHandler(client_OpenReadCompleted);
             client.OpenReadAsync(new Uri(indexFileUrl + "?" + Guid.NewGuid()), UriKind.Absolute);
+           // client.OpenReadAsync(new Uri(indexFileUrl));
+
+            //client.DownloadStringCompleted += client_DownloadStringCompleted;
+            //client.DownloadStringAsync(new Uri(indexFileUrl));
+            ///
 #else
             Assembly asm = Assembly.GetExecutingAssembly();
             Stream localStream = asm.GetManifestResourceStream("Centapp.CartoonCommon.videosrc.json");
             client_OpenReadCompleted(localStream, null);
 #endif
+        }
+
+        void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            var test = e.Result;
+
         }
 
 
@@ -385,21 +402,25 @@ namespace Centapp.CartoonCommon.ViewModels
 #if DEBUGOFFLINE
                 webStream = (Stream)sender;
 #endif
-                List<Season> seasons = new List<Season>();
+                if (e.Error != null) {
+                    if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
+                    return;
+                }
+  
+                webStream = e.Result;
+
                 using (StreamReader reader = new StreamReader(webStream))
                 {
-                    BuildItemsFromJson(reader.ReadToEnd(), false);
+                    var data = reader.ReadToEnd();
+                    SaveIndexToIsostoreJSON(data);
+                    //TODO gestire status
+                    BuildItemsFromJson(data, false);
                 }
 
                 if (webStream != null)
                 {
                     webStream.Close();
                 }
-
-                //TODO salvare offline
-                //TODO gestire status
-
-
             }
             else
             {
@@ -624,7 +645,7 @@ namespace Centapp.CartoonCommon.ViewModels
                     #region xml saving
                     try
                     {
-                        SaveIndexToIsostore(doc);
+                        SaveIndexToIsostoreXML(doc);
                     }
                     catch (Exception ex)
                     {
@@ -681,7 +702,9 @@ namespace Centapp.CartoonCommon.ViewModels
         }
 
         #region load/save index isostore
-        private static void SaveIndexToIsostore(XDocument doc)
+
+        #region xml
+        private static void SaveIndexToIsostoreXML(XDocument doc)
         {
             //salvataggio su file system doc
             try
@@ -705,7 +728,7 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
 
-        private static XDocument LoadIndexFromIsostore()
+        private static XDocument LoadIndexFromIsostoreXML()
         {
             XDocument doc = null;
             try
@@ -733,12 +756,69 @@ namespace Centapp.CartoonCommon.ViewModels
             return doc;
         }
         #endregion
+        #region json
+        private static void SaveIndexToIsostoreJSON(string json)
+        {
+            try
+            {
+                using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    {
+                        isoStore.DeleteFile(GenericHelper.OfflineIndexFileName);
+                    }
+                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Create, isoStore))
+                    {
+                        using (TextWriter writer = new StreamWriter(isoStream))
+                        {
+                            writer.WriteLine(json);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                App.ViewModel.Logger.Log(string.Format("[SaveIndexToIsostore] error - {0}", ex.Message));
+                throw ex;
+            }
+        }
+
+        private static string LoadIndexFromIsostoreJSON()
+        {
+            string str = null;
+            try
+            {
+                using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    {
+                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
+                        {
+                            using (TextReader reader = new StreamReader(isoStream))
+                            {
+                                str = reader.ReadToEnd();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("internal error" + GenericHelper.OfflineIndexFileName + " not found");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                App.ViewModel.Logger.Log(string.Format("[LoadIndexFromIsostore] error - {0}", ex.Message));
+                throw ex;
+            }
+            return str;
+        }
+        #endregion
+
+        #endregion
 
         private void InitResManager(XDocument doc)
         {
-            //var doc = LoadIndexFromIsostore();
-            //App.ResManager = new MyResourceManager(doc, new CultureInfo("it-IT"));
-
             if (IsMonoLang)
             {
                 //forza la cultura corrente ad essere quella dichiarata dall'AssmblyInfo 
@@ -748,18 +828,14 @@ namespace Centapp.CartoonCommon.ViewModels
             {
                 App.ResManager = new MyResourceManager(doc, Thread.CurrentThread.CurrentCulture, App.ViewModel.NeutralCulture);
             }
-
-            //#if DEBUG
-            //                        MessageBox.Show("test localizzazione");
-            //                        App.ResManager = new MyResourceManager(doc, new System.Globalization.CultureInfo("pt-BR"));
-            //#else
-            //                        App.ResManager = new MyResourceManager(doc);
-            //#endif
         }
 
         private void BuildItemsFromJson(string json, bool appIsOffline)
         {
+            //senza status
             List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+            //con status
+            //List<Season> seasons = JsonConvert.DeserializeObject<RootObject>(json).seasons;
             ObservableCollection<ItemViewModel> items = new ObservableCollection<ItemViewModel>();
             //int seasonCount = 0;
             int index = 0;
@@ -885,9 +961,17 @@ namespace Centapp.CartoonCommon.ViewModels
             }
             else
             {
-                var doc = LoadIndexFromIsostore();
-                InitResManager(doc);
-                BuildItemsFromXml(doc, true);
+                if (App.ViewModel.UseJSon)
+                {
+                    var json = LoadIndexFromIsostoreJSON();
+                    BuildItemsFromJson(json, true);
+                }
+                else
+                {
+                    var doc = LoadIndexFromIsostoreXML();
+                    InitResManager(doc);
+                    BuildItemsFromXml(doc, true);
+                }
             }
         }
 
@@ -941,20 +1025,5 @@ namespace Centapp.CartoonCommon.ViewModels
         #endregion
 
 
-
-
-
-
-        public bool DownloadIsAllowed { get; set; }
-
-        public bool InfoPageIsPivot { get; set; }
-
-        public bool ShowOtherApps { get; set; }
-
-        public string CustomFirstPivotItemName { get; set; }
-
-        public Uri CurrentYoutubeMP4Uri { get; set; }
-
-        public string CurrentYoutubeMP4FileName { get; set; }
     }
 }

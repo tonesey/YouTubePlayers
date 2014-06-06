@@ -1,3 +1,6 @@
+{  
+"statusmsg":"test msg", "op":"lt", "targetVer":"1.1.13", "value":"warn",
+"seasons":
 [
    {
       "season":1,
@@ -9,7 +12,7 @@
             "name":"Pozzanghere di fango",
             "url":"http://youtu.be/lptqU7vIMb0",
             "youtube_id":"lptqU7vIMb0",
-	    "free":"true"
+		    "free":"true"
          },
          {
             "id":2,
@@ -62,7 +65,7 @@
          },
          {
             "id":9,
-            "name":"Papà   perde i suoi occhiali",
+            "name":"Papà   perde i suoi occhiali",
             "url":"http://youtu.be/U9NuGlIZ-ds",
             "youtube_id":"U9NuGlIZ-ds",
 	    "free":"false"
@@ -1085,3 +1088,4 @@
       ]
    }
 ]
+}

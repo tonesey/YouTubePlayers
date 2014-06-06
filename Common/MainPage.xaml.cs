@@ -375,7 +375,7 @@ namespace Centapp.CartoonCommon
                             App.ViewModel.IsDataLoading = true;
                             //OK
                             //Uri test1 = new Uri(@"C:\Data\Users\DefApps\AppData\{2D034F2D-836B-466C-9CA2-A7BB6B24E3F8}\Local\ep_1.mp4", UriKind.Absolute);
-                            Uri episodeUri = new Uri(@"C:\Data\Users\DefApps\AppData\{" + Wp7Shared.Helpers.AppInfosHelper.GetId() + @"}\Local\" + selectedItem.OfflineFileName, 
+                            Uri episodeUri = new Uri(@"C:\Data\Users\DefApps\AppData\{" + Wp7Shared.Helpers.AppInfosHelper.GetId() + @"}\Local\" + selectedItem.OfflineFileName,
                                                     UriKind.Absolute);
                             App.ViewModel.CurrentYoutubeMP4Uri = episodeUri;
                             Wp7Shared.Helpers.NavigationHelper.SafeNavigateTo(NavigationService, Dispatcher, "/PlayerPage.xaml");
@@ -444,7 +444,7 @@ namespace Centapp.CartoonCommon
                                             MyToolkit.Multimedia.YouTubeQuality.Quality480P,
                                             (uri, ex) =>
                                             {
-                                               
+
                                                 //SystemTray.ProgressIndicator.IsVisible = true;
                                                 if (ex == null && uri != null)
                                                 {
@@ -696,8 +696,20 @@ namespace Centapp.CartoonCommon
                 email.To = "centapp@hotmail.com";
                 email.Subject = string.Format("{0} - {1} ({2})", AppResources.reportError, App.ViewModel.AppName.ToUpper(), GenericHelper.GetAppversion());
                 var episode = (_currentContextItem as ItemViewModel);
+
+
+                string epTitle = string.Empty;
+                if (App.ViewModel.UseResManager)
+                {
+                    epTitle = (string)(new IdToTitleConverter().Convert(episode.Id, null, null, App.ViewModel.NeutralCulture));
+                }
+                else
+                {
+                    epTitle = episode.Title;
+                }
+
                 email.Body = string.Format(AppResources.brokenLinkText,
-                                          new IdToTitleConverter().Convert(episode.Id, null, null, App.ViewModel.NeutralCulture),
+                                          epTitle,
                                           (_currentContextItem as ItemViewModel).Url);
 
                 if (!string.IsNullOrEmpty(episode.OrigId))
@@ -724,9 +736,20 @@ namespace Centapp.CartoonCommon
         {
             try
             {
+
+                string epTitle = string.Empty;
+                if (App.ViewModel.UseResManager)
+                {
+                    epTitle = (string)(new IdToTitleConverter().Convert((_currentContextItem as ItemViewModel).Id, null, null, null));
+                }
+                else
+                {
+                    epTitle = (_currentContextItem as ItemViewModel).Title;
+                }
+
                 ShareStatusTask shareStatusTask = new ShareStatusTask();
                 shareStatusTask.Status = String.Format(AppResources.checkoutVideo,
-                                                      new IdToTitleConverter().Convert((_currentContextItem as ItemViewModel).Id, null, null, null),
+                                                      epTitle,
                                                       (_currentContextItem as ItemViewModel).Url);
                 shareStatusTask.Show();
             }
@@ -809,7 +832,7 @@ namespace Centapp.CartoonCommon
                 email.To = "centapp@hotmail.com";
                 email.Subject = string.Format(AppResources.feedbackText, App.ViewModel.AppName.ToUpper()) + string.Format(" ({0})", GenericHelper.GetAppversion());
 
-                
+
                 email.Show();
             }
             catch (InvalidOperationException ignored)
@@ -979,7 +1002,6 @@ namespace Centapp.CartoonCommon
 
             //decimal test1 = Math.Round((decimal)((float)curAvail / 1024 / 1024 / 1024), 1);
             //decimal test2 = Math.Round((decimal)((double)curAvail / 1024d / 1024d / 1024d), 1);
-
             //requiredGigaBytes = (float)(estimatedRequiredSpace / 1024d / 1024 / 1024);
             requiredGigaBytes = Math.Round((decimal)((double)estimatedRequiredSpace / 1024d / 1024d / 1024d), 1);
 
