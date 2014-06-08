@@ -33,8 +33,8 @@ namespace Centapp.CartoonCommon.Converters
             {
                 switch (index)
                 {
-                    //case 0:
-                    //    return (value as Collection<ItemViewModel>).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+                    case 0:
+                        return (value as Collection<ItemViewModel>).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
                     case 1:
                         return (value as Collection<ItemViewModel>).Count > 25 ? Visibility.Visible : Visibility.Collapsed;
                     case 2:

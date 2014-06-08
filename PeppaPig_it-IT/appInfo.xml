@@ -1,5 +1,5 @@
 <app friendlyName="Peppa Pig"
-     indexFile="peppa_it_src_json.xml"
+     indexFile="peppa_it_src_json.xml" 
      isMonoLang="true"
      useResManager="false"
      episodesAverageLength="300"
@@ -7,3 +7,5 @@
   <!--<adv AdUnitId="10711787" ApplicationId="dc2306ce-221f-47d1-9e50-4e02444ddbd9"></adv>-->
   <!--<adv provider="myapp"></adv>-->
 </app>
+
+<!--peppa.xmll-->
