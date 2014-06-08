@@ -63,8 +63,10 @@ namespace Centapp.CartoonCommon.ViewModels
         public Uri CurrentYoutubeMP4Uri { get; set; }
         public string CurrentYoutubeMP4FileName { get; set; }
 
-        public string AppName {
-            get {
+        public string AppName
+        {
+            get
+            {
                 return AppInfo.Instance.AppName;
             }
         }
@@ -365,7 +367,8 @@ namespace Centapp.CartoonCommon.ViewModels
 #if DEBUGOFFLINE
                 webStream = (Stream)sender;
 #endif
-                if (e.Error != null) {
+                if (e.Error != null)
+                {
                     if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
                     return;
                 }
@@ -800,23 +803,105 @@ namespace Centapp.CartoonCommon.ViewModels
         private void BuildItemsFromJson(string json, bool appIsOffline)
         {
             //senza status
-            List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+            //List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+
             //con status
-            //List<Season> seasons = JsonConvert.DeserializeObject<RootObject>(json).seasons;
+            var root = JsonConvert.DeserializeObject<RootObject>(json);
+            List<Season> seasons = root.seasons;
+
+            if (!appIsOffline)
+            {
+                #region status management
+                var elStatus = root.statusmsg;
+                if (!string.IsNullOrEmpty(elStatus))
+                {
+                    if (!string.IsNullOrEmpty(root.value) && root.value != "ok")
+                    {
+                        bool mustExit = false;
+                        bool msgRequired = true;
+
+                        if (root.value == "ko")
+                        {
+                            mustExit = true;
+                        }
+                        else if (root.value == "warn")
+                        {
+                            mustExit = false;
+                        }
+
+                        if (!string.IsNullOrEmpty(root.targetVer) && !string.IsNullOrEmpty(root.op))
+                        {
+                            var targetVer = root.targetVer;
+                            var op = root.op;
+
+                            if (!string.IsNullOrEmpty(targetVer) && !string.IsNullOrEmpty(op))
+                            {
+                                Version serverVer = new Version(targetVer);
+                                VersionFormat formatRequired = VersionFormat.VRB;
+                                if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build != -1)
+                                {
+                                    //VRB
+                                    formatRequired = VersionFormat.VRB;
+                                }
+                                else if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build == -1)
+                                {
+                                    //VR
+                                    formatRequired = VersionFormat.VR;
+                                }
+                                else if (serverVer.Major != -1 && serverVer.Minor == -1 && serverVer.Build == -1)
+                                {
+                                    //V
+                                    formatRequired = VersionFormat.V;
+                                }
+
+                                Version appVer = new Version(GenericHelper.GetAppversion(formatRequired));
+
+                                switch (op.ToUpper())
+                                {
+                                    case "EQ":
+                                        msgRequired = appVer == serverVer;
+                                        break;
+                                    case "LT":
+                                        msgRequired = appVer < serverVer;
+                                        break;
+                                    case "GT":
+                                        msgRequired = appVer > serverVer;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+
+                        if (msgRequired)
+                        {
+                            OnUserMessageRequired(root.statusmsg, mustExit);
+                            if (mustExit)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+            }
+
+
             ObservableCollection<ItemViewModel> items = new ObservableCollection<ItemViewModel>();
             //int seasonCount = 0;
-            int index = 0;
+            // int index = 0;
             foreach (var season in seasons)
             {
-                foreach (var episode in season.episodies)
+                foreach (var episode in season.episodes)
                 {
                     var item = new ItemViewModel()
                                {
-                                   Id = ++index,
+                                   Id = episode.id,
                                    Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
-                                   IsAvailableInTrial = appIsOffline ? true : index <= 5,
+                                   IsAvailableInTrial = appIsOffline ? true : episode.id <= 5,
                                    Title = episode.name,
-                                   SeasonId= season.season
+                                   SeasonId = season.season
                                };
                     items.Add(item);
                 }
