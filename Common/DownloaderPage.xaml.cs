@@ -586,18 +586,18 @@ namespace Centapp.CartoonCommon
             var email = new EmailComposeTask();
             email.To = "centapp@hotmail.com";
 
-            email.Subject = string.Format("{0} backup errors report", App.ViewModel.AppName.ToUpper());
+            email.Subject = string.Format("{0} backup errors report", AppInfo.Instance.AppName.ToUpper());
             email.Body += string.Format("\nApp version = '{0}'", GenericHelper.GetAppversion());
-            email.Body += string.Format("\nApp language = '{0}'", App.ViewModel.NeutralCulture);
+            email.Body += string.Format("\nApp language = '{0}'", AppInfo.Instance.NeutralCulture);
             email.Body += "\n";
             var titleCnv = new IdToTitleConverter();                   
 
             foreach (var item in list)
             {
                 string epTitle = null;
-                if (App.ViewModel.UseResManager)
+                if (AppInfo.Instance.UseResManager)
                 {
-                    epTitle = titleCnv.Convert(item.Id.ToString(), null, null, App.ViewModel.NeutralCulture).ToString();
+                    epTitle = titleCnv.Convert(item.Id.ToString(), null, null, AppInfo.Instance.NeutralCulture).ToString();
                 }
                 else
                 {

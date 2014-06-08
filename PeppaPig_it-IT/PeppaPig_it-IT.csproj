@@ -191,6 +191,9 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\Common\AppInfo.cs">
+      <Link>AppInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\AppResources.Designer.cs">
       <Link>AppResources.Designer.cs</Link>
       <DependentUpon>AppResources.resx</DependentUpon>

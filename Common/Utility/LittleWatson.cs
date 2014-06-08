@@ -59,7 +59,7 @@ namespace Centapp.CartoonCommon.Utility
                     {
                         EmailComposeTask email = new EmailComposeTask();
                         email.To = "centapp@hotmail.com";
-                        email.Subject = string.Format("{0} auto-generated problem report", App.ViewModel.AppName.ToUpper());
+                        email.Subject = string.Format("{0} auto-generated problem report", AppInfo.Instance.AppName.ToUpper());
                         email.Body = contents;
                         SafeDeleteFile(IsolatedStorageFile.GetUserStoreForApplication());
                         email.Show();

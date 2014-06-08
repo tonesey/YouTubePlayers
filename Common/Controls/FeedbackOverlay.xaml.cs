@@ -191,7 +191,7 @@ namespace Centapp.CartoonCommon.Controls
 
         private void SetupFirstMessage()
         {
-            this.Title = string.Format(AppResources.RatingTitle, App.ViewModel.AppName.ToUpper());
+            this.Title = string.Format(AppResources.RatingTitle, AppInfo.Instance.AppName.ToUpper());
             this.Message = AppResources.RatingMessage1;
             this.YesText = AppResources.RatingYes;
             this.NoText = AppResources.RatingNo;
@@ -199,7 +199,7 @@ namespace Centapp.CartoonCommon.Controls
 
         private void SetupSecondMessage()
         {
-            this.Title = string.Format(AppResources.RatingTitle, App.ViewModel.AppName.ToUpper());
+            this.Title = string.Format(AppResources.RatingTitle, AppInfo.Instance.AppName.ToUpper());
             this.Message = AppResources.RatingMessage2;
             this.YesText = AppResources.RatingYes;
             this.NoText = AppResources.RatingNo;
@@ -207,7 +207,7 @@ namespace Centapp.CartoonCommon.Controls
 
         //private void SetupFeedbackMessage()
         //{
-        //    this.Title = string.Format(AppResources.RatingTitle, App.ViewModel.AppName);
+        //    this.Title = string.Format(AppResources.RatingTitle, AppInfo.Instance.AppName);
         //    this.Message = AppResources.FeedbackMessage1;
         //    this.YesText = AppResources.FeedbackYes;
         //    this.NoText = AppResources.FeedbackNo;
@@ -289,7 +289,7 @@ namespace Centapp.CartoonCommon.Controls
         //    // Email task
         //    var email = new EmailComposeTask();
         //    email.To = "centapp@hotmail.com";
-        //    email.Subject = string.Format("{0} feedback", App.ViewModel.AppName);
+        //    email.Subject = string.Format("{0} feedback", AppInfo.Instance.AppName);
         //    email.Body = body;
         //    email.Show();
         //}

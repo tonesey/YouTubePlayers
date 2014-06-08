@@ -123,31 +123,24 @@ namespace Centapp.CartoonCommon
             PanoramaMainControl.SelectionChanged += new EventHandler<SelectionChangedEventArgs>(PanoramaMainControl_SelectionChanged);
 
             CheckOtherAppsPanoramaItem();
+
             App.ViewModel.Logger.Reset();
 
-            if (!string.IsNullOrEmpty(App.ViewModel.CustomFirstPivotItemName))
+            if (!string.IsNullOrEmpty(AppInfo.Instance.CustomFirstPivotItemName))
             {
-                TextBlockFirstPivotItem.Text = App.ViewModel.CustomFirstPivotItemName;
+                TextBlockFirstPivotItem.Text = AppInfo.Instance.CustomFirstPivotItemName;
             }
 
 #if DEBUG
             //MessageBox.Show("versione BETA : " + GenericHelper.GetAppversion());
 #endif
 
-            //_dt.Interval = TimeSpan.FromSeconds(TimerInterval);
-            //_dt.Tick += new EventHandler(dt_Tick);
-
-            //NotificationBox.ShowAgain(
-            //    "Show Again",
-            //    "Uncheck the show again message and this message won't appear again.",
-            //    "Show this message again",
-            //    false,
-            //    suppressed => { },
-            //    GetType().ToString(),
-            //    new NotificationBoxCommand("Xxx", () => { }),
-            //    new NotificationBoxCommand("Xxx", () => { }),
-            //    new NotificationBoxCommand("Zzz", () => { }));
+            App.ViewModel.OnLoadCompleted -= new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
+            App.ViewModel.OnLoadCompleted += new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
+            
         }
+
+      
 
         void ViewModel_OnError(string msg, bool isFatalError)
         {
@@ -169,88 +162,6 @@ namespace Centapp.CartoonCommon
             shareLinkTask.Show();
         }
 
-        private void MigrateTranslationToWeb()
-        {
-            List<CultureInfo> supportedUiCultures = new List<CultureInfo>() { 
-                new CultureInfo("es-ES"), 
-                new CultureInfo("it-IT"), 
-                new CultureInfo("en-US"), 
-                new CultureInfo("pt-BR") 
-            };
-
-            try
-            {
-                MessageBox.Show("MigrateTranslationToWeb ATTIVO");
-
-
-                XDocument xDoc = new XDocument();
-                Assembly asm = Assembly.GetExecutingAssembly();
-                Stream stream = asm.GetManifestResourceStream("Centapp.Cartoon.xml.pingu.xml");
-                xDoc = XDocument.Load(stream);
-
-                //<item id="4">
-                //  <url>http://www.youtube.com/watch?v=ee2r7PAgNCA</url>
-                //  <desc>
-                //    <descItem lang="en-US" value="Zipping along"/>
-                //  </desc>
-                //</item>  
-
-                var items = xDoc.Element("root").Descendants("item");
-                foreach (var item in items)
-                {
-
-                    int idValue = int.Parse(item.Attribute("id").Value);
-                    string dictKey = string.Format("ep_{0}", idValue < 10 ? idValue.ToString().PadLeft(2, '0') : idValue.ToString());
-
-                    if (item.Element("desc") == null)
-                    {
-                        XElement tmp = new XElement("desc");
-                        item.Add(tmp);
-                    }
-
-                    XElement descEl = item.Element("desc");
-
-                    foreach (var cultureInfo in supportedUiCultures)
-                    {
-                        ResourceSet resourceSet = AppResources.ResourceManager.GetResourceSet(cultureInfo, true, true);
-
-                        string translatedValue = string.Empty;
-                        foreach (DictionaryEntry entry in resourceSet)
-                        {
-                            string resourceKey = entry.Key.ToString();
-                            if (resourceKey.Equals(dictKey))
-                            {
-                                translatedValue = entry.Value.ToString().Trim();
-                                break;
-                            }
-                        }
-                        string content = string.Format("<descItem lang=\"{0}\" value=\"{1}\"/>", cultureInfo, translatedValue);
-                        XElement translatedEl = XDocument.Parse(content).Root;
-                        descEl.Add(translatedEl);
-                    }
-
-                }
-                string str = xDoc.ToString();
-
-                //var c1 = new CultureInfo("it-IT");
-                //var c2 = new CultureInfo("en-US");
-                //var c3 = new CultureInfo("es-ES");
-                //var c4 = new CultureInfo("pt-BR");
-                //var c5 = new CultureInfo("fi-FI");
-
-                //MyResourceManager rm = new MyResourceManager(xDoc, c1);
-                //string test1 = rm.GetString("ep_13", c1);
-                //string test2 = rm.GetString("ep_13", c2);
-                //string test3 = rm.GetString("ep_13", c3);
-                //string test4 = rm.GetString("ep_13", c4);
-                //string test5 = rm.GetString("ep_13", c5);
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
         void ViewModel_OnUserMessageRequired(string msg, bool mustExitApp)
         {
             Dispatcher.BeginInvoke(() =>
@@ -266,7 +177,6 @@ namespace Centapp.CartoonCommon
                 }
             });
         }
-
 
         void PanoramaMainControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -318,8 +228,7 @@ namespace Centapp.CartoonCommon
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdateAppInfos();
-            backupEpisodesButton.Visibility = App.ViewModel.DownloadIsAllowed ? Visibility.Visible : Visibility.Collapsed;
+          
         }
 
         private void UpdateAppInfos()
@@ -334,7 +243,6 @@ namespace Centapp.CartoonCommon
                 appInfo.Text += " (offline)";
             }
         }
-
 
         void itemsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -360,7 +268,7 @@ namespace Centapp.CartoonCommon
                     #region OFFLINE
                     try
                     {
-                        if (App.ViewModel.IsAdvertisingEnabled)
+                        if (AppInfo.Instance.IsAdvertisingEnabled)
                         {
                             #region advertising ON
 
@@ -420,7 +328,7 @@ namespace Centapp.CartoonCommon
                         }
                     }
 
-                    if (App.ViewModel.DownloadIsAllowed)
+                    if (AppInfo.Instance.DownloadIsAllowed)
                     {
                         GenericHelper.IncrementOnlineUsagesCount();
                         if (GenericHelper.OnlineUsagesSettingValue % 4 == 0)
@@ -437,7 +345,7 @@ namespace Centapp.CartoonCommon
                     string id = GenericHelper.GetYoutubeID(selectedItem.Url);
                     App.ViewModel.IsDataLoading = true;
 
-                    if (App.ViewModel.IsAdvertisingEnabled)
+                    if (AppInfo.Instance.IsAdvertisingEnabled)
                     {
                         #region advertising ON
                         YouTube.GetVideoUri(id,
@@ -541,7 +449,7 @@ namespace Centapp.CartoonCommon
         {
             //string currentCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
-            if (!App.ViewModel.ShowOtherApps)
+            if (!AppInfo.Instance.ShowOtherApps)
             {
                 otherAppsPanoramaItem.Visibility = System.Windows.Visibility.Collapsed;
             }
@@ -694,14 +602,14 @@ namespace Centapp.CartoonCommon
             {
                 var email = new EmailComposeTask();
                 email.To = "centapp@hotmail.com";
-                email.Subject = string.Format("{0} - {1} ({2})", AppResources.reportError, App.ViewModel.AppName.ToUpper(), GenericHelper.GetAppversion());
+                email.Subject = string.Format("{0} - {1} ({2})", AppResources.reportError, AppInfo.Instance.AppName.ToUpper(), GenericHelper.GetAppversion());
                 var episode = (_currentContextItem as ItemViewModel);
 
 
                 string epTitle = string.Empty;
-                if (App.ViewModel.UseResManager)
+                if (AppInfo.Instance.UseResManager)
                 {
-                    epTitle = (string)(new IdToTitleConverter().Convert(episode.Id, null, null, App.ViewModel.NeutralCulture));
+                    epTitle = (string)(new IdToTitleConverter().Convert(episode.Id, null, null, AppInfo.Instance.NeutralCulture));
                 }
                 else
                 {
@@ -723,7 +631,7 @@ namespace Centapp.CartoonCommon
                 }
 
                 email.Body += string.Format("\nApp version = '{0}'", _appVer);
-                email.Body += string.Format("\nApp language = '{0}'", App.ViewModel.NeutralCulture);
+                email.Body += string.Format("\nApp language = '{0}'", AppInfo.Instance.NeutralCulture);
 
                 email.Show();
             }
@@ -738,7 +646,7 @@ namespace Centapp.CartoonCommon
             {
 
                 string epTitle = string.Empty;
-                if (App.ViewModel.UseResManager)
+                if (AppInfo.Instance.UseResManager)
                 {
                     epTitle = (string)(new IdToTitleConverter().Convert((_currentContextItem as ItemViewModel).Id, null, null, null));
                 }
@@ -830,7 +738,7 @@ namespace Centapp.CartoonCommon
 
                 var email = new EmailComposeTask();
                 email.To = "centapp@hotmail.com";
-                email.Subject = string.Format(AppResources.feedbackText, App.ViewModel.AppName.ToUpper()) + string.Format(" ({0})", GenericHelper.GetAppversion());
+                email.Subject = string.Format(AppResources.feedbackText, AppInfo.Instance.AppName.ToUpper()) + string.Format(" ({0})", GenericHelper.GetAppversion());
 
 
                 email.Show();
@@ -934,8 +842,8 @@ namespace Centapp.CartoonCommon
                     }
                 }
 
-                App.ViewModel.OnLoadCompleted -= new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
-                App.ViewModel.OnLoadCompleted += new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
+                App.ViewModel.OnLoadCompleted -= new OnLoadCompletedHandler(ViewModel_OnLoadCompletedDownload);
+                App.ViewModel.OnLoadCompleted += new OnLoadCompletedHandler(ViewModel_OnLoadCompletedDownload);
                 App.ViewModel.LoadData();
             }
             else
@@ -978,7 +886,7 @@ namespace Centapp.CartoonCommon
             availableGigaBytes = 0;
             requiredGigaBytes = 0;
 
-            int episodeDurationInSec = App.ViewModel.EpisodesLength;
+            int episodeDurationInSec = AppInfo.Instance.EpisodesLength;
             if (episodeDurationInSec == -1)
             {
                 return true; //dato non dichiarato nell'app: non è possibile eseguire il calcolo e torna true....
@@ -1013,9 +921,28 @@ namespace Centapp.CartoonCommon
             return true;
         }
 
-        void ViewModel_OnLoadCompleted()
+        private void ViewModel_OnLoadCompleted()
         {
             App.ViewModel.OnLoadCompleted -= new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
+            PanoramaMainControl.DefaultItem = PanoramaMainControl.Items[0];
+
+            UpdateAppInfos();
+            backupEpisodesButton.Visibility = AppInfo.Instance.DownloadIsAllowed ? Visibility.Visible : Visibility.Collapsed;
+            if (AppInfo.Instance.OfflineRevertWarningRequired)
+            {
+                AppInfo.Instance.OfflineRevertWarningRequired = false;
+                switch (MessageBox.Show(AppResources.OfflineRevertWarning, AppResources.Warning, MessageBoxButton.OKCancel))
+                {
+                    case MessageBoxResult.OK:
+                        GotoDownloaderPage();
+                        return;
+                }
+            }
+        }
+
+        void ViewModel_OnLoadCompletedDownload()
+        {
+            App.ViewModel.OnLoadCompleted -= new OnLoadCompletedHandler(ViewModel_OnLoadCompletedDownload);
             GotoDownloaderPage();
         }
 
@@ -1040,7 +967,7 @@ namespace Centapp.CartoonCommon
         private void infoButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
 
-            var infoPage = App.ViewModel.InfoPageIsPivot ? "/InfoPagePivot.xaml" : "/InfoPage.xaml";
+            var infoPage = AppInfo.Instance.InfoPageIsPivot ? "/InfoPagePivot.xaml" : "/InfoPage.xaml";
             Wp7Shared.Helpers.NavigationHelper.SafeNavigateTo(NavigationService,
                                                 Dispatcher,
                                                 string.Format(infoPage));

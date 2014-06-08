@@ -12,6 +12,7 @@ using System.IO.IsolatedStorage;
 using System.Collections.Generic;
 using System.Windows.Navigation;
 using System.Xml.Linq;
+using System.Globalization;
 
 namespace Centapp.CartoonCommon.Helpers
 {
@@ -26,8 +27,6 @@ namespace Centapp.CartoonCommon.Helpers
     public class GenericHelper
     {
 
-        public const string OfflineIndexFileName = "offline.xml";
-        public const string DataBackupFileName = "backup.xml";
 
         public const string FavoriteEpisodesKey = "FavoriteEpisodesIds";
         public const string AppIsOfflineKey = "AppIsOffline";
@@ -40,9 +39,10 @@ namespace Centapp.CartoonCommon.Helpers
         public static List<int> FavoriteEpisodesIdsSettingValue { set; get; }
         public static bool AppIsOfflineSettingValue { set; get; }
         public static int OnlineUsagesSettingValue { set; get; }
+
         #endregion
 
-        public static void ReadGlobalVariables()
+        public static void ReadAppSettings()
         {
             object favoriteEpisodes = Readkey(FavoriteEpisodesKey);
             FavoriteEpisodesIdsSettingValue = favoriteEpisodes == null ? new List<int>() : (List<int>)favoriteEpisodes;
@@ -50,8 +50,53 @@ namespace Centapp.CartoonCommon.Helpers
             object appIsOffline = Readkey(AppIsOfflineKey);
             AppIsOfflineSettingValue = appIsOffline == null ? false : (bool)appIsOffline;
 
+            if (AppIsOfflineSettingValue)
+            {
+                if (AppInfo.Instance.UseJSon)
+                {
+                    //è il caso di un'app precedente a 1.2.x in cui il file indice era in xml
+                    //l'app torna ad essere "online" in quando gli episodi sono cambiati
+                    using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
+                        {
+                            AppIsOfflineSettingValue = false;
+                            RemoveOfflineData(isoStore);
+                        }
+                        AppInfo.Instance.OfflineRevertWarningRequired = true;
+                    }
+                }
+            }
+            else
+            {
+                if (AppInfo.Instance.UseJSon)
+                {
+                    //per pulizia viene eliminato il vecchio file indice xml anche sulle versioni online
+                    using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
+                        {
+                            RemoveOfflineData(isoStore);
+                        }
+                    }
+                }
+            }
+
             object onlineUsagesCount = Readkey(OnlineUsagesKey);
             OnlineUsagesSettingValue = (onlineUsagesCount == null || string.IsNullOrEmpty(onlineUsagesCount.ToString())) ? 0 : int.Parse(onlineUsagesCount.ToString());
+        }
+
+        private static void RemoveOfflineData(IsolatedStorageFile isoStore)
+        {
+            isoStore.DeleteFile(AppInfo.OfflineIndexFileNameXml);
+            foreach (var item in isoStore.GetFileNames("ep*.mp4"))
+            {
+                isoStore.DeleteFile(item);
+            }
+            foreach (var item in isoStore.GetFileNames("thumb*.*"))
+            {
+                isoStore.DeleteFile(item);
+            }
         }
 
         public static void Writekey(string key, object value)

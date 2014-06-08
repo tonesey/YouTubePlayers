@@ -136,6 +136,7 @@
       <SubType>
       </SubType>
     </Compile>
+    <Compile Include="AppInfo.cs" />
     <Compile Include="AppResources.Designer.cs">
       <DependentUpon>AppResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>

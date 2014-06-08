@@ -38,49 +38,9 @@ namespace Centapp.CartoonCommon.ViewModels
     public delegate void AsyncMsgHandler(string msg, bool isFatalError);
     public delegate void OnLoadCompletedHandler();
 
-    //public enum EnWorkingMode
-    //{
-    //    Undefined,
-    //    Offline,
-    //    Online
-    //}
-
     public class MainViewModel : INotifyPropertyChanged
     {
-        #region app main infos
-        public string AppName { get; set; }
-        public string IndexFile { get; set; }
 
-        public bool UseJSon
-        {
-            get
-            {
-                return IndexFile != null && IndexFile.Contains("_json");
-            }
-        }
-
-        public bool DownloadIsAllowed { get; set; }
-        public bool InfoPageIsPivot { get; set; }
-        public bool ShowOtherApps { get; set; }
-        public string CustomFirstPivotItemName { get; set; }
-        public Uri CurrentYoutubeMP4Uri { get; set; }
-        public string CurrentYoutubeMP4FileName { get; set; }
-
-        public CultureInfo NeutralCulture { get; set; }
-        public bool IsMonoLang { get; set; }
-        public bool UseResManager { get; set; }
-        public int EpisodesLength { get; set; }
-
-        #region adv/analytics
-        public string MtiksId { get; set; }
-        public bool IsAdvertisingEnabled { get; set; }
-        public AdvProvider AdvProvider { get; set; }
-        public string AdUnitId { get; set; }
-        public string ApplicationId { get; set; }
-        public string AdSpaceId { get; set; }
-        public string AdPublisherId { get; set; }
-        #endregion
-        #endregion
 
         int _dwnRetryCounter = 0;
 
@@ -99,6 +59,15 @@ namespace Centapp.CartoonCommon.ViewModels
         IdToTitleConverter _cnv = new IdToTitleConverter();
 
         public Dispatcher CurrentDispatcher { get; set; }
+
+        public Uri CurrentYoutubeMP4Uri { get; set; }
+        public string CurrentYoutubeMP4FileName { get; set; }
+
+        public string AppName {
+            get {
+                return AppInfo.Instance.AppName;
+            }
+        }
 
         public MainViewModel()
         {
@@ -370,11 +339,6 @@ namespace Centapp.CartoonCommon.ViewModels
 
             client.OpenReadCompleted += new OpenReadCompletedEventHandler(client_OpenReadCompleted);
             client.OpenReadAsync(new Uri(indexFileUrl + "?" + Guid.NewGuid()), UriKind.Absolute);
-           // client.OpenReadAsync(new Uri(indexFileUrl));
-
-            //client.DownloadStringCompleted += client_DownloadStringCompleted;
-            //client.DownloadStringAsync(new Uri(indexFileUrl));
-            ///
 #else
             Assembly asm = Assembly.GetExecutingAssembly();
             Stream localStream = asm.GetManifestResourceStream("Centapp.CartoonCommon.videosrc.json");
@@ -388,7 +352,6 @@ namespace Centapp.CartoonCommon.ViewModels
 
         }
 
-
         void client_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
             string errMsg = string.Empty;
@@ -397,7 +360,7 @@ namespace Centapp.CartoonCommon.ViewModels
 
             App.ViewModel.Logger.Log("[client_OpenReadCompleted]");
 
-            if (App.ViewModel.UseJSon)
+            if (AppInfo.Instance.UseJSon)
             {
 #if DEBUGOFFLINE
                 webStream = (Stream)sender;
@@ -406,20 +369,24 @@ namespace Centapp.CartoonCommon.ViewModels
                     if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
                     return;
                 }
-  
-                webStream = e.Result;
-
-                using (StreamReader reader = new StreamReader(webStream))
+                try
                 {
-                    var data = reader.ReadToEnd();
-                    SaveIndexToIsostoreJSON(data);
-                    //TODO gestire status
-                    BuildItemsFromJson(data, false);
+                    webStream = e.Result;
+
+                    using (StreamReader reader = new StreamReader(webStream))
+                    {
+                        var data = reader.ReadToEnd();
+                        SaveIndexToIsostoreJSON(data);
+                        //TODO gestire status
+                        BuildItemsFromJson(data, false);
+                    }
                 }
-
-                if (webStream != null)
+                finally
                 {
-                    webStream.Close();
+                    if (webStream != null)
+                    {
+                        webStream.Close();
+                    }
                 }
             }
             else
@@ -442,9 +409,9 @@ namespace Centapp.CartoonCommon.ViewModels
                     App.ViewModel.Logger.Log("[client_OpenReadCompleted] error -> trying to load from isostore...");
                     using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                     {
-                        if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                        if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                         {
-                            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
+                            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameXml, FileMode.Open, isoStore))
                             {
                                 doc = LoadXmlFromStream(isoStream);
                                 indexFileLoadedFromIsostore = true;
@@ -711,11 +678,11 @@ namespace Centapp.CartoonCommon.ViewModels
             {
                 using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                     {
-                        isoStore.DeleteFile(GenericHelper.OfflineIndexFileName);
+                        isoStore.DeleteFile(AppInfo.OfflineIndexFileNameXml);
                     }
-                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Create, isoStore))
+                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameXml, FileMode.Create, isoStore))
                     {
                         doc.Save(isoStream);
                     }
@@ -735,16 +702,16 @@ namespace Centapp.CartoonCommon.ViewModels
             {
                 using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                     {
-                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
+                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameXml, FileMode.Open, isoStore))
                         {
                             doc = XDocument.Load(isoStream);
                         }
                     }
                     else
                     {
-                        throw new Exception("internal error" + GenericHelper.OfflineIndexFileName + " not found");
+                        throw new Exception("internal error" + AppInfo.OfflineIndexFileNameXml + " not found");
                     }
                 }
             }
@@ -763,11 +730,11 @@ namespace Centapp.CartoonCommon.ViewModels
             {
                 using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameJSON))
                     {
-                        isoStore.DeleteFile(GenericHelper.OfflineIndexFileName);
+                        isoStore.DeleteFile(AppInfo.OfflineIndexFileNameJSON);
                     }
-                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Create, isoStore))
+                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameJSON, FileMode.Create, isoStore))
                     {
                         using (TextWriter writer = new StreamWriter(isoStream))
                         {
@@ -790,9 +757,9 @@ namespace Centapp.CartoonCommon.ViewModels
             {
                 using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameJSON))
                     {
-                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
+                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameJSON, FileMode.Open, isoStore))
                         {
                             using (TextReader reader = new StreamReader(isoStream))
                             {
@@ -802,7 +769,7 @@ namespace Centapp.CartoonCommon.ViewModels
                     }
                     else
                     {
-                        throw new Exception("internal error" + GenericHelper.OfflineIndexFileName + " not found");
+                        throw new Exception("internal error" + AppInfo.OfflineIndexFileNameJSON + " not found");
                     }
                 }
             }
@@ -819,14 +786,14 @@ namespace Centapp.CartoonCommon.ViewModels
 
         private void InitResManager(XDocument doc)
         {
-            if (IsMonoLang)
+            if (AppInfo.Instance.IsMonoLang)
             {
                 //forza la cultura corrente ad essere quella dichiarata dall'AssmblyInfo 
-                App.ResManager = new MyResourceManager(doc, App.ViewModel.NeutralCulture, App.ViewModel.NeutralCulture);
+                App.ResManager = new MyResourceManager(doc, AppInfo.Instance.NeutralCulture, AppInfo.Instance.NeutralCulture);
             }
             else
             {
-                App.ResManager = new MyResourceManager(doc, Thread.CurrentThread.CurrentCulture, App.ViewModel.NeutralCulture);
+                App.ResManager = new MyResourceManager(doc, Thread.CurrentThread.CurrentCulture, AppInfo.Instance.NeutralCulture);
             }
         }
 
@@ -957,11 +924,11 @@ namespace Centapp.CartoonCommon.ViewModels
             IsDataLoading = true;
             if (!GenericHelper.AppIsOfflineSettingValue)
             {
-                DownloadItemsAsynch(string.Format("http://centapp.altervista.org/{0}", App.ViewModel.IndexFile));
+                DownloadItemsAsynch(string.Format("http://centapp.altervista.org/{0}", AppInfo.Instance.IndexFile));
             }
             else
             {
-                if (App.ViewModel.UseJSon)
+                if (AppInfo.Instance.UseJSon)
                 {
                     var json = LoadIndexFromIsostoreJSON();
                     BuildItemsFromJson(json, true);

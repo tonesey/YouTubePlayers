@@ -26,7 +26,6 @@
     </shell:SystemTray.ProgressIndicator>
 
     <phone:PhoneApplicationPage.Resources>
-        
         <DataTemplate x:Key="DefaultItemTemplate">
             <Border BorderThickness="1" BorderBrush="LightGray" Height="140" Width="410" 
                                     Margin="0,5"
@@ -63,7 +62,6 @@
                 </Grid>
             </Border>
         </DataTemplate>
-        
         <DataTemplate x:Key="FavoritesItemTemplate">
             <Border BorderThickness="1" BorderBrush="LightGray" Height="140" Width="410" 
                                     Margin="0,5"
@@ -130,7 +128,7 @@
                 <ImageBrush ImageSource="PanoramaBackground.png" Opacity="0.5"/>
             </controls:Panorama.Background>
 
-            <!-- 1-25 -->
+            <!-- lista 1 -->
             <controls:PanoramaItem Name="panItem1"
                                    Visibility="{Binding Items, 
                                                 Converter={StaticResource episodesToPanItemVisConverter},
@@ -154,7 +152,7 @@
                 </StackPanel>
             </controls:PanoramaItem>
 
-            <!-- 26-50 -->
+            <!-- lista 2 -->
             <controls:PanoramaItem Name="panItem2"                        
                                    Visibility="{Binding Items, 
                                                 Converter={StaticResource episodesToPanItemVisConverter},
@@ -175,7 +173,7 @@
                 </StackPanel>
             </controls:PanoramaItem>
 
-            <!-- 51-75 -->
+            <!-- lista 3 -->
             <controls:PanoramaItem Name="panItem3"
                                    Visibility="{Binding Items, 
                                                 Converter={StaticResource episodesToPanItemVisConverter},
@@ -196,7 +194,7 @@
                 </StackPanel>
             </controls:PanoramaItem>
 
-            <!-- 76-100 -->
+            <!-- lista 4 -->
             <controls:PanoramaItem Name="panItem4"  
                                    Visibility="{Binding Items, 
                                                 Converter={StaticResource episodesToPanItemVisConverter},
@@ -217,6 +215,7 @@
                 </StackPanel>
             </controls:PanoramaItem>
 
+            <!-- favorites -->
             <controls:PanoramaItem>
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -255,6 +254,7 @@
                 </StackPanel>
             </controls:PanoramaItem>
 
+            <!-- other apps -->
             <controls:PanoramaItem x:Name="otherAppsPanoramaItem"  >
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -267,6 +267,7 @@
                 </ScrollViewer>
             </controls:PanoramaItem>
 
+            <!-- app menu -->
             <controls:PanoramaItem x:Name="appPanoramaItem">
                 <controls:PanoramaItem.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

@@ -344,4 +344,8 @@ Please try again later... if problem persists please contact support</value>
   <data name="season" xml:space="preserve">
     <value>Season {0}</value>
   </data>
+  <data name="OfflineRevertWarning" xml:space="preserve">
+    <value>Sorry but current episodes offline backup is not more valid: this version changed episodes catalogue and a new backup is neeeded!... a lot of new episodes were added!
+Do you want to backup right now?</value>
+  </data>
 </root>

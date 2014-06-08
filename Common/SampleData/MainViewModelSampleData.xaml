@@ -7,7 +7,6 @@
     DwnCurEpisodePercentage="20"
     BackupStage="DwnCompletedWithError"
     DwnOverallPercentage="30"
-    AppName="app name"
     IsDataLoading="True">
 
     <local:MainViewModel.Items>
