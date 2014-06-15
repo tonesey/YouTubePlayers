@@ -38,42 +38,9 @@ namespace Centapp.CartoonCommon.ViewModels
     public delegate void AsyncMsgHandler(string msg, bool isFatalError);
     public delegate void OnLoadCompletedHandler();
 
-    //public enum EnWorkingMode
-    //{
-    //    Undefined,
-    //    Offline,
-    //    Online
-    //}
-
     public class MainViewModel : INotifyPropertyChanged
     {
-        #region app main infos
-        public string AppName { get; set; }
-        public string IndexFile { get; set; }
 
-        public bool UseJSon
-        {
-            get
-            {
-                return IndexFile != null && IndexFile.EndsWith("json");
-            }
-        }
-        public CultureInfo NeutralCulture { get; set; }
-        public bool IsMonoLang { get; set; }
-        public int EpisodesLength { get; set; }
-        public string MtiksId { get; set; }
-
-        public bool IsAdvertisingEnabled { get; set; }
-
-        public AdvProvider AdvProvider { get; set; }
-        public string AdUnitId { get; set; }
-        public string ApplicationId { get; set; }
-        public string AdSpaceId { get; set; }
-        public string AdPublisherId { get; set; }
-        #endregion
-
-        //public Color GradientStop =  Colors.Yellow;
-        //private const int TotalEpisodes = 100;
 
         int _dwnRetryCounter = 0;
 
@@ -89,11 +56,20 @@ namespace Centapp.CartoonCommon.ViewModels
             set { _logger = value; }
         }
 
-        // public EnWorkingMode WorkingMode { get; set; }
-
         IdToTitleConverter _cnv = new IdToTitleConverter();
 
         public Dispatcher CurrentDispatcher { get; set; }
+
+        public Uri CurrentYoutubeMP4Uri { get; set; }
+        public string CurrentYoutubeMP4FileName { get; set; }
+
+        public string AppName
+        {
+            get
+            {
+                return AppInfo.Instance.AppName;
+            }
+        }
 
         public MainViewModel()
         {
@@ -362,6 +338,7 @@ namespace Centapp.CartoonCommon.ViewModels
         {
 #if !DEBUGOFFLINE
             WebClient client = new WebClient();
+
             client.OpenReadCompleted += new OpenReadCompletedEventHandler(client_OpenReadCompleted);
             client.OpenReadAsync(new Uri(indexFileUrl + "?" + Guid.NewGuid()), UriKind.Absolute);
 #else
@@ -371,6 +348,11 @@ namespace Centapp.CartoonCommon.ViewModels
 #endif
         }
 
+        void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            var test = e.Result;
+
+        }
 
         void client_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
@@ -380,26 +362,35 @@ namespace Centapp.CartoonCommon.ViewModels
 
             App.ViewModel.Logger.Log("[client_OpenReadCompleted]");
 
-            if (App.ViewModel.UseJSon)
+            if (AppInfo.Instance.UseJSon)
             {
 #if DEBUGOFFLINE
                 webStream = (Stream)sender;
 #endif
-                List<Season> seasons = new List<Season>();
-                using (StreamReader reader = new StreamReader(webStream))
+                if (e.Error != null)
                 {
-                    BuildItemsFromJson(reader.ReadToEnd(), false);
+                    if (OnError != null) OnError(AppResources.ServerTemporaryUnavailable, true);
+                    return;
                 }
-
-                if (webStream != null)
+                try
                 {
-                    webStream.Close();
+                    webStream = e.Result;
+
+                    using (StreamReader reader = new StreamReader(webStream))
+                    {
+                        var data = reader.ReadToEnd();
+                        SaveIndexToIsostoreJSON(data);
+                        //TODO gestire status
+                        BuildItemsFromJson(data, false);
+                    }
                 }
-
-                //TODO salvare offline
-                //TODO gestire status
-
-
+                finally
+                {
+                    if (webStream != null)
+                    {
+                        webStream.Close();
+                    }
+                }
             }
             else
             {
@@ -421,9 +412,9 @@ namespace Centapp.CartoonCommon.ViewModels
                     App.ViewModel.Logger.Log("[client_OpenReadCompleted] error -> trying to load from isostore...");
                     using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                     {
-                        if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                        if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                         {
-                            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
+                            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameXml, FileMode.Open, isoStore))
                             {
                                 doc = LoadXmlFromStream(isoStream);
                                 indexFileLoadedFromIsostore = true;
@@ -624,7 +615,7 @@ namespace Centapp.CartoonCommon.ViewModels
                     #region xml saving
                     try
                     {
-                        SaveIndexToIsostore(doc);
+                        SaveIndexToIsostoreXML(doc);
                     }
                     catch (Exception ex)
                     {
@@ -681,18 +672,20 @@ namespace Centapp.CartoonCommon.ViewModels
         }
 
         #region load/save index isostore
-        private static void SaveIndexToIsostore(XDocument doc)
+
+        #region xml
+        private static void SaveIndexToIsostoreXML(XDocument doc)
         {
             //salvataggio su file system doc
             try
             {
                 using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                     {
-                        isoStore.DeleteFile(GenericHelper.OfflineIndexFileName);
+                        isoStore.DeleteFile(AppInfo.OfflineIndexFileNameXml);
                     }
-                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Create, isoStore))
+                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameXml, FileMode.Create, isoStore))
                     {
                         doc.Save(isoStream);
                     }
@@ -705,23 +698,23 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
 
-        private static XDocument LoadIndexFromIsostore()
+        private static XDocument LoadIndexFromIsostoreXML()
         {
             XDocument doc = null;
             try
             {
                 using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    if (isoStore.FileExists(GenericHelper.OfflineIndexFileName))
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                     {
-                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(GenericHelper.OfflineIndexFileName, FileMode.Open, isoStore))
+                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameXml, FileMode.Open, isoStore))
                         {
                             doc = XDocument.Load(isoStream);
                         }
                     }
                     else
                     {
-                        throw new Exception("internal error" + GenericHelper.OfflineIndexFileName + " not found");
+                        throw new Exception("internal error" + AppInfo.OfflineIndexFileNameXml + " not found");
                     }
                 }
             }
@@ -733,47 +726,182 @@ namespace Centapp.CartoonCommon.ViewModels
             return doc;
         }
         #endregion
+        #region json
+        private static void SaveIndexToIsostoreJSON(string json)
+        {
+            try
+            {
+                using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameJSON))
+                    {
+                        isoStore.DeleteFile(AppInfo.OfflineIndexFileNameJSON);
+                    }
+                    using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameJSON, FileMode.Create, isoStore))
+                    {
+                        using (TextWriter writer = new StreamWriter(isoStream))
+                        {
+                            writer.WriteLine(json);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                App.ViewModel.Logger.Log(string.Format("[SaveIndexToIsostore] error - {0}", ex.Message));
+                throw ex;
+            }
+        }
+
+        private static string LoadIndexFromIsostoreJSON()
+        {
+            string str = null;
+            try
+            {
+                using (IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (isoStore.FileExists(AppInfo.OfflineIndexFileNameJSON))
+                    {
+                        using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameJSON, FileMode.Open, isoStore))
+                        {
+                            using (TextReader reader = new StreamReader(isoStream))
+                            {
+                                str = reader.ReadToEnd();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("internal error" + AppInfo.OfflineIndexFileNameJSON + " not found");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                App.ViewModel.Logger.Log(string.Format("[LoadIndexFromIsostore] error - {0}", ex.Message));
+                throw ex;
+            }
+            return str;
+        }
+        #endregion
+
+        #endregion
 
         private void InitResManager(XDocument doc)
         {
-            //var doc = LoadIndexFromIsostore();
-            //App.ResManager = new MyResourceManager(doc, new CultureInfo("it-IT"));
-
-            if (IsMonoLang)
+            if (AppInfo.Instance.IsMonoLang)
             {
                 //forza la cultura corrente ad essere quella dichiarata dall'AssmblyInfo 
-                App.ResManager = new MyResourceManager(doc, App.ViewModel.NeutralCulture, App.ViewModel.NeutralCulture);
+                App.ResManager = new MyResourceManager(doc, AppInfo.Instance.NeutralCulture, AppInfo.Instance.NeutralCulture);
             }
             else
             {
-                App.ResManager = new MyResourceManager(doc, Thread.CurrentThread.CurrentCulture, App.ViewModel.NeutralCulture);
+                App.ResManager = new MyResourceManager(doc, Thread.CurrentThread.CurrentCulture, AppInfo.Instance.NeutralCulture);
             }
-
-            //#if DEBUG
-            //                        MessageBox.Show("test localizzazione");
-            //                        App.ResManager = new MyResourceManager(doc, new System.Globalization.CultureInfo("pt-BR"));
-            //#else
-            //                        App.ResManager = new MyResourceManager(doc);
-            //#endif
         }
 
         private void BuildItemsFromJson(string json, bool appIsOffline)
         {
-            List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+            //senza status
+            //List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+
+            //con status
+            var root = JsonConvert.DeserializeObject<RootObject>(json);
+            List<Season> seasons = root.seasons;
+
+            if (!appIsOffline)
+            {
+                #region status management
+                var elStatus = root.statusmsg;
+                if (!string.IsNullOrEmpty(elStatus))
+                {
+                    if (!string.IsNullOrEmpty(root.value) && root.value != "ok")
+                    {
+                        bool mustExit = false;
+                        bool msgRequired = true;
+
+                        if (root.value == "ko")
+                        {
+                            mustExit = true;
+                        }
+                        else if (root.value == "warn")
+                        {
+                            mustExit = false;
+                        }
+
+                        if (!string.IsNullOrEmpty(root.targetVer) && !string.IsNullOrEmpty(root.op))
+                        {
+                            var targetVer = root.targetVer;
+                            var op = root.op;
+
+                            if (!string.IsNullOrEmpty(targetVer) && !string.IsNullOrEmpty(op))
+                            {
+                                Version serverVer = new Version(targetVer);
+                                VersionFormat formatRequired = VersionFormat.VRB;
+                                if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build != -1)
+                                {
+                                    //VRB
+                                    formatRequired = VersionFormat.VRB;
+                                }
+                                else if (serverVer.Major != -1 && serverVer.Minor != -1 && serverVer.Build == -1)
+                                {
+                                    //VR
+                                    formatRequired = VersionFormat.VR;
+                                }
+                                else if (serverVer.Major != -1 && serverVer.Minor == -1 && serverVer.Build == -1)
+                                {
+                                    //V
+                                    formatRequired = VersionFormat.V;
+                                }
+
+                                Version appVer = new Version(GenericHelper.GetAppversion(formatRequired));
+
+                                switch (op.ToUpper())
+                                {
+                                    case "EQ":
+                                        msgRequired = appVer == serverVer;
+                                        break;
+                                    case "LT":
+                                        msgRequired = appVer < serverVer;
+                                        break;
+                                    case "GT":
+                                        msgRequired = appVer > serverVer;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+
+                        if (msgRequired)
+                        {
+                            OnUserMessageRequired(root.statusmsg, mustExit);
+                            if (mustExit)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                #endregion
+            }
+
+
             ObservableCollection<ItemViewModel> items = new ObservableCollection<ItemViewModel>();
             //int seasonCount = 0;
-            int index = 0;
+            // int index = 0;
             foreach (var season in seasons)
             {
-                foreach (var episode in season.episodies)
+                foreach (var episode in season.episodes)
                 {
                     var item = new ItemViewModel()
                                {
-                                   Id = ++index,
+                                   Id = episode.id,
                                    Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
-                                   IsAvailableInTrial = appIsOffline ? true : index <= 5,
+                                   IsAvailableInTrial = appIsOffline ? true : episode.id <= 5,
                                    Title = episode.name,
-                                   SeasonId= season.season
+                                   SeasonId = season.season
                                };
                     items.Add(item);
                 }
@@ -881,13 +1009,21 @@ namespace Centapp.CartoonCommon.ViewModels
             IsDataLoading = true;
             if (!GenericHelper.AppIsOfflineSettingValue)
             {
-                DownloadItemsAsynch(string.Format("http://centapp.altervista.org/{0}", App.ViewModel.IndexFile));
+                DownloadItemsAsynch(string.Format("http://centapp.altervista.org/{0}", AppInfo.Instance.IndexFile));
             }
             else
             {
-                var doc = LoadIndexFromIsostore();
-                InitResManager(doc);
-                BuildItemsFromXml(doc, true);
+                if (AppInfo.Instance.UseJSon)
+                {
+                    var json = LoadIndexFromIsostoreJSON();
+                    BuildItemsFromJson(json, true);
+                }
+                else
+                {
+                    var doc = LoadIndexFromIsostoreXML();
+                    InitResManager(doc);
+                    BuildItemsFromXml(doc, true);
+                }
             }
         }
 
@@ -941,20 +1077,5 @@ namespace Centapp.CartoonCommon.ViewModels
         #endregion
 
 
-
-
-
-
-        public bool DownloadIsAllowed { get; set; }
-
-        public bool InfoPageIsPivot { get; set; }
-
-        public bool ShowOtherApps { get; set; }
-
-        public string CustomFirstPivotItemName { get; set; }
-
-        public Uri CurrentYoutubeMP4Uri { get; set; }
-
-        public string CurrentYoutubeMP4FileName { get; set; }
     }
 }

@@ -422,6 +422,16 @@ namespace Centapp.CartoonCommon {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry but current episodes offline backup is not more valid: this version changed episodes catalogue and a new backup is neeeded!... a lot of new episodes were added!
+        ///Do you want to backup right now?.
+        /// </summary>
+        internal static string OfflineRevertWarning {
+            get {
+                return ResourceManager.GetString("OfflineRevertWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to other apps.
         /// </summary>
         internal static string otherAppsButton {

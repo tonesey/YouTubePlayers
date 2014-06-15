@@ -23,17 +23,18 @@ namespace Centapp.CartoonCommon.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int index = int.Parse(parameter.ToString());
-            if (App.ViewModel.UseJSon)
+            if (AppInfo.Instance.UseJSon)
             {
                 //verifico che esista la stagione con l'id passato come parametro
-                return App.ViewModel.Items.Any() && (App.ViewModel.Items.FirstOrDefault(it => it.SeasonId == (index + 1)) != null);
+                var vis = (App.ViewModel.Items.FirstOrDefault(it => it.SeasonId == (index + 1)) != null);
+                return vis ? Visibility.Visible : Visibility.Collapsed;
             }
             else
             {
                 switch (index)
                 {
-                    //case 0:
-                    //    return (value as Collection<ItemViewModel>).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+                    case 0:
+                        return (value as Collection<ItemViewModel>).Count > 0 ? Visibility.Visible : Visibility.Collapsed;
                     case 1:
                         return (value as Collection<ItemViewModel>).Count > 25 ? Visibility.Visible : Visibility.Collapsed;
                     case 2:
@@ -42,7 +43,7 @@ namespace Centapp.CartoonCommon.Converters
                         return (value as Collection<ItemViewModel>).Count > 75 ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
-            return true;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

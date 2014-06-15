@@ -38,9 +38,9 @@ namespace Centapp.CartoonCommon
             {
                 App.ViewModel.Logger.Log("[PlayerPage] const");
                 _fadeAnimation = this.LayoutRoot.Resources["radFadeAnimation"] as RadFadeAnimation;
-                App.ViewModel.Logger.Log("[PlayerPage] App.ViewModel.AdvProvider = " + App.ViewModel.AdvProvider);
+                App.ViewModel.Logger.Log("[PlayerPage] AppInfo.Instance.AdvProvider = " + AppInfo.Instance.AdvProvider);
                 myAdv.Visibility = System.Windows.Visibility.Collapsed;
-                switch (App.ViewModel.AdvProvider)
+                switch (AppInfo.Instance.AdvProvider)
                 {
                     case AdvProvider.PubCenter:
                         //MS PubCenter
@@ -50,8 +50,8 @@ namespace Centapp.CartoonCommon
                         adControlPubCenter.AdRefreshed += adControl1_AdRefreshed;
                         adControlPubCenter.ErrorOccurred -= adControl1_ErrorOccurred;
                         adControlPubCenter.ErrorOccurred += adControl1_ErrorOccurred;
-                        adControlPubCenter.AdUnitId = App.ViewModel.AdUnitId;
-                        adControlPubCenter.ApplicationId = App.ViewModel.ApplicationId;
+                        adControlPubCenter.AdUnitId = AppInfo.Instance.AdUnitId;
+                        adControlPubCenter.ApplicationId = AppInfo.Instance.ApplicationId;
                         adControlPubCenter.IsHitTestVisible = false;
                         adControlPubCenter.Width = 80;
                         adControlPubCenter.Height = 480;
@@ -65,8 +65,8 @@ namespace Centapp.CartoonCommon
                         adControlSoma.AdSpaceHeight = 50;
                         adControlSoma.AdSpaceWidth = 320;
                         adControlSoma.Visibility = System.Windows.Visibility.Visible;
-                        adControlSoma.Pub = int.Parse(App.ViewModel.AdPublisherId);
-                        adControlSoma.Adspace = int.Parse(App.ViewModel.AdSpaceId);
+                        adControlSoma.Pub = int.Parse(AppInfo.Instance.AdPublisherId);
+                        adControlSoma.Adspace = int.Parse(AppInfo.Instance.AdSpaceId);
                         adControlSoma.Age = 12;
                         adControlSoma.ShowErrors = false;
                         adControlSoma.LocationUseOK = true;
@@ -146,7 +146,7 @@ namespace Centapp.CartoonCommon
 
         private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            switch (App.ViewModel.AdvProvider)
+            switch (AppInfo.Instance.AdvProvider)
             {
                 case AdvProvider.Sooma:
                     adControlSoma.StopAds();
@@ -213,7 +213,7 @@ namespace Centapp.CartoonCommon
             SMFPlayerControl.Playlist.Add(new PlaylistItem() { MediaSource = App.ViewModel.CurrentYoutubeMP4Uri });
             SMFPlayerControl.Play();
 
-            switch (App.ViewModel.AdvProvider)
+            switch (AppInfo.Instance.AdvProvider)
             {
                 case AdvProvider.MyAppPromotion:
                     _dt.Start();
@@ -248,7 +248,7 @@ namespace Centapp.CartoonCommon
 
         void Player_MediaEnded(object sender, EventArgs e)
         {
-            switch (App.ViewModel.AdvProvider)
+            switch (AppInfo.Instance.AdvProvider)
             {
                 case AdvProvider.MyAppPromotion:
                     _dt.Stop();

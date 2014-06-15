@@ -335,4 +335,7 @@ Perchè non ci dai 5 stelle sullo store? :)</value>
   <data name="season" xml:space="preserve">
     <value>stagione {0}</value>
   </data>
+  <data name="OfflineRevertWarning" xml:space="preserve">
+    <value>Gli episodi correntemente salvati non sono più validi: questa versione ha modificato la lista degli episodi disponibili ed è necessario rieseguire l'operazione di backup... Molti episodi sono stati aggiunti! Vuoi procedere ora con il backup?</value>
+  </data>
 </root>

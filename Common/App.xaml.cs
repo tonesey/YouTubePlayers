@@ -112,14 +112,37 @@ namespace Centapp.CartoonCommon
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             FeedbackHelper.Default.Launching();
-
             InitApp();
             LittleWatson.CheckForPreviousException(AppResources.ExceptionMessage, AppResources.ExceptionMessageTitle);
         }
 
         private void InitApp()
         {
+            ParseAppInfo();
 
+            try
+            {
+                if (!string.IsNullOrEmpty(AppInfo.Instance.MtiksId))
+                {
+                    mtiks.Instance.Start(AppInfo.Instance.MtiksId, Assembly.GetExecutingAssembly());
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            CheckTrialState();
+            GenericHelper.ReadAppSettings();
+            if (!GenericHelper.AppIsOfflineSettingValue && !NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show(AppResources.noNetworkAvailable);
+                return;
+            }
+            App.ViewModel.LoadData();
+        }
+
+        private static void ParseAppInfo()
+        {
             Assembly asm = Assembly.GetExecutingAssembly();
             Stream stream = asm.GetManifestResourceStream("Centapp.CartoonCommon.appInfo.xml");
             var doc = XDocument.Load(stream);
@@ -128,6 +151,7 @@ namespace Centapp.CartoonCommon
             string indexFile = doc.Root.Attribute("indexFile").Value;
             //default = false
             bool isMonoLang = doc.Root.Attribute("isMonoLang") != null ? bool.Parse(doc.Root.Attribute("isMonoLang").Value) : false;
+            bool useResManager = doc.Root.Attribute("useResManager") != null ? bool.Parse(doc.Root.Attribute("useResManager").Value) : true;
             int episodesLength = doc.Root.Attribute("episodesAverageLength") != null ? int.Parse(doc.Root.Attribute("episodesAverageLength").Value) : -1;
             string mtiksId = doc.Root.Attribute("mtiksId") != null ? doc.Root.Attribute("mtiksId").Value : "";
 
@@ -154,7 +178,6 @@ namespace Centapp.CartoonCommon
             {
                 customFirstPivotItemName = doc.Root.Element("firstPivotItemName").Value;
             }
-
 
             bool usesAdvertising = false;
             //pubcenter
@@ -193,44 +216,23 @@ namespace Centapp.CartoonCommon
             var attributes = asm.GetCustomAttributes(typeof(System.Resources.NeutralResourcesLanguageAttribute), false);
             var defLang = (attributes.First() as NeutralResourcesLanguageAttribute).CultureName;
 
-            //TODO spostare in una classe di Settings
-            App.ViewModel.CustomFirstPivotItemName = customFirstPivotItemName;
-            App.ViewModel.ShowOtherApps = showOtherApps;
-            App.ViewModel.DownloadIsAllowed = downloadIsAllowed;
-            App.ViewModel.InfoPageIsPivot = infoPageIsPivot;
-            App.ViewModel.AppName = appName;
-            App.ViewModel.IndexFile = indexFile;
-            App.ViewModel.IsMonoLang = isMonoLang;
-            App.ViewModel.NeutralCulture = new CultureInfo(defLang);
-            App.ViewModel.EpisodesLength = episodesLength;
-            App.ViewModel.MtiksId = mtiksId;
-            App.ViewModel.IsAdvertisingEnabled = usesAdvertising;
-            App.ViewModel.AdvProvider = provider;
-            App.ViewModel.AdUnitId = adUnitId;
-            App.ViewModel.ApplicationId = applicationId;
-            App.ViewModel.AdSpaceId = adSpaceId;
-            App.ViewModel.AdPublisherId = adPublisherId;
-            //
-
-            try
-            {
-                if (!string.IsNullOrEmpty(App.ViewModel.MtiksId))
-                {
-                    mtiks.Instance.Start(App.ViewModel.MtiksId, Assembly.GetExecutingAssembly());
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-
-            CheckTrialState();
-            GenericHelper.ReadGlobalVariables();
-            if (!GenericHelper.AppIsOfflineSettingValue && !NetworkInterface.GetIsNetworkAvailable())
-            {
-                MessageBox.Show(AppResources.noNetworkAvailable);
-                return;
-            }
-            App.ViewModel.LoadData();
+            AppInfo.Instance.CustomFirstPivotItemName = customFirstPivotItemName;
+            AppInfo.Instance.ShowOtherApps = showOtherApps;
+            AppInfo.Instance.DownloadIsAllowed = downloadIsAllowed;
+            AppInfo.Instance.InfoPageIsPivot = infoPageIsPivot;
+            AppInfo.Instance.AppName = appName;
+            AppInfo.Instance.IndexFile = indexFile;
+            AppInfo.Instance.IsMonoLang = isMonoLang;
+            AppInfo.Instance.UseResManager = useResManager;
+            AppInfo.Instance.NeutralCulture = new CultureInfo(defLang);
+            AppInfo.Instance.EpisodesLength = episodesLength;
+            AppInfo.Instance.MtiksId = mtiksId;
+            AppInfo.Instance.IsAdvertisingEnabled = usesAdvertising;
+            AppInfo.Instance.AdvProvider = provider;
+            AppInfo.Instance.AdUnitId = adUnitId;
+            AppInfo.Instance.ApplicationId = applicationId;
+            AppInfo.Instance.AdSpaceId = adSpaceId;
+            AppInfo.Instance.AdPublisherId = adPublisherId;
         }
 
         // Code to execute when the application is activated (brought to foreground)
