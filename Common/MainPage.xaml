@@ -100,6 +100,24 @@
                 </Grid>
             </Border>
         </DataTemplate>
+        <Storyboard x:Name="AnimateBannerSb" Storyboard.TargetName="ImageBanner" >
+        	<PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="ImageBanner">
+        		<EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
+        		<EasingPointKeyFrame KeyTime="0:0:2" Value="0.5,0.5"/>
+        	</PointAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="ImageBanner">
+        		<EasingDoubleKeyFrame KeyTime="0:0:1" Value="-1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<QuadraticEase EasingMode="EaseInOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<QuadraticEase EasingMode="EaseInOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -145,11 +163,16 @@
                 </controls:PanoramaItem.Header>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Name="firstListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
-                    <ListBox  Name="firstList" Height="380" Margin="0,0,-2,0" 
+                    <ListBox  Name="firstList" Height="450" Margin="0,0,-2,0" 
                               ItemsSource="{Binding Items_Chunk1}" 
                               ItemTemplate="{StaticResource DefaultItemTemplate}"
                              />
-                    <Image x:Name="ImageBanner" Source="/Resources/banner_campanaccio.png" Width="400" Height="80" Tap="ImageBanner_OnTap"></Image>
+                    
+                    <Image x:Name="ImageBanner" Source="/PeppaPig;component/Resources/banner_campanaccio.png" Width="410" Height="75" Margin="-10,0,0,0"  Tap="ImageBanner_OnTap" Stretch="Fill">
+                    	<Image.RenderTransform>
+                    		<CompositeTransform/>
+                    	</Image.RenderTransform>
+                    </Image>
                 </StackPanel>
             </controls:PanoramaItem>
 
