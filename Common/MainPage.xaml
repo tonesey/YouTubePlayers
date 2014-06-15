@@ -156,10 +156,11 @@
                 </controls:PanoramaItem.Header>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Name="firstListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
-                    <ListBox  Name="firstList" Height="500" Margin="0,0,-2,0" 
+                    <ListBox  Name="firstList" Height="380" Margin="0,0,-2,0" 
                               ItemsSource="{Binding Items_Chunk1}" 
                               ItemTemplate="{StaticResource DefaultItemTemplate}"
                              />
+                    <Image x:Name="ImageBanner" Source="/Resources/banner_campanaccio.png" Width="400" Height="80" Tap="ImageBanner_OnTap"></Image>
                 </StackPanel>
             </controls:PanoramaItem>
 

@@ -40,6 +40,9 @@ using Centapp.CartoonCommon.Helpers;
 using Centapp.CartoonCommon;
 using Microsoft.Phone.Info;
 using Wp7Shared.Helpers;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+
+
 //using Wp7Shared.Helpers;
 
 
@@ -1024,5 +1027,13 @@ namespace Centapp.CartoonCommon
                                                 string.Format(infoPage));
         }
 
+        private void ImageBanner_OnTap(object sender, GestureEventArgs e)
+        {
+            //Show an application, using the default ContentType.
+            MarketplaceDetailTask marketplaceDetailTask = new MarketplaceDetailTask();
+            marketplaceDetailTask.ContentIdentifier = "2c9d48fb-2693-418d-87f9-f850eefb64e1";
+            marketplaceDetailTask.ContentType = MarketplaceContentType.Applications;
+            marketplaceDetailTask.Show();
+        }
     }
 }

@@ -401,6 +401,7 @@
     <Resource Include="Mkt\thumb300.png" />
     <Content Include="Mkt\screen0_it-IT.png" />
     <Content Include="README_FIRST.txt" />
+    <Resource Include="Resources\banner_campanaccio.png" />
     <Content Include="Resources\BuyApp.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
