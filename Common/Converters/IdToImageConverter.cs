@@ -1,4 +1,5 @@
-﻿using Centapp.CartoonCommon.Helpers;
+﻿using System.IO;
+using Centapp.CartoonCommon.Helpers;
 using Centapp.CartoonCommon.ViewModels;
 using MyToolkit.Multimedia;
 using System;
@@ -31,10 +32,10 @@ namespace Centapp.CartoonCommon.Converters
                 var curThumbName = string.Format("thumb_{0}.png", (value as ItemViewModel).Id);
                 if (!isoStore.FileExists(curThumbName))
                 {
-                    //prevedere un img di default? in teorian non dovrebbe MAI passare da qua se offline
+                    //prevedere un img di default? in teoria non dovrebbe MAI passare da qua se offline
                     curThumbName = string.Format("thumb_1.png");
                 }
-                using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(curThumbName, System.IO.FileMode.Open))
+                using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(curThumbName, FileMode.Open, FileAccess.Read))
                 {
                     image.SetSource(stream);
                 }
