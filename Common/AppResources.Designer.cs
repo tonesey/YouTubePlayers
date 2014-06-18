@@ -413,7 +413,7 @@ namespace Centapp.CartoonCommon {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to :( not enough space on device to save episodes... Required space: {0} Gb.
+        ///   Looks up a localized string similar to :( not enough space on device to save episodes... Required space: {0} Gb - Available space: {1}.
         /// </summary>
         internal static string notEnoughSpace {
             get {
@@ -555,7 +555,8 @@ namespace Centapp.CartoonCommon {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Offline episodes will occupy about {0}Gb of your phone memory. Continue?.
+        ///   Looks up a localized string similar to Offline episodes will occupy about {0}Gb of your phone memory  ({1}Gb available).
+        ///Continue?.
         /// </summary>
         internal static string SpaceRequiredWarn {
             get {

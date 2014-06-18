@@ -292,7 +292,7 @@ Vuoi comprare la versione completa?</value>
 E' possibile che l'operazione di backup non sia stata completata correttamente, per favore ritenta il backup.</value>
   </data>
   <data name="notEnoughSpace" xml:space="preserve">
-    <value>:( Non c'è abbastanza spazio sul telefono per salvare gli episodi... Spazio richiesto: {0} Gb</value>
+    <value>:( Non c'è abbastanza spazio sul telefono per salvare gli episodi... Spazio richiesto: {0} Gb - Spazio disponibile: {1} Gb</value>
   </data>
   <data name="wifiRequired" xml:space="preserve">
     <value>E' richiesta una connessione wi-fi per eseguire il salvataggio degli episodi!</value>
@@ -330,7 +330,8 @@ Perchè non ci dai 5 stelle sullo store? :)</value>
     <value>La funzionalità è disponibile solo in modalità offline, vuoi scaricare ora gli episodi?</value>
   </data>
   <data name="SpaceRequiredWarn" xml:space="preserve">
-    <value>Gli episodi una volta scaricati occuperanno circa {0}Gb di memoria. Continuare?</value>
+    <value>Gli episodi una volta scaricati occuperanno circa {0}Gb di memoria ({1}Gb disponibile). 
+Continuare?</value>
   </data>
   <data name="season" xml:space="preserve">
     <value>stagione {0}</value>

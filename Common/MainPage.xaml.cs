@@ -799,11 +799,11 @@ namespace Centapp.CartoonCommon
             decimal requiredGb = 0;
             if (!CheckAvailableSpace(out availGb, out requiredGb))
             {
-                MessageBox.Show(string.Format(AppResources.notEnoughSpace, requiredGb));
+                MessageBox.Show(string.Format(AppResources.notEnoughSpace, requiredGb, availGb));
                 return;
             }
 
-            MessageBoxResult messageBoxResult = MessageBox.Show(string.Format(AppResources.SpaceRequiredWarn, requiredGb), AppResources.Warning, MessageBoxButton.OKCancel);
+            MessageBoxResult messageBoxResult = MessageBox.Show(string.Format(AppResources.SpaceRequiredWarn, requiredGb, availGb), AppResources.Warning, MessageBoxButton.OKCancel);
             if (messageBoxResult != MessageBoxResult.OK)
             {
                 return;

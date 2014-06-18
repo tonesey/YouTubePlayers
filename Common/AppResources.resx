@@ -295,7 +295,7 @@ Do you want to buy full version?</value>
 Maybe backup procedure hasn't completed correctly: please retry operation.</value>
   </data>
   <data name="notEnoughSpace" xml:space="preserve">
-    <value>:( not enough space on device to save episodes... Required space: {0} Gb</value>
+    <value>:( not enough space on device to save episodes... Required space: {0} Gb - Available space: {1}</value>
   </data>
   <data name="wifiRequired" xml:space="preserve">
     <value>A wi-fi connection is required for download!</value>
@@ -336,7 +336,8 @@ Why not give us a 5 star rating to show your appreciation?</value>
 Please try again later... if problem persists please contact support</value>
   </data>
   <data name="SpaceRequiredWarn" xml:space="preserve">
-    <value>Offline episodes will occupy about {0}Gb of your phone memory. Continue?</value>
+    <value>Offline episodes will occupy about {0}Gb of your phone memory  ({1}Gb available).
+Continue?</value>
   </data>
   <data name="FavoritesOnlyInOfflineMode" xml:space="preserve">
     <value>Sorry but this feature is available only in offline mode, do you want to download episodes right now?</value>
