@@ -27,18 +27,21 @@ namespace Centapp.CartoonCommon.Converters
             }
 
             BitmapImage image = new BitmapImage();
-            using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+            lock (this)
             {
-                var curThumbName = string.Format("thumb_{0}.png", (value as ItemViewModel).Id);
-                if (!isoStore.FileExists(curThumbName))
+                using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    //prevedere un img di default? in teoria non dovrebbe MAI passare da qua se offline
-                    curThumbName = string.Format("thumb_1.png");
-                }
-                using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(curThumbName, FileMode.Open, FileAccess.Read))
-                {
-                    image.SetSource(stream);
-                }
+                    var curThumbName = string.Format("thumb_{0}.png", (value as ItemViewModel).Id);
+                    if (!isoStore.FileExists(curThumbName))
+                    {
+                        //prevedere un img di default? in teoria non dovrebbe MAI passare da qua se offline
+                        curThumbName = string.Format("thumb_1.png");
+                    }
+                    using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(curThumbName, FileMode.Open, FileAccess.Read))
+                    {
+                        image.SetSource(stream);
+                    }
+                } 
             }
             return image;
         }
