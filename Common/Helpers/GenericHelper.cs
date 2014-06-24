@@ -89,13 +89,19 @@ namespace Centapp.CartoonCommon.Helpers
         private static void RemoveOfflineData(IsolatedStorageFile isoStore)
         {
             isoStore.DeleteFile(AppInfo.OfflineIndexFileNameXml);
-            foreach (var item in isoStore.GetFileNames("ep*.mp4"))
+            try
             {
-                isoStore.DeleteFile(item);
+                foreach (var item in isoStore.GetFileNames("ep*.mp4"))
+                {
+                    isoStore.DeleteFile(item);
+                }
+                foreach (var item in isoStore.GetFileNames("thumb_*.png"))
+                {
+                    isoStore.DeleteFile(item);
+                }
             }
-            foreach (var item in isoStore.GetFileNames("thumb*.*"))
+            catch (Exception)
             {
-                isoStore.DeleteFile(item);
             }
         }
 

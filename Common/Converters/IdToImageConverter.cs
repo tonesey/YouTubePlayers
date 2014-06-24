@@ -19,30 +19,47 @@ namespace Centapp.CartoonCommon.Converters
 
 #if DEBUGOFFLINE
             return null;
-#endif 
-            if (!GenericHelper.AppIsOfflineSettingValue)
+#endif
+            BitmapImage image = new BitmapImage();
+            bool useOfflineThumb = false;
+            string curThumbName = string.Empty;
+
+            if (GenericHelper.AppIsOfflineSettingValue)
             {
-                //return new BitmapImage(new Uri(string.Format("/Resources/thumb/{0}.png", (int)value), UriKind.Relative));
-                return new BitmapImage(YouTube.GetThumbnailUri(GenericHelper.GetYoutubeID((value as ItemViewModel).Url)));
+                curThumbName = string.Format("thumb_{0}.png", (value as ItemViewModel).Id);
+                try
+                {
+                    using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        if (isoStore.FileExists(curThumbName))
+                        {
+                            useOfflineThumb = true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
             }
 
-            BitmapImage image = new BitmapImage();
             lock (this)
             {
-                using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                if (useOfflineThumb)
                 {
-                    var curThumbName = string.Format("thumb_{0}.png", (value as ItemViewModel).Id);
-                    if (!isoStore.FileExists(curThumbName))
+                    using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                     {
-                        //prevedere un img di default? in teoria non dovrebbe MAI passare da qua se offline
-                        curThumbName = string.Format("thumb_1.png");
+                        using (var stream = isoStore.OpenFile(curThumbName, FileMode.Open, FileAccess.Read))
+                        {
+                            image.SetSource(stream);
+                        }
                     }
-                    using (var stream = IsolatedStorageFile.GetUserStoreForApplication().OpenFile(curThumbName, FileMode.Open, FileAccess.Read))
-                    {
-                        image.SetSource(stream);
-                    }
-                } 
+                }
+                else
+                {
+                    image = new BitmapImage(YouTube.GetThumbnailUri(GenericHelper.GetYoutubeID((value as ItemViewModel).Url)));
+                }
             }
+
             return image;
         }
 
