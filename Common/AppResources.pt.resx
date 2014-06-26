@@ -324,6 +324,6 @@ Por que não nos dão cinco estrelas? :)</value>
     <value>Sim!</value>
   </data>
   <data name="SpaceRequiredWarn" xml:space="preserve">
-    <value>Episódios offline ocupará sobre {0}Gb de memória do telefone. Continuar?</value>
+    <value>Episódios offline ocupará sobre {0}Gb ({1} disponível) de memória do telefone. Continuar?</value>
   </data>
 </root>

@@ -26,8 +26,6 @@ namespace Centapp.CartoonCommon.Helpers
 
     public class GenericHelper
     {
-
-
         public const string FavoriteEpisodesKey = "FavoriteEpisodesIds";
         public const string AppIsOfflineKey = "AppIsOffline";
         public const string OnlineUsagesKey = "OnlineUsages";
@@ -52,17 +50,23 @@ namespace Centapp.CartoonCommon.Helpers
 
             if (AppIsOfflineSettingValue)
             {
+                //offline
                 if (AppInfo.Instance.UseJSon)
                 {
-                    //è il caso di un'app precedente a 1.2.x in cui il file indice era in xml
-                    //l'app torna ad essere "online" in quando gli episodi sono cambiati
                     using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                     {
+                        //è il caso di un'app precedente a 1.2.x in cui il file indice era in xml
                         if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                         {
-                            AppInfo.Instance.OfflineRevertWarningRequired = true;
-                            AppIsOfflineSettingValue = false;
-                            RemoveOfflineData(isoStore);
+                            RemoveLocalIndexXml(isoStore);
+
+                            //l'app torna ad essere "online" in quando gli episodi sono cambiati
+                            if (AppInfo.Instance.XmlToJSONRequiresOfflineReset)
+                            {
+                                AppInfo.Instance.OfflineRevertWarningRequired = true;
+                                SetAppIsOffline(false);
+                                RemoveOfflineData(isoStore);
+                            }
                         }
                     }
                 }
@@ -76,7 +80,7 @@ namespace Centapp.CartoonCommon.Helpers
                     {
                         if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                         {
-                            RemoveOfflineData(isoStore);
+                            RemoveLocalIndexXml(isoStore);
                         }
                     }
                 }
@@ -86,15 +90,21 @@ namespace Centapp.CartoonCommon.Helpers
             OnlineUsagesSettingValue = (onlineUsagesCount == null || string.IsNullOrEmpty(onlineUsagesCount.ToString())) ? 0 : int.Parse(onlineUsagesCount.ToString());
         }
 
-        private static void RemoveOfflineData(IsolatedStorageFile isoStore)
+        private static void RemoveLocalIndexXml(IsolatedStorageFile isoStore)
         {
             isoStore.DeleteFile(AppInfo.OfflineIndexFileNameXml);
+        }
+
+        private static void RemoveOfflineData(IsolatedStorageFile isoStore)
+        {
             try
             {
+
                 foreach (var item in isoStore.GetFileNames("ep*.mp4"))
                 {
                     isoStore.DeleteFile(item);
                 }
+
                 foreach (var item in isoStore.GetFileNames("thumb_*.png"))
                 {
                     isoStore.DeleteFile(item);

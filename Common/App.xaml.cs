@@ -155,6 +155,7 @@ namespace Centapp.CartoonCommon
             int episodesLength = doc.Root.Attribute("episodesAverageLength") != null ? int.Parse(doc.Root.Attribute("episodesAverageLength").Value) : -1;
             string mtiksId = doc.Root.Attribute("mtiksId") != null ? doc.Root.Attribute("mtiksId").Value : "";
 
+            bool xmlToJSONRequiresOfflineReset = doc.Root.Attribute("xmlToJSONRequiresOfflineReset") != null ? bool.Parse(doc.Root.Attribute("xmlToJSONRequiresOfflineReset").Value) : true;
 
             bool episodesGroupedBySeasons = true;
             if (doc.Root.Attribute("episodesGroupedBySeason") != null && doc.Root.Attribute("episodesGroupedBySeason").Value != null)
@@ -225,6 +226,7 @@ namespace Centapp.CartoonCommon
             var defLang = (attributes.First() as NeutralResourcesLanguageAttribute).CultureName;
 
             AppInfo.Instance.CustomFirstPivotItemName = customFirstPivotItemName;
+            AppInfo.Instance.XmlToJSONRequiresOfflineReset = xmlToJSONRequiresOfflineReset;
             AppInfo.Instance.ShowOtherApps = showOtherApps;
             AppInfo.Instance.DownloadIsAllowed = downloadIsAllowed;
             AppInfo.Instance.InfoPageIsPivot = infoPageIsPivot;

@@ -1,6 +1,7 @@
 <app friendlyName="Pingu" 
-     indexFile="pingu_src_json_oneline.txt" 
+     indexFile="pingu_src_json.xml" 
      episodesAverageLength="300"
+     xmlToJSONRequiresOfflineReset="false"
      episodesGroupedBySeason="false" >
   <!--<adv provider="soma" AdSpaceId="65825743" PublisherID="923876422"></adv>-->
 </app>

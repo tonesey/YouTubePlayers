@@ -38,6 +38,7 @@ namespace Centapp.CartoonCommon
 
         public bool DownloadIsAllowed { get; set; }
         public bool OfflineRevertWarningRequired { get; set; }
+        public bool XmlToJSONRequiresOfflineReset { get; set; }
 
         public bool InfoPageIsPivot { get; set; }
         public bool ShowOtherApps { get; set; }

@@ -21,9 +21,11 @@
     toolkit:TiltEffect.IsTiltEnabled="True"
     shell:SystemTray.IsVisible="False">
 
+    <!--
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator IsIndeterminate="True" IsVisible="False"/>
+        <shell:ProgressIndicator IsIndeterminate="True" IsVisible="True"/>
     </shell:SystemTray.ProgressIndicator>
+    -->
 
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="DefaultItemTemplate">
@@ -129,9 +131,10 @@
         </Grid.RowDefinitions>
 
         <toolkit:PerformanceProgressBar
-                            Grid.Row="0"
+                            Grid.Row="1"
                             HorizontalAlignment="Stretch"
                             Margin="0"
+                            Height="20"
                             IsIndeterminate="True"
                             ActualIsIndeterminate="{Binding IsDataLoading}"
                             Visibility="{Binding IsDataLoading, Converter={StaticResource visibilityConverter}}"/>

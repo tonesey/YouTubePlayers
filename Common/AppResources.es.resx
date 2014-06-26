@@ -316,4 +316,8 @@ Se mantendrán los episodios descargados.
   <data name="RatingYes" xml:space="preserve">
     <value>¡sí!</value>
   </data>
+  <data name="SpaceRequiredWarn" xml:space="preserve">
+    <value>Los episodios ocuparán {0} Gb de memoria ({1} GB disponible). 
+¿Desea continuar?</value>
+  </data>
 </root>
