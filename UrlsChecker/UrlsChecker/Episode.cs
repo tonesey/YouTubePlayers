@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UrlsChecker
 {
-    class Episode
+    class EpisodeInfo
     {
         public int Id { get; set; }
 

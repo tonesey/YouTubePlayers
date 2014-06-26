@@ -26,6 +26,8 @@ using Wp7Shared.Utility;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using JSONObjects;
+using Newtonsoft.Json;
+using Wp7Shared.Helpers;
 
 
 namespace UrlsChecker
@@ -62,15 +64,15 @@ namespace UrlsChecker
         XNamespace ytns = XNamespace.Get("http://gdata.youtube.com/schemas/2007");
 
         Queue<AppItem> _appsToCheck = new Queue<AppItem>();
-        Queue<Episode> _episodesToCheck = new Queue<Episode>();
+        Queue<EpisodeInfo> _episodesToCheck = new Queue<EpisodeInfo>();
 
-        Queue<Episode> _episodesQueue = new Queue<Episode>();
-        List<Episode> _episodesList = new List<Episode>();
+        Queue<EpisodeInfo> _episodesQueue = new Queue<EpisodeInfo>();
+        List<EpisodeInfo> _episodesList = new List<EpisodeInfo>();
 
         DateTime _startTime = DateTime.Now;
         DateTime _endTime = DateTime.Now;
 
-        List<Episode> _wrongEpisodes = new List<Episode>();
+        List<EpisodeInfo> _wrongEpisodes = new List<EpisodeInfo>();
         StringBuilder _report = new StringBuilder();
         List<string> _titleWords = null;
         AppItem _curApp;
@@ -97,7 +99,7 @@ namespace UrlsChecker
             //Task.Run(() => Test());
             //Test();
 
-            ConvertXmlToJSON();
+            //ConvertXmlToJSON();
         }
 
         private void ConvertXmlToJSON()
@@ -133,8 +135,8 @@ namespace UrlsChecker
 
             var status = doc.Element("root").Element("status");
 
-              //<status value="warn" targetVer="3.1.10" op="lt" defMsg="WARNING: this app is obsolete, please install latest version! Thanks">
-              //</status>
+            //<status value="warn" targetVer="3.1.10" op="lt" defMsg="WARNING: this app is obsolete, please install latest version! Thanks">
+            //</status>
 
             r.statusmsg = status.Attribute("defMsg").Value;
             r.value = status.Attribute("value").Value;
@@ -187,7 +189,7 @@ namespace UrlsChecker
         //}
         //#endregion
 
-        async Task FindYoutubeId(Episode ep)
+        async Task FindYoutubeId(EpisodeInfo ep)
         {
             //Debug.WriteLine("<-- " + ep.Desc);
             string id = "not found";
@@ -302,13 +304,13 @@ namespace UrlsChecker
             }
 
             int index = 0;
-            _episodesList = new List<Episode>((from item in doc.Element("root").Descendants("item")
-                                               select new Episode()
-                                               {
-                                                   Id = ++index,
-                                                   OrigId = item.Element("origId") != null ? item.Element("origId").Value : string.Empty,
-                                                   Desc = item.Element("desc") == null ? "" : item.Element("desc").Elements("descItem").Count() == 0 ? item.Element("desc").Value : item.Element("desc").Elements("descItem").First().Attribute("value").Value.ToString()
-                                               }).ToList());
+            _episodesList = new List<EpisodeInfo>((from item in doc.Element("root").Descendants("item")
+                                                   select new EpisodeInfo()
+                                                   {
+                                                       Id = ++index,
+                                                       OrigId = item.Element("origId") != null ? item.Element("origId").Value : string.Empty,
+                                                       Desc = item.Element("desc") == null ? "" : item.Element("desc").Elements("descItem").Count() == 0 ? item.Element("desc").Value : item.Element("desc").Elements("descItem").First().Attribute("value").Value.ToString()
+                                                   }).ToList());
 
             _episodesList.ForEach(ep => _episodesQueue.Enqueue(ep));
 
@@ -380,7 +382,7 @@ namespace UrlsChecker
         //    };
         //}
 
-        private async Task RetrieveAllItems_Parallel(List<Episode> episodes)
+        private async Task RetrieveAllItems_Parallel(List<EpisodeInfo> episodes)
         {
             //IEnumerable<Task<string>> downloadTasksQuery = from ep in _episodesList select FindYoutubeId(ep.Desc);
             //Task<string>[] downloadTasks = downloadTasksQuery.ToArray();
@@ -618,7 +620,8 @@ namespace UrlsChecker
             if (!test)
             {
                 // _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/MyLittlePony_en.xml", Name = "My Little Pony", YouTubeSearchHint = "My Little Pony" });
-                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa.xml", Name = "Peppa Pig", YouTubeSearchHint = "Peppa Pig" });
+                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa.xml", Name = "Peppa Pig (XML)", YouTubeSearchHint = "Peppa Pig" });
+                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_it_src_json.xml", Name = "Peppa Pig (JSON)", YouTubeSearchHint = "Peppa Pig", IndexType = IndexType.JSONGrouped });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_en-US.xml", Name = "Peppa Pig (en)", YouTubeSearchHint = "Peppa Pig" });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_es.xml", Name = "Peppa Pig (es)", YouTubeSearchHint = "Peppa Pig" });
                 _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_pt.xml", Name = "Peppa Pig (pt)", YouTubeSearchHint = "Peppa Pig" });
@@ -626,7 +629,7 @@ namespace UrlsChecker
                 _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/pingu_full.xml", Name = "Pingu", YouTubeSearchHint = "Pingu" });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/puffi.xml", Name = "Puffi", YouTubeSearchHint = "Puffi" });
                 // _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/banane.xml", Name = "Banane in pigiama", YouTubeSearchHint = "Banane in pigiama" });
-                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/cinico.xml", Name = "Cinico TV", YouTubeSearchHint = "Cinico TV" });
+                //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/cinico.xml", Name = "Cinico TV", YouTubeSearchHint = "Cinico TV" });
             }
             else
             {
@@ -663,10 +666,10 @@ namespace UrlsChecker
             _report.Clear();
             ButtonCheck.IsEnabled = false;
             ButtonSend.IsEnabled = false;
-            ProcessXml();
+            ProcessAppIndex();
         }
 
-        private void ProcessXml()
+        private void ProcessAppIndex()
         {
             if (_appsToCheck.Any())
             {
@@ -693,40 +696,80 @@ namespace UrlsChecker
             client.OpenReadCompleted += (s, e) =>
             {
                 string errMsg = string.Empty;
-                XDocument doc = new XDocument();
-                Stream webStream = null;
-                webStream = e.Result;
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.DtdProcessing = DtdProcessing.Ignore;
-                using (XmlReader reader = XmlReader.Create(webStream, settings))
+
+                if (app.IndexType == IndexType.JSONFlat || app.IndexType == IndexType.JSONGrouped)
                 {
-                    doc = XDocument.Load(reader);
-                }
+                    RootObjectEpisodesGroupedBySeasons rootGrouped = null;
+                    RootObjectFlatEpisodes rootFlat = null;
 
-                if (webStream != null)
+                    Stream webStream = null;
+                    webStream = e.Result;
+                    string data = null;
+                    using (StreamReader reader = new StreamReader(webStream))
+                    {
+                        data = reader.ReadToEnd();
+                    }
+
+                    if (app.IndexType == IndexType.JSONFlat)
+                    {
+                        rootFlat = JsonConvert.DeserializeObject<RootObjectFlatEpisodes>(data);
+                    }
+                    else
+                    {
+                        rootGrouped = JsonConvert.DeserializeObject<RootObjectEpisodesGroupedBySeasons>(data);
+                        foreach (var season in rootGrouped.seasons)
+                        {
+                            foreach (var episode in season.episodes)
+                            {
+                                var item = new EpisodeInfo()
+                                {
+                                    Id = episode.id,
+                                    Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
+                                    Desc = episode.name
+                                };
+                                _episodesToCheck.Enqueue(item);
+                            }
+                        }
+                    }
+                }
+                if (app.IndexType == IndexType.Xml)
                 {
-                    webStream.Close();
+                    XDocument doc = new XDocument();
+                    Stream webStream = null;
+                    webStream = e.Result;
+                    XmlReaderSettings settings = new XmlReaderSettings();
+                    settings.DtdProcessing = DtdProcessing.Ignore;
+                    using (XmlReader reader = XmlReader.Create(webStream, settings))
+                    {
+                        doc = XDocument.Load(reader);
+                    }
+
+                    if (webStream != null)
+                    {
+                        webStream.Close();
+                    }
+
+                    //AppName = xmlUrl.Substring(xmlUrl.LastIndexOf("/") + 1).Replace(".xml", "");
+
+                    int index = 0;
+                    var episodes = new List<EpisodeInfo>((from item in doc.Element("root").Descendants("item")
+                                                          select new EpisodeInfo()
+                                                                   {
+                                                                       AppName = app.Name,
+                                                                       YouTubeSearchHint = app.YouTubeSearchHint,
+                                                                       Id = ++index,
+                                                                       OrigId = item.Element("origId") != null ? item.Element("origId").Value : string.Empty,
+                                                                       Url = item.Element("url").Value,
+                                                                       Desc = item.Element("desc") == null ? "" : item.Element("desc").Elements("descItem").Count() == 0 ? item.Element("desc").Value : item.Element("desc").Elements("descItem").First().Attribute("value").Value.ToString()
+                                                                   }).ToList());
+
+                    episodes.ForEach(it => _episodesToCheck.Enqueue(it));
                 }
-
-                //AppName = xmlUrl.Substring(xmlUrl.LastIndexOf("/") + 1).Replace(".xml", "");
-
-                int index = 0;
-                var episodes = new List<Episode>((from item in doc.Element("root").Descendants("item")
-                                                  select new Episode()
-                                                           {
-                                                               AppName = app.Name,
-                                                               YouTubeSearchHint = app.YouTubeSearchHint,
-                                                               Id = ++index,
-                                                               OrigId = item.Element("origId") != null ? item.Element("origId").Value : string.Empty,
-                                                               Url = item.Element("url").Value,
-                                                               Desc = item.Element("desc") == null ? "" : item.Element("desc").Elements("descItem").Count() == 0 ? item.Element("desc").Value : item.Element("desc").Elements("descItem").First().Attribute("value").Value.ToString()
-                                                           }).ToList());
-
-                episodes.ForEach(it => _episodesToCheck.Enqueue(it));
 
                 //_dict.Add(url, episodes);
                 //Log(">>> " + xmlUrl + " loaded");
-                ProcessXml();
+                ProcessAppIndex();
+
             };
 
         }
@@ -780,11 +823,11 @@ namespace UrlsChecker
             XDocument doc = XDocument.Parse(newRes);
             var episodesElements = doc.Descendants("li").Where(d => d.Attribute("data-context-item-id") != null && d.Attribute("data-context-item-title") != null);
 
-            List<Episode> episodesList = new List<Episode>();
+            List<EpisodeInfo> episodesList = new List<EpisodeInfo>();
             //http://www.tsjensen.com/blog/post/2011/05/27/Four+Functions+For+Finding+Fuzzy+String+Matches+In+C+Extensions.aspx
             foreach (var item in episodesElements)
             {
-                episodesList.Add(new Episode()
+                episodesList.Add(new EpisodeInfo()
                 {
                     Desc = item.Attribute("data-context-item-title").Value,
                     YouTubeId = item.Attribute("data-context-item-id").Value,
@@ -806,7 +849,7 @@ namespace UrlsChecker
         {
             if (_episodesToCheck.Any())
             {
-                Episode ep = _episodesToCheck.Dequeue();
+                EpisodeInfo ep = _episodesToCheck.Dequeue();
                 _episodeCount++;
 
                 Dispatcher.BeginInvoke(() =>
