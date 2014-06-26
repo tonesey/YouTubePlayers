@@ -163,12 +163,12 @@
                 </controls:PanoramaItem.Header>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Name="firstListTxtNoInternet" Visibility="Visible" FontSize="24" Text="$Internet non disponibile!"></TextBlock>
-                    <ListBox  Name="firstList" Height="450" Margin="0,0,-2,0" 
+                    <ListBox  Name="firstList"  Height="500" Margin="0,0,-12,0"
                               ItemsSource="{Binding Items_Chunk1}" 
                               ItemTemplate="{StaticResource DefaultItemTemplate}"
                              />
                     
-                    <Image x:Name="ImageBanner" Source="/PeppaPig;component/Resources/banner_campanaccio.png" Width="410" Height="75" Margin="-10,0,0,0"  Tap="ImageBanner_OnTap" Stretch="Fill">
+                    <Image x:Name="ImageBanner" Visibility="Collapsed" Source="/PeppaPig;component/Resources/banner_campanaccio.png" Width="410" Height="75" Margin="-10,0,0,0"  Tap="ImageBanner_OnTap" Stretch="Fill">
                     	<Image.RenderTransform>
                     		<CompositeTransform/>
                     	</Image.RenderTransform>

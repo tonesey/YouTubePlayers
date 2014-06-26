@@ -60,10 +60,10 @@ namespace Centapp.CartoonCommon.Helpers
                     {
                         if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                         {
+                            AppInfo.Instance.OfflineRevertWarningRequired = true;
                             AppIsOfflineSettingValue = false;
                             RemoveOfflineData(isoStore);
                         }
-                        AppInfo.Instance.OfflineRevertWarningRequired = true;
                     }
                 }
             }

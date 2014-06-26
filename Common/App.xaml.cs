@@ -155,6 +155,14 @@ namespace Centapp.CartoonCommon
             int episodesLength = doc.Root.Attribute("episodesAverageLength") != null ? int.Parse(doc.Root.Attribute("episodesAverageLength").Value) : -1;
             string mtiksId = doc.Root.Attribute("mtiksId") != null ? doc.Root.Attribute("mtiksId").Value : "";
 
+
+            bool episodesGroupedBySeasons = true;
+            if (doc.Root.Attribute("episodesGroupedBySeason") != null && doc.Root.Attribute("episodesGroupedBySeason").Value != null)
+            {
+                episodesGroupedBySeasons = doc.Root.Attribute("episodesGroupedBySeason").Value == "true";
+            }
+
+
             bool infoPageIsPivot = false;
             if (doc.Root.Element("infoSection") != null && doc.Root.Element("infoSection").Attribute("usePivot") != null)
             {
@@ -233,6 +241,7 @@ namespace Centapp.CartoonCommon
             AppInfo.Instance.ApplicationId = applicationId;
             AppInfo.Instance.AdSpaceId = adSpaceId;
             AppInfo.Instance.AdPublisherId = adPublisherId;
+            AppInfo.Instance.EpisodesGroupedBySeasons = episodesGroupedBySeasons;
         }
 
         // Code to execute when the application is activated (brought to foreground)

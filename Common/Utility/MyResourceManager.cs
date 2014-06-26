@@ -27,6 +27,13 @@ namespace Centapp.CartoonCommon.Utility
         //{
         //}
 
+        public MyResourceManager(Dictionary<string, Dictionary<CultureInfo, string>> translations, CultureInfo currentCulture, CultureInfo defaultCulture)
+        {
+            _currentCulture = currentCulture;
+            _defaultCulture = defaultCulture;
+            _dict = translations;
+        }
+
         public MyResourceManager(XDocument doc, CultureInfo currentCulture, CultureInfo defaultCulture)
         {
             _currentCulture = currentCulture;

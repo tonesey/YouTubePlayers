@@ -60,5 +60,7 @@ namespace Centapp.CartoonCommon
 
 
 
+
+        public bool EpisodesGroupedBySeasons { get; set; }
     }
 }

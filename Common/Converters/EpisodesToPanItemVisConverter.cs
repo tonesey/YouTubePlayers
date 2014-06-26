@@ -23,7 +23,7 @@ namespace Centapp.CartoonCommon.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int index = int.Parse(parameter.ToString());
-            if (AppInfo.Instance.UseJSon)
+            if (AppInfo.Instance.UseJSon && AppInfo.Instance.EpisodesGroupedBySeasons)
             {
                 //verifico che esista la stagione con l'id passato come parametro
                 var vis = (App.ViewModel.Items.FirstOrDefault(it => it.SeasonId == (index + 1)) != null);

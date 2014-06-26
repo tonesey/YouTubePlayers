@@ -380,8 +380,8 @@ namespace Centapp.CartoonCommon.ViewModels
                     {
                         var data = reader.ReadToEnd();
                         SaveIndexToIsostoreJSON(data);
-                        //TODO gestire status
                         BuildItemsFromJson(data, false);
+
                     }
                 }
                 finally
@@ -800,39 +800,70 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
 
+        private void InitResManager(Dictionary<string, Dictionary<CultureInfo, string>> translations)
+        {
+            if (AppInfo.Instance.IsMonoLang)
+            {
+                //forza la cultura corrente ad essere quella dichiarata dall'AssmblyInfo 
+                App.ResManager = new MyResourceManager(translations, AppInfo.Instance.NeutralCulture, AppInfo.Instance.NeutralCulture);
+            }
+            else
+            {
+                App.ResManager = new MyResourceManager(translations, Thread.CurrentThread.CurrentCulture, AppInfo.Instance.NeutralCulture);
+            }
+        }
+
         private void BuildItemsFromJson(string json, bool appIsOffline)
         {
-            //senza status
-            //List<Season> seasons = JsonConvert.DeserializeObject<List<Season>>(json);
+            StatusInfos status = new StatusInfos();
+            List<Season> seasons = null;
 
-            //con status
-            var root = JsonConvert.DeserializeObject<RootObject>(json);
-            List<Season> seasons = root.seasons;
+            RootObjectEpisodesGroupedBySeasons rootGrouped = null;
+            RootObjectFlatEpisodes rootFlat = null;
 
+            if (AppInfo.Instance.EpisodesGroupedBySeasons)
+            {
+                rootGrouped = JsonConvert.DeserializeObject<RootObjectEpisodesGroupedBySeasons>(json);
+                seasons = rootGrouped.seasons;
+                status.StatusMsg = rootGrouped.statusmsg;
+                status.Value = rootGrouped.value;
+                status.TargetVer = rootGrouped.targetVer;
+                status.Op = rootGrouped.op;
+            }
+            else
+            {
+                rootFlat = JsonConvert.DeserializeObject<RootObjectFlatEpisodes>(json);
+                status.StatusMsg = rootFlat.statusmsg;
+                status.Value = rootFlat.value;
+                status.TargetVer = rootFlat.targetVer;
+                status.Op = rootFlat.op;
+            }
+
+            #region status management
             if (!appIsOffline)
             {
-                #region status management
-                var elStatus = root.statusmsg;
+
+                var elStatus = status.StatusMsg;
                 if (!string.IsNullOrEmpty(elStatus))
                 {
-                    if (!string.IsNullOrEmpty(root.value) && root.value != "ok")
+                    if (!string.IsNullOrEmpty(status.Value) && status.Value != "ok")
                     {
                         bool mustExit = false;
                         bool msgRequired = true;
 
-                        if (root.value == "ko")
+                        if (status.Value == "ko")
                         {
                             mustExit = true;
                         }
-                        else if (root.value == "warn")
+                        else if (status.Value == "warn")
                         {
                             mustExit = false;
                         }
 
-                        if (!string.IsNullOrEmpty(root.targetVer) && !string.IsNullOrEmpty(root.op))
+                        if (!string.IsNullOrEmpty(status.TargetVer) && !string.IsNullOrEmpty(status.Op))
                         {
-                            var targetVer = root.targetVer;
-                            var op = root.op;
+                            var targetVer = status.TargetVer;
+                            var op = status.Op;
 
                             if (!string.IsNullOrEmpty(targetVer) && !string.IsNullOrEmpty(op))
                             {
@@ -875,7 +906,7 @@ namespace Centapp.CartoonCommon.ViewModels
 
                         if (msgRequired)
                         {
-                            OnUserMessageRequired(root.statusmsg, mustExit);
+                            OnUserMessageRequired(status.StatusMsg, mustExit);
                             if (mustExit)
                             {
                                 return;
@@ -883,37 +914,81 @@ namespace Centapp.CartoonCommon.ViewModels
                         }
                     }
                 }
-
-                #endregion
             }
-
+            #endregion
 
             ObservableCollection<ItemViewModel> items = new ObservableCollection<ItemViewModel>();
-            //int seasonCount = 0;
-            // int index = 0;
-            foreach (var season in seasons)
+
+            if (AppInfo.Instance.EpisodesGroupedBySeasons)
             {
-                foreach (var episode in season.episodes)
+                //grouped
+                foreach (var season in seasons)
+                {
+                    foreach (var episode in season.episodes)
+                    {
+                        var item = new ItemViewModel()
+                                   {
+                                       Id = episode.id,
+                                       Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
+                                       IsAvailableInTrial = appIsOffline ? true : episode.id <= 5,
+                                       Title = episode.name,
+                                       SeasonId = season.season
+                                   };
+                        items.Add(item);
+                    }
+                }
+                Items_Chunk1 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 1));
+                Items_Chunk2 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 2));
+                Items_Chunk3 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 3));
+                Items_Chunk4 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 4));
+            }
+            else
+            {
+                Dictionary<string, Dictionary<CultureInfo, string>> episodesTranslations = new Dictionary<string, Dictionary<CultureInfo, string>>();
+
+                //flat
+                foreach (var episode in rootFlat.episodes)
                 {
                     var item = new ItemViewModel()
-                               {
-                                   Id = episode.id,
-                                   Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
-                                   IsAvailableInTrial = appIsOffline ? true : episode.id <= 5,
-                                   Title = episode.name,
-                                   SeasonId = season.season
-                               };
+                    {
+                        Id = episode.id,
+                        Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
+                        IsAvailableInTrial = appIsOffline ? true : episode.id <= 5,
+                    };
+
+
+                    string itemTransKey = string.Format("ep_{0}", item.Id < 10 ? item.Id.ToString().PadLeft(2, '0') : item.Id.ToString());
+                    Dictionary<CultureInfo, string> itemTransValues = new Dictionary<CultureInfo, string>();
+                    foreach (var cultureCode in episode.names.Keys)
+                    {
+                        itemTransValues.Add(new CultureInfo(cultureCode), episode.names[cultureCode]);
+                    }
+                    episodesTranslations.Add(itemTransKey, itemTransValues);
+
                     items.Add(item);
                 }
-                //seasonCount++;
+
+                Items_Chunk1 = new ObservableCollection<ItemViewModel>(items.Where(n => n.Id >= 1 && n.Id <= 25));
+                Items_Chunk2 = new ObservableCollection<ItemViewModel>(items.Where(n => n.Id >= 26 && n.Id <= 50));
+                Items_Chunk3 = new ObservableCollection<ItemViewModel>(items.Where(n => n.Id >= 51 && n.Id <= 75));
+                Items_Chunk4 = new ObservableCollection<ItemViewModel>(items.Where(n => n.Id >= 76 && n.Id <= 100));
+
+                InitResManager(episodesTranslations);
             }
 
-            #region favorites management
+            Items = items;
+
+            #region episodetitle and favorites management
             for (int i = 1; i <= items.Count; i++)
             {
                 ItemViewModel curEpisode = items.ElementAt(i - 1);
                 int episodeId = curEpisode.Id;
-                //curEpisode.Title = _cnv.Convert(episodeId);
+
+                if (AppInfo.Instance.UseResManager)
+                {
+                    curEpisode.Title = _cnv.Convert(episodeId);
+                }
+
                 if (GenericHelper.FavoriteEpisodesIdsSettingValue.Contains(episodeId))
                 {
                     curEpisode.IsFavorite = true;
@@ -925,19 +1000,14 @@ namespace Centapp.CartoonCommon.ViewModels
             }
             #endregion
 
-            Items = items;
-
-            Items_Chunk1 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 1));
-            Items_Chunk2 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 2));
-            Items_Chunk3 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 3));
-            Items_Chunk4 = new ObservableCollection<ItemViewModel>(items.Where(i => i.SeasonId == 4));
-
-            this.IsDataLoaded = true;
+            IsDataLoaded = true;
             IsDataLoading = false;
 
             NotifyPropertyChanged("FavoriteEpisodes");
             if (OnLoadCompleted != null) OnLoadCompleted();
         }
+
+       
 
         private void BuildItemsFromXml(XDocument doc, bool appIsOffline)
         {
@@ -995,7 +1065,7 @@ namespace Centapp.CartoonCommon.ViewModels
             Items_Chunk3 = new ObservableCollection<ItemViewModel>(items.Where(n => n.Id >= 51 && n.Id <= 75));
             Items_Chunk4 = new ObservableCollection<ItemViewModel>(items.Where(n => n.Id >= 76 && n.Id <= 100));
 
-            this.IsDataLoaded = true;
+            IsDataLoaded = true;
             IsDataLoading = false;
 
             NotifyPropertyChanged("FavoriteEpisodes");

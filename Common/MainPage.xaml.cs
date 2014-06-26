@@ -942,14 +942,13 @@ namespace Centapp.CartoonCommon
                 }
             }
 
-            var bannerAnimation = (Storyboard)Resources["AnimateBannerSb"];
-
-            bannerAnimation.Stop();
-            bannerAnimation.Completed += (s, e1) =>
-            {
-                bannerAnimation.Stop();
-            };
-            bannerAnimation.Begin();
+            //var bannerAnimation = (Storyboard)Resources["AnimateBannerSb"];
+            //bannerAnimation.Stop();
+            //bannerAnimation.Completed += (s, e1) =>
+            //{
+            //    bannerAnimation.Stop();
+            //};
+            //bannerAnimation.Begin();
         }
 
         void ViewModel_OnLoadCompletedDownload()

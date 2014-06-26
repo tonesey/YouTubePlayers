@@ -107,7 +107,8 @@
     <Compile Include="AppItem.cs" />
     <Compile Include="DiceCoefficientExtensions.cs" />
     <Compile Include="Episode.cs" />
-    <Compile Include="JSON\JSONObjects.cs" />
+    <Compile Include="JSON\JSONModel.cs" />
+    <Compile Include="JSON\YoutubeJSONObjects.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -142,6 +143,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="peppa.xml" />
+    <Content Include="peppa_it_src_json.xml" />
+    <EmbeddedResource Include="pingu_full.xml" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

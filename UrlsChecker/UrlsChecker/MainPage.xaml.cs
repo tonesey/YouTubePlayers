@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using System.Net;
 using System.Windows;
@@ -95,6 +96,77 @@ namespace UrlsChecker
 
             //Task.Run(() => Test());
             //Test();
+
+            ConvertXmlToJSON();
+        }
+
+        private void ConvertXmlToJSON()
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            Stream stream = asm.GetManifestResourceStream("UrlsChecker.pingu_full.xml");
+            var doc = XDocument.Load(stream);
+
+            int index = 0;
+
+            //<item id="2">
+            //  <url>http://www.youtube.com/watch?v=lnKi4qDdLmQ</url>
+            //  <origId>46</origId>
+            //  <desc>
+            //    <descItem lang="es-ES" value="Pingu y el regalo" />
+            //    <descItem lang="it-IT" value="Pingu e il dono" />
+            //    <descItem lang="en-US" value="Pingu and the gift" />
+            //    <descItem lang="pt-BR" value="Pingu eo dom" />
+            //  </desc>
+            //</item>
+
+            //_episodesList = new List<Episode>((from item in doc.Element("root").Descendants("item")
+            //                                   select new MyEpisode()
+            //                                   {
+            //                                       id = ++index,
+            //                                       youtube_id = GetYoutubeID(item.Element("url").Value),
+            //                                       names = new Dictionary<string, string>() 
+            //                                   }).ToList());
+
+
+            RootObjectFlatEpisodes r = new RootObjectFlatEpisodes();
+            r.episodes = new List<MyEpisode>();
+
+            var status = doc.Element("root").Element("status");
+
+              //<status value="warn" targetVer="3.1.10" op="lt" defMsg="WARNING: this app is obsolete, please install latest version! Thanks">
+              //</status>
+
+            r.statusmsg = status.Attribute("defMsg").Value;
+            r.value = status.Attribute("value").Value;
+            r.targetVer = status.Attribute("targetVer").Value;
+            r.op = status.Attribute("op").Value;
+
+            var items = doc.Element("root").Descendants("item");
+            foreach (var itemXml in items)
+            {
+                var id = (itemXml.Attribute("id").Value);
+                var youtube_id = GetYoutubeID(itemXml.Element("url").Value);
+                var descs = itemXml.Element("desc").Descendants("descItem");
+
+                Dictionary<string, string> descsDict = new Dictionary<string, string>();
+                foreach (var desc in descs)
+                {
+                    descsDict.Add(desc.Attribute("lang").Value, desc.Attribute("value").Value);
+                }
+
+                var jsonEpisode = new MyEpisode { id = int.Parse(id), youtube_id = youtube_id, names = descsDict };
+                r.episodes.Add(jsonEpisode);
+            }
+
+            string objTostr = Newtonsoft.Json.JsonConvert.SerializeObject(r);
+
+
+            RootObjectFlatEpisodes rTest = Newtonsoft.Json.JsonConvert.DeserializeObject<RootObjectFlatEpisodes>(objTostr);
+
+            //RootObject r = Newtonsoft.Json.JsonConvert.DeserializeObject<RootObject>(result.Replace("$", "Z_"));
+
+
+
         }
 
         //#region async/await

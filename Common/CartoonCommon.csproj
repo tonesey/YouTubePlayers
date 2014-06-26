@@ -197,6 +197,7 @@
       <DependentUpon>InfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="JSON\JSONModel.cs" />
+    <Compile Include="JSON\StatusInfos.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

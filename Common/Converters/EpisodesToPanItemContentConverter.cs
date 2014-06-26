@@ -22,7 +22,7 @@ namespace Centapp.CartoonCommon.Converters
         #region IValueConverter Members
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (AppInfo.Instance.UseJSon)
+            if (AppInfo.Instance.UseJSon && AppInfo.Instance.EpisodesGroupedBySeasons)
             {
                 if ((value as Collection<ItemViewModel>).Count > 0)
                 {

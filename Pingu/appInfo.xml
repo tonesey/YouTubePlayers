@@ -1,3 +1,6 @@
-<app friendlyName="Pingu" indexFile="pingu_full.xml" episodesAverageLength="300">
-  <adv provider="soma" AdSpaceId="65825743" PublisherID="923876422"></adv>
+<app friendlyName="Pingu" 
+     indexFile="pingu_src_json_oneline.txt" 
+     episodesAverageLength="300"
+     episodesGroupedBySeason="false" >
+  <!--<adv provider="soma" AdSpaceId="65825743" PublisherID="923876422"></adv>-->
 </app>

@@ -275,6 +275,9 @@
     <Compile Include="..\Common\JSON\JSONModel.cs">
       <Link>JSON\JSONModel.cs</Link>
     </Compile>
+    <Compile Include="..\Common\JSON\StatusInfos.cs">
+      <Link>JSON\StatusInfos.cs</Link>
+    </Compile>
     <Compile Include="..\Common\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>

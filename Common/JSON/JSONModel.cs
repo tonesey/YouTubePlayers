@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Centapp.CartoonCommon.JSON
 {
+    //====================================================
+    //Grouped
     public class Episode
     {
         public int id { get; set; }
@@ -18,7 +20,7 @@ namespace Centapp.CartoonCommon.JSON
         public List<Episode> episodes { get; set; }
     }
 
-    public class RootObject
+    public class RootObjectEpisodesGroupedBySeasons
     {
         public string statusmsg { get; set; }
         public string op { get; set; }
@@ -26,4 +28,24 @@ namespace Centapp.CartoonCommon.JSON
         public string value { get; set; }
         public List<Season> seasons { get; set; }
     }
+
+    //====================================================
+    //Flat
+
+    public class MyEpisode
+    {
+        public int id { get; set; }
+        public Dictionary<string, string> names { get; set; }
+        public string youtube_id { get; set; }
+    }
+
+    public class RootObjectFlatEpisodes
+    {
+        public string statusmsg { get; set; }
+        public string op { get; set; }
+        public string targetVer { get; set; }
+        public string value { get; set; }
+        public List<MyEpisode> episodes { get; set; }
+    }
+
 }
