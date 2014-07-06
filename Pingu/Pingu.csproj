@@ -362,6 +362,7 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Include="Resources\pinguoffline.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Common\Resources\buttons\backup.png">

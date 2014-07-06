@@ -49,6 +49,9 @@ namespace Centapp.CartoonCommon.ViewModels
 
         public event OnLoadCompletedHandler OnLoadCompleted;
 
+        //ManualResetEvent _mre = new ManualResetEvent(false);
+        //public bool SaveOnlyIndexFileOnDownload { get; set; }
+
         private Logger _logger = new Logger();
         internal Logger Logger
         {
@@ -334,11 +337,20 @@ namespace Centapp.CartoonCommon.ViewModels
         }
 
         #region online management
-        public void DownloadItemsAsynch(string indexFileUrl)
+
+        //internal void DownloadAndSaveIndexFile()
+        //{
+        //    _mre.Reset();
+        //    SaveOnlyIndexFileOnDownload = true;
+        //    var uri = new Uri(string.Format("http://centapp.altervista.org/{0}", AppInfo.Instance.IndexFile) + "?" + Guid.NewGuid(), UriKind.Absolute);
+        //    ThreadPool.QueueUserWorkItem(new WaitCallback(DownloadItemsAsynch), uri);
+        //    _mre.WaitOne();
+        //}
+
+        public void DownloadItemsAsynch(object indexFileUrl)
         {
 #if !DEBUGOFFLINE
             WebClient client = new WebClient();
-
             client.OpenReadCompleted += new OpenReadCompletedEventHandler(client_OpenReadCompleted);
             client.OpenReadAsync(new Uri(indexFileUrl + "?" + Guid.NewGuid()), UriKind.Absolute);
 #else
@@ -348,11 +360,10 @@ namespace Centapp.CartoonCommon.ViewModels
 #endif
         }
 
-        void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            var test = e.Result;
-
-        }
+        //void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        //{
+        //    var test = e.Result;
+        //}
 
         void client_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
@@ -380,8 +391,10 @@ namespace Centapp.CartoonCommon.ViewModels
                     {
                         var data = reader.ReadToEnd();
                         SaveIndexToIsostoreJSON(data);
+                        //if (!SaveOnlyIndexFileOnDownload)
+                        //{
                         BuildItemsFromJson(data, false);
-
+                        //}
                     }
                 }
                 finally
@@ -391,6 +404,12 @@ namespace Centapp.CartoonCommon.ViewModels
                         webStream.Close();
                     }
                 }
+
+                //if (SaveOnlyIndexFileOnDownload)
+                //{
+                //    _mre.Set();
+                //    return;
+                //}
             }
             else
             {
@@ -698,7 +717,7 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
 
-        private static XDocument LoadIndexFromIsostoreXML()
+        public static XDocument LoadIndexFromIsostoreXML()
         {
             XDocument doc = null;
             try
@@ -727,7 +746,7 @@ namespace Centapp.CartoonCommon.ViewModels
         }
         #endregion
         #region json
-        private static void SaveIndexToIsostoreJSON(string json)
+        public static void SaveIndexToIsostoreJSON(string json)
         {
             try
             {
@@ -753,7 +772,7 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
 
-        private static string LoadIndexFromIsostoreJSON()
+        public static string LoadIndexFromIsostoreJSON()
         {
             string str = null;
             try
@@ -1007,7 +1026,7 @@ namespace Centapp.CartoonCommon.ViewModels
             if (OnLoadCompleted != null) OnLoadCompleted();
         }
 
-       
+
 
         private void BuildItemsFromXml(XDocument doc, bool appIsOffline)
         {
@@ -1079,6 +1098,7 @@ namespace Centapp.CartoonCommon.ViewModels
             IsDataLoading = true;
             if (!GenericHelper.AppIsOfflineSettingValue)
             {
+               // SaveOnlyIndexFileOnDownload = false;
                 DownloadItemsAsynch(string.Format("http://centapp.altervista.org/{0}", AppInfo.Instance.IndexFile));
             }
             else
@@ -1145,6 +1165,9 @@ namespace Centapp.CartoonCommon.ViewModels
             }
         }
         #endregion
+
+
+
 
 
     }

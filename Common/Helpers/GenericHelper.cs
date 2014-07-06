@@ -13,6 +13,11 @@ using System.Collections.Generic;
 using System.Windows.Navigation;
 using System.Xml.Linq;
 using System.Globalization;
+using System.Threading;
+using Centapp.CartoonCommon.JSON;
+using Centapp.CartoonCommon.ViewModels;
+using System.Reflection;
+using System.IO;
 
 namespace Centapp.CartoonCommon.Helpers
 {
@@ -55,17 +60,45 @@ namespace Centapp.CartoonCommon.Helpers
                 {
                     using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                     {
-                        //è il caso di un'app precedente a 1.2.x in cui il file indice era in xml
                         if (isoStore.FileExists(AppInfo.OfflineIndexFileNameXml))
                         {
-                            RemoveLocalIndexXml(isoStore);
-
-                            //l'app torna ad essere "online" in quando gli episodi sono cambiati
+                            //è il caso di un passaggio di un update di un app offline con indice xml
                             if (AppInfo.Instance.XmlToJSONRequiresOfflineReset)
                             {
+                                //l'app torna ad essere "online" in quando gli episodi sono cambiati (Peppa)
+                                RemoveLocalIndexXml(isoStore);
                                 AppInfo.Instance.OfflineRevertWarningRequired = true;
                                 SetAppIsOffline(false);
                                 RemoveOfflineData(isoStore);
+                            }
+                            else
+                            {
+                                //l'app può mantenere gli episodi scaricati
+                                //è necessario convertire xml locale in json
+                                //ATTENZIONE: la conversione è prevista solo per episodi non divisi in stagioni (Pingu)
+                                //in futuro sviluppare funzione di conversione anche per altri (Peppa)
+                                ConvertOfflineXmlToJSON();
+                                RemoveLocalIndexXml(isoStore);
+                            }
+                        }
+                        else
+                        {
+                            if (!isoStore.FileExists(AppInfo.OfflineIndexFileNameJSON))
+                            {
+                                //non esistono i file offline ne' in jsono ne' in xml: sono le versioni offline bacate di Pingu (3.1.19).
+                                //si copia un file json "fix" da risorsa locale
+                                Assembly asm = Assembly.GetExecutingAssembly();
+                                Stream stream = asm.GetManifestResourceStream("Centapp.CartoonCommon.Resources.pinguoffline.json");
+                                using (IsolatedStorageFileStream outStream = new IsolatedStorageFileStream(AppInfo.OfflineIndexFileNameJSON, FileMode.CreateNew, isoStore))
+                                {
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                    {
+                                        outStream.Write(buffer, 0, bytesRead);
+                                    }
+                                    outStream.Flush();
+                                }
                             }
                         }
                     }
@@ -182,7 +215,40 @@ namespace Centapp.CartoonCommon.Helpers
         }
         #endregion
 
+        private static void ConvertOfflineXmlToJSON()
+        {
+            var doc = MainViewModel.LoadIndexFromIsostoreXML();
+            int index = 0;
 
-        //public static MyResourceManager Resourcemanager { get; set; }
+            RootObjectFlatEpisodes r = new RootObjectFlatEpisodes();
+            r.episodes = new List<MyEpisode>();
+
+            var status = doc.Element("root").Element("status");
+            r.statusmsg = status.Attribute("defMsg").Value;
+            r.value = status.Attribute("value").Value;
+            r.targetVer = status.Attribute("targetVer").Value;
+            r.op = status.Attribute("op").Value;
+
+            var items = doc.Element("root").Descendants("item");
+            foreach (var itemXml in items)
+            {
+                var id = (itemXml.Attribute("id").Value);
+                var youtube_id = GetYoutubeID(itemXml.Element("url").Value);
+                var descs = itemXml.Element("desc").Descendants("descItem");
+
+                Dictionary<string, string> descsDict = new Dictionary<string, string>();
+                foreach (var desc in descs)
+                {
+                    descsDict.Add(desc.Attribute("lang").Value, desc.Attribute("value").Value);
+                }
+
+                var jsonEpisode = new MyEpisode { id = int.Parse(id), youtube_id = youtube_id, names = descsDict };
+                r.episodes.Add(jsonEpisode);
+            }
+
+            string objTostr = Newtonsoft.Json.JsonConvert.SerializeObject(r);
+            MainViewModel.SaveIndexToIsostoreJSON(objTostr);
+        }
+
     }
 }
