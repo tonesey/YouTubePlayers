@@ -845,7 +845,7 @@ namespace UrlsChecker
             throw new NotImplementedException();
         }
 
-        private void CheckUrls()
+        private async void CheckUrls()
         {
             if (_episodesToCheck.Any())
             {
@@ -859,15 +859,13 @@ namespace UrlsChecker
 
 
                 //valid link: http://www.youtube.com/watch?v=sb_hKB38QRw
-                YouTube.GetVideoUri(GetYoutubeID(ep.Url), YouTubeQuality.Quality480P, (uri, ex) =>
+                var uri = await YouTube.GetVideoUriAsync(GetYoutubeID(ep.Url), YouTubeQuality.Quality480P);
+                if (uri == null)
                 {
-                    if (uri == null)
-                    {
-                        _wrongEpisodes.Add(ep);
-                        Log(string.Format("{0}: {1}", ep.AppName, ep.Desc));
-                    }
-                    CheckUrls();
-                });
+                    _wrongEpisodes.Add(ep);
+                    Log(string.Format("{0}: {1}", ep.AppName, ep.Desc));
+                }
+                CheckUrls();
             }
             else
             {
