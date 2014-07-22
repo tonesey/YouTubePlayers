@@ -235,7 +235,7 @@ namespace Centapp.CartoonCommon
         }
 
 
-        public void ProcessItem()
+        public async void ProcessItem()
         {
             if (_cancellationPending)
             {
@@ -303,63 +303,50 @@ namespace Centapp.CartoonCommon
                             //completed(null, ex) => http error
                             //completed(null, null) => url not found (eg quality not found)
                             //completed(uri, null) => success
-                            YouTube.GetVideoUri(GenericHelper.GetYoutubeID(_curEpisode.Url),
-                                                  YouTubeQuality.Quality480P,
-                                                  (uri, ex) =>
-                                                  {
-                                                      if (ex == null && uri != null)
-                                                      {
-                                                          App.ViewModel.Logger.Log("[ProcessItem] URI before download OK!");
-                                                          _curEpisode.ActualMP4Uri = uri;
-                                                          _client.OpenReadAsync(_curEpisode.ActualMP4Uri.Uri);
-                                                      }
-                                                      else
-                                                      {
-                                                          throw new Exception(string.Format("[ep {0}] [ProcessItem] GetVideoUri error: {1}", new object[] { _curEpisode.Id, ex.Message }), ex);
-                                                      }
-                                                  });
 
+                            var uri = await YouTube.GetVideoUriAsync(GenericHelper.GetYoutubeID(_curEpisode.Url), YouTubeQuality.Quality480P);
+                            if (uri != null)
+                            {
+                                App.ViewModel.Logger.Log("[ProcessItem] URI before download OK!");
+                                _curEpisode.ActualMP4Uri = uri;
+                                _client.OpenReadAsync(_curEpisode.ActualMP4Uri.Uri);
+                            }
                             //ProcessItem() in questo caso è chiamata dalla callback in "client_OpenReadCompleted"
                             break;
 
                         case BackupOperationEn.UrlChecks:
                             #region url checks
                             //App.ViewModel.Logger.Log("[ProcessItem] requesting URI for: " + _curEpisode.Id);
-                            YouTube.GetVideoUri(GenericHelper.GetYoutubeID(_curEpisode.Url), YouTubeQuality.Quality480P, (uri, ex) =>
+                            
+                            var uri1 = await YouTube.GetVideoUriAsync(GenericHelper.GetYoutubeID(_curEpisode.Url), YouTubeQuality.Quality480P);
+
+                            if (uri1 != null)
                             {
-                                //completed(null, ex) => http error
-                                //completed(null, null) => url not found (eg quality not found)
-                                //completed(uri, null) => success
-                                if (ex != null || uri == null)
+                                _curEpisode.ActualMP4Uri = uri1;
+                                //save thumb offline
+                                var curThumbName = string.Format("thumb_{0}.png", _curEpisode.Id);
+                                Dispatcher.BeginInvoke(() =>
                                 {
-                                    _wrongEpisodes.Add(_curEpisode);
-                                }
-                                else
-                                {
-                                    _curEpisode.ActualMP4Uri = uri;
-                                    //save thumb offline
-                                    var curThumbName = string.Format("thumb_{0}.png", _curEpisode.Id);
-                                    Dispatcher.BeginInvoke(() =>
+                                    WriteableBitmap img = new WriteableBitmap((int)ImagePreview.Width, (int)ImagePreview.Height);
+                                    img.Render(ImagePreview, null);
+                                    img.Invalidate();
+
+                                    //TODO portare su SD?
+                                    using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
                                     {
-                                        WriteableBitmap img = new WriteableBitmap((int)ImagePreview.Width, (int)ImagePreview.Height);
-                                        img.Render(ImagePreview, null);
-                                        img.Invalidate();
-                                        using (var isoStore = IsolatedStorageFile.GetUserStoreForApplication())
+                                        if (isoStore.FileExists(curThumbName))
                                         {
-                                            if (isoStore.FileExists(curThumbName))
-                                            {
-                                                isoStore.DeleteFile(curThumbName);
-                                            }
-                                            using (var isoStoreFileStream = isoStore.CreateFile(curThumbName))
-                                            {
-                                                img.SaveJpeg(isoStoreFileStream, 150, 102, 0, 100);
-                                            }
+                                            isoStore.DeleteFile(curThumbName);
                                         }
-                                    });
-                                }
+                                        using (var isoStoreFileStream = isoStore.CreateFile(curThumbName))
+                                        {
+                                            img.SaveJpeg(isoStoreFileStream, 150, 102, 0, 100);
+                                        }
+                                    }
+                                });
 
                                 ProcessItem();
-                            });
+                            }
                             #endregion
                             break;
                     }
@@ -590,7 +577,7 @@ namespace Centapp.CartoonCommon
             email.Body += string.Format("\nApp version = '{0}'", GenericHelper.GetAppversion());
             email.Body += string.Format("\nApp language = '{0}'", AppInfo.Instance.NeutralCulture);
             email.Body += "\n";
-            var titleCnv = new IdToTitleConverter();                   
+            var titleCnv = new IdToTitleConverter();
 
             foreach (var item in list)
             {

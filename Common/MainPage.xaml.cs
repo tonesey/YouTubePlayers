@@ -140,10 +140,10 @@ namespace Centapp.CartoonCommon
 
             App.ViewModel.OnLoadCompleted -= new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
             App.ViewModel.OnLoadCompleted += new OnLoadCompletedHandler(ViewModel_OnLoadCompleted);
-            
+
         }
 
-      
+
 
         void ViewModel_OnError(string msg, bool isFatalError)
         {
@@ -247,7 +247,7 @@ namespace Centapp.CartoonCommon
             }
         }
 
-        void itemsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        async void itemsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if ((sender as ListBox).SelectedItem == null)
             {
@@ -351,30 +351,26 @@ namespace Centapp.CartoonCommon
                     if (AppInfo.Instance.IsAdvertisingEnabled)
                     {
                         #region advertising ON
-                        YouTube.GetVideoUri(id,
-                                            MyToolkit.Multimedia.YouTubeQuality.Quality480P,
-                                            (uri, ex) =>
-                                            {
 
-                                                //SystemTray.ProgressIndicator.IsVisible = true;
-                                                if (ex == null && uri != null)
-                                                {
-                                                    App.ViewModel.CurrentYoutubeMP4Uri = uri.Uri;
-                                                    Wp7Shared.Helpers.NavigationHelper.SafeNavigateTo(NavigationService, Dispatcher, "/PlayerPage.xaml");
-                                                }
-                                                else
-                                                {
-                                                    switch (MessageBox.Show(AppResources.brokenLinkQuestion,
-                                                                            AppResources.ExceptionMessageTitle,
-                                                                            MessageBoxButton.OKCancel))
-                                                    {
+                        //TODO TEST!!!
+                        var uri1 = await YouTube.GetVideoUriAsync(id, YouTubeQuality.Quality480P);
+                        if (uri1 != null)
+                        {
+                            App.ViewModel.CurrentYoutubeMP4Uri = uri1.Uri;
+                            Wp7Shared.Helpers.NavigationHelper.SafeNavigateTo(NavigationService, Dispatcher, "/PlayerPage.xaml");
+                        }
+                        else
+                        {
+                            switch (MessageBox.Show(AppResources.brokenLinkQuestion,
+                                                    AppResources.ExceptionMessageTitle,
+                                                    MessageBoxButton.OKCancel))
+                            {
 
-                                                        case MessageBoxResult.OK:
-                                                            ReportBrokenLink(ex.Message);
-                                                            break;
-                                                    }
-                                                }
-                                            });
+                                case MessageBoxResult.OK:
+                                    ReportBrokenLink("uri not found: " + uri1);
+                                    break;
+                            }
+                        }
                         #endregion
                     }
                     else
