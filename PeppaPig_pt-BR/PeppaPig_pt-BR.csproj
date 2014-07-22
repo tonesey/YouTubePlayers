@@ -197,6 +197,9 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\Common\AppInfo.cs">
+      <Link>AppInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\AppResources.Designer.cs">
       <Link>AppResources.Designer.cs</Link>
       <DependentUpon>AppResources.resx</DependentUpon>
@@ -275,6 +278,12 @@
     <Compile Include="..\Common\InfoPage.xaml.cs">
       <Link>InfoPage.xaml.cs</Link>
       <DependentUpon>InfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\JSON\JSONModel.cs">
+      <Link>JSON\JSONModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\JSON\StatusInfos.cs">
+      <Link>JSON\StatusInfos.cs</Link>
     </Compile>
     <Compile Include="..\Common\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{678EC2EF-2CC4-4E56-BB92-BFA294B20E67}" Title="Peppa Pig" RuntimeType="Silverlight" Version="1.1.19" Genre="apps.normal" Author="Centapp" Description="Episodi Peppa Pig (portoghese)" Publisher="Centapp" BitsPerPixel="16">
+  <App xmlns="" ProductID="{678EC2EF-2CC4-4E56-BB92-BFA294B20E67}" Title="Peppa Pig" RuntimeType="Silverlight" Version="1.1.20" Genre="apps.normal" Author="Centapp" Description="Episodi Peppa Pig (portoghese)" Publisher="Centapp" BitsPerPixel="16">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <!--<Capability Name="ID_CAP_IDENTITY_DEVICE" />
