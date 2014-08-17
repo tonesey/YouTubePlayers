@@ -620,13 +620,14 @@ namespace UrlsChecker
             if (!test)
             {
                 // _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/MyLittlePony_en.xml", Name = "My Little Pony", YouTubeSearchHint = "My Little Pony" });
-                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa.xml", Name = "Peppa Pig (XML)", YouTubeSearchHint = "Peppa Pig" });
+                //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa.xml", Name = "Peppa Pig (XML)", YouTubeSearchHint = "Peppa Pig" });
                 _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_it_src_json.xml", Name = "Peppa Pig (JSON)", YouTubeSearchHint = "Peppa Pig", IndexType = IndexType.JSONGrouped });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_en-US.xml", Name = "Peppa Pig (en)", YouTubeSearchHint = "Peppa Pig" });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_es.xml", Name = "Peppa Pig (es)", YouTubeSearchHint = "Peppa Pig" });
                 _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_pt.xml", Name = "Peppa Pig (pt)", YouTubeSearchHint = "Peppa Pig" });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/peppa_ru.xml", Name = "Свинка Пеппа", YouTubeSearchHint = "Свинка Пеппа" });
-                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/pingu_full.xml", Name = "Pingu", YouTubeSearchHint = "Pingu" });
+                //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/pingu_full.xml", Name = "Pingu", YouTubeSearchHint = "Pingu" });
+                _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/pingu_src_json.xml", Name = "Pingu (JSON)", YouTubeSearchHint = "Pingu", IndexType = IndexType.JSONFlat });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/puffi.xml", Name = "Puffi", YouTubeSearchHint = "Puffi" });
                 // _appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/banane.xml", Name = "Banane in pigiama", YouTubeSearchHint = "Banane in pigiama" });
                 //_appsToCheck.Enqueue(new AppItem() { IndexFile = "http://centapp.altervista.org/cinico.xml", Name = "Cinico TV", YouTubeSearchHint = "Cinico TV" });
@@ -713,6 +714,17 @@ namespace UrlsChecker
                     if (app.IndexType == IndexType.JSONFlat)
                     {
                         rootFlat = JsonConvert.DeserializeObject<RootObjectFlatEpisodes>(data);
+                        foreach (var episode in rootFlat.episodes)
+                        {
+                            var item = new EpisodeInfo()
+                            {
+                                AppName = app.Name,
+                                Id = episode.id,
+                                Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
+                                Desc = episode.names.FirstOrDefault(n => n.Key.Contains("en")).Value
+                            };
+                            _episodesToCheck.Enqueue(item);
+                        }
                     }
                     else
                     {
@@ -723,6 +735,7 @@ namespace UrlsChecker
                             {
                                 var item = new EpisodeInfo()
                                 {
+                                    AppName = app.Name,
                                     Id = episode.id,
                                     Url = YouTubeHelper.BuildYoutubeID(episode.youtube_id),
                                     Desc = episode.name
@@ -732,7 +745,7 @@ namespace UrlsChecker
                         }
                     }
                 }
-                if (app.IndexType == IndexType.Xml)
+                else if (app.IndexType == IndexType.Xml)
                 {
                     XDocument doc = new XDocument();
                     Stream webStream = null;
