@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{2d034f2d-836b-466c-9ca2-a7bb6b24e3f8}" Title="Cinico TV" RuntimeType="Silverlight" Version="1.0.8" Genre="apps.normal" Author="Centapp" Description="Clip Cinico TV" Publisher="Centapp" BitsPerPixel="16">
+  <App xmlns="" ProductID="{2d034f2d-836b-466c-9ca2-a7bb6b24e3f8}" Title="Cinico TV" RuntimeType="Silverlight" Version="1.0.10" Genre="apps.normal" Author="Centapp" Description="Clip Cinico TV" Publisher="Centapp" BitsPerPixel="16">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <!--<Capability Name="ID_CAP_IDENTITY_DEVICE" />
