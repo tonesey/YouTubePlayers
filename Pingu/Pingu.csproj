@@ -139,17 +139,17 @@
     <Reference Include="mtiks">
       <HintPath>..\..\Wp7Shared\Analytics\mtiks.dll</HintPath>
     </Reference>
-    <Reference Include="MyToolkit, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MyToolkit, Version=2.3.28.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wp7Shared\packages\MyToolkit.2.3.3.0\lib\portable-sl5+wp71\MyToolkit.dll</HintPath>
+      <HintPath>..\..\Wp7Shared\packages\MyToolkit.2.3.28.0\lib\portable-sl5+wp71\MyToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="MyToolkit.Extended, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MyToolkit.Extended, Version=2.3.28.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wp7Shared\packages\MyToolkit.Extended.2.3.3.0\lib\sl4-wp71\MyToolkit.Extended.dll</HintPath>
+      <HintPath>..\..\Wp7Shared\packages\MyToolkit.Extended.2.3.28.0\lib\sl4-wp71\MyToolkit.Extended.dll</HintPath>
     </Reference>
-    <Reference Include="MyToolkit.Http, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MyToolkit.Http, Version=2.3.28.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wp7Shared\packages\MyToolkit.Http.2.3.3.0\lib\portable-sl5+wp71\MyToolkit.Http.dll</HintPath>
+      <HintPath>..\..\Wp7Shared\packages\MyToolkit.Http.2.3.28.0\lib\portable-sl5+wp71\MyToolkit.Http.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -164,15 +164,15 @@
     </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
+      <HintPath>..\..\Wp7Shared\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime, Version=1.5.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

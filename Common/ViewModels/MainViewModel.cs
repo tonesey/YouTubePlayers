@@ -834,7 +834,7 @@ namespace Centapp.CartoonCommon.ViewModels
 
         private void BuildItemsFromJson(string json, bool appIsOffline)
         {
-            StatusInfos status = new StatusInfos();
+            var status = new StatusInfos();
             List<Season> seasons = null;
 
             RootObjectEpisodesGroupedBySeasons rootGrouped = null;
