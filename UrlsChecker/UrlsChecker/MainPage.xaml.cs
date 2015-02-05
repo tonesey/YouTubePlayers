@@ -872,7 +872,16 @@ namespace UrlsChecker
 
 
                 //valid link: http://www.youtube.com/watch?v=sb_hKB38QRw
-                var uri = await YouTube.GetVideoUriAsync(GetYoutubeID(ep.Url), YouTubeQuality.Quality480P);
+                YouTubeUri uri = null;
+                
+                try 
+	            {	        
+		            uri = await YouTube.GetVideoUriAsync(GetYoutubeID(ep.Url), YouTubeQuality.Quality480P);
+	            }
+	            catch (Exception)
+	            {
+                    uri = null;
+	            }
                 if (uri == null)
                 {
                     _wrongEpisodes.Add(ep);
